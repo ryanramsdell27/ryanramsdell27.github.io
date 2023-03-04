@@ -4,9 +4,10 @@ from pathlib import Path
 from typing import List
 
 SOURCE_DIR = 'src/pages/'
+TEMPLATE_DIR = 'src/'
 OUTPUT_DIR = 'build/'
 
-buildPath = lambda file: Path(str(file).replace('.md', '.html').replace(SOURCE_DIR, OUTPUT_DIR))
+buildPath = lambda file, src: Path(str(file).replace('.md', '.html').replace(src, OUTPUT_DIR))
 
 md = markdown.Markdown()
 
@@ -32,15 +33,15 @@ def convert_md_file(file: Path):
     temp_html = md.convert(file_md)
     temp_html = build_template('src/template/post.html', [['content', temp_html], ['title', meta_data['title']]])
 
-    output_file = buildPath(file)
+    output_file = buildPath(file, SOURCE_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     with open(output_file, 'w') as f:
         f.write(temp_html)
     return meta_data
 
 
-def copy_to_build_dir(file: Path):
-    output_file = buildPath(file)
+def copy_to_build_dir(file: Path, src: str):
+    output_file = buildPath(file, src)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     shutil.copyfile(file, output_file)
 
@@ -61,7 +62,7 @@ def build_index(index: List):
     link_list = '<ul>{}</ul>'.format(''.join(links))
     temp_f = build_template('src/template/contents.html', [['index', link_list]])
 
-    output_file = buildPath(OUTPUT_DIR + 'index.html')
+    output_file = buildPath(OUTPUT_DIR + 'index.html', SOURCE_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     with open(output_file, 'w') as f:
         f.write(temp_f)
@@ -75,10 +76,13 @@ def process_files():
             continue
         if file.suffix == '.md':
             meta_data = convert_md_file(file)
-            index.append({'path': buildPath(file), 'meta_data': meta_data})
+            index.append({'path': buildPath(file, SOURCE_DIR), 'meta_data': meta_data})
         else:
-            copy_to_build_dir(file)
+            copy_to_build_dir(file, SOURCE_DIR)
     build_index(index)
+    for file in Path(TEMPLATE_DIR).glob('**/*'):
+        if file.suffix == '.css':
+            copy_to_build_dir(file, TEMPLATE_DIR)
 
 
 process_files()
