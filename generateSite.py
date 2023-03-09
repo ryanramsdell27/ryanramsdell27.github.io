@@ -37,7 +37,6 @@ def convert_md_file(file: Path):
     [meta_data, file_md] = read_meta_data(temp_md)
     md.reset()
     temp_html = md.convert(file_md)
-    print(meta_data)
     tags = ''
     if 'tags' in meta_data:
         for tag in meta_data['tags'].split(','):
@@ -75,19 +74,19 @@ def build_template(template, var_arr):
     return template
 
 
-def build_index(index: List):
+def build_index(index: List, out: str, title: str):
     links = []
     index.sort(key=lambda k: k['meta_data']['date'], reverse=True)
     for file in index:
-        links.append('<li><a href={}>{}<span style="float:right;font-size:smaller;">{}</span></a></li>'.format(
+        links.append('<li><a href=/{}>{}<span style="float:right;font-size:smaller;">{}</span></a></li>'.format(
             str(file['path']).replace(OUTPUT_DIR, ''),
             file['meta_data']['title'],
             date.fromisoformat(file['meta_data']['date']).strftime("%A %d, %B %Y"),
         ))
     link_list = '<ul>{}</ul>'.format(''.join(links))
-    temp_f = build_template(CONTENTS_TEMPLATE, [['index', link_list]])
+    temp_f = build_template(CONTENTS_TEMPLATE, [['index', link_list], ['title', title]])
 
-    output_file = buildPath(OUTPUT_DIR + 'index.html', SOURCE_DIR, OUTPUT_DIR)
+    output_file = buildPath(OUTPUT_DIR + out + '/index.html', SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     with open(output_file, 'w') as f:
         f.write(temp_f)
@@ -106,15 +105,25 @@ def read_components():
 def process_files():
     files = Path(SOURCE_DIR).glob('**/*')
     index = []
+    tag_index = {}
     for file in files:
         if not file.is_file():
             continue
         if file.suffix == '.md':
             meta_data = convert_md_file(file)
             index.append({'path': buildPath(file, SOURCE_DIR, OUTPUT_DIR), 'meta_data': meta_data})
+            if 'tags' in meta_data:
+                for tag in meta_data['tags'].split(','):
+                    details = {'path': buildPath(file, SOURCE_DIR, OUTPUT_DIR), 'meta_data': meta_data}
+                    if tag in tag_index:
+                        tag_index[tag].append(details)
+                    else:
+                        tag_index[tag] = [details]
         else:
             copy_to_build_dir(file, SOURCE_DIR, OUTPUT_DIR)
-    build_index(index)
+    build_index(index, '', 'All posts')
+    for tag in tag_index:
+        build_index(tag_index[tag], 'tagged/' + tag, 'Tagged: ' + tag)
     for file in Path(TEMPLATE_DIR).glob('**/*'):
         if file.suffix == '.css':
             copy_to_build_dir(file, TEMPLATE_DIR, OUTPUT_DIR + '/template')
