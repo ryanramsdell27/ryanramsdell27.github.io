@@ -5,10 +5,11 @@ from typing import List
 from datetime import date
 
 SOURCE_DIR = 'src/pages/'
-TEMPLATE_DIR = 'src/'
+TEMPLATE_DIR = 'src/template'
+COMPONENT_DIR = 'src/component'
 OUTPUT_DIR = 'build/'
 
-buildPath = lambda file, src: Path(str(file).replace('.md', '.html').replace(src, OUTPUT_DIR))
+buildPath = lambda file, src, target: Path(str(file).replace('.md', '.html').replace(src, target))
 
 md = markdown.Markdown(extensions=['fenced_code'])
 
@@ -41,15 +42,15 @@ def convert_md_file(file: Path):
                                 ['title', meta_data['title']],
                                 ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")]])
 
-    output_file = buildPath(file, SOURCE_DIR)
+    output_file = buildPath(file, SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     with open(output_file, 'w') as f:
         f.write(temp_html)
     return meta_data
 
 
-def copy_to_build_dir(file: Path, src: str):
-    output_file = buildPath(file, src)
+def copy_to_build_dir(file: Path, src: str, target: str):
+    output_file = buildPath(file, src, target)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     shutil.copyfile(file, output_file)
 
@@ -57,6 +58,8 @@ def copy_to_build_dir(file: Path, src: str):
 def build_template(template, var_arr):
     with open(template, 'r') as f:
         temp_f = f.read()
+    for component in components:
+        temp_f = temp_f.replace('{{component.%s}}' % component['name'], component['value'])
     for [key, value] in var_arr:
         temp_f = temp_f.replace('{{%s}}' % key, value)
     return temp_f
@@ -73,10 +76,20 @@ def build_index(index: List):
     link_list = '<ul>{}</ul>'.format(''.join(links))
     temp_f = build_template('src/template/contents.html', [['index', link_list]])
 
-    output_file = buildPath(OUTPUT_DIR + 'index.html', SOURCE_DIR)
+    output_file = buildPath(OUTPUT_DIR + 'index.html', SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     with open(output_file, 'w') as f:
         f.write(temp_f)
+
+
+def read_components():
+    components_list = []
+    for file in Path(COMPONENT_DIR).glob('**/*'):
+        if file.suffix == '.html':
+            with open(file, 'r') as f:
+                temp_f = f.read()
+            components_list.append({'name': file.name.removesuffix(file.suffix), 'value': temp_f})
+    return components_list
 
 
 def process_files():
@@ -87,14 +100,15 @@ def process_files():
             continue
         if file.suffix == '.md':
             meta_data = convert_md_file(file)
-            index.append({'path': buildPath(file, SOURCE_DIR), 'meta_data': meta_data})
+            index.append({'path': buildPath(file, SOURCE_DIR, OUTPUT_DIR), 'meta_data': meta_data})
         else:
-            copy_to_build_dir(file, SOURCE_DIR)
+            copy_to_build_dir(file, SOURCE_DIR, OUTPUT_DIR)
     build_index(index)
     for file in Path(TEMPLATE_DIR).glob('**/*'):
         if file.suffix == '.css':
-            copy_to_build_dir(file, TEMPLATE_DIR)
+            copy_to_build_dir(file, TEMPLATE_DIR, OUTPUT_DIR + '/template')
 
 
+components = read_components()
 clean()
 process_files()
