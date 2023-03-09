@@ -1,8 +1,6 @@
 title: Chair Restoration
-date: 20230303
+date: 2023-03-03
 ---
-# Chair Restoration
-
 ![Chair](chair.png)
 
 This was a very long project in the making

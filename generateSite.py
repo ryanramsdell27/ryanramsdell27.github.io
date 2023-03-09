@@ -2,6 +2,7 @@ import markdown
 import shutil
 from pathlib import Path
 from typing import List
+from datetime import date
 
 SOURCE_DIR = 'src/pages/'
 TEMPLATE_DIR = 'src/'
@@ -9,13 +10,13 @@ OUTPUT_DIR = 'build/'
 
 buildPath = lambda file, src: Path(str(file).replace('.md', '.html').replace(src, OUTPUT_DIR))
 
-md = markdown.Markdown()
+md = markdown.Markdown(extensions=['fenced_code'])
 
 
 def read_meta_data(file):
     t_header = file.split('---', 1)
     if len(t_header) <= 1:
-        return {'title': 'Post', 'date': 20230101}, file
+        return {'title': 'Post', 'date': '2023-01-01'}, file
     meta_data = {}
     for line in t_header[0].split('\n'):
         attribute = line.split(': ')
@@ -31,7 +32,10 @@ def convert_md_file(file: Path):
     [meta_data, file_md] = read_meta_data(temp_md)
     md.reset()
     temp_html = md.convert(file_md)
-    temp_html = build_template('src/template/post.html', [['content', temp_html], ['title', meta_data['title']]])
+    temp_html = build_template('src/template/post.html',
+                               [['content', temp_html],
+                                ['title', meta_data['title']],
+                                ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")]])
 
     output_file = buildPath(file, SOURCE_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
@@ -57,8 +61,11 @@ def build_template(template, var_arr):
 def build_index(index: List):
     links = []
     for file in index:
-        links.append('<li><a href={}>{}</a></li>'.format(str(file['path'])
-                                                         .replace(OUTPUT_DIR, ''), file['meta_data']['title']))
+        links.append('<li><a href={}>{}<span style="float:right;font-size:smaller;">{}</span></a></li>'.format(
+            str(file['path']).replace(OUTPUT_DIR, ''),
+            file['meta_data']['title'],
+            date.fromisoformat(file['meta_data']['date']).strftime("%A %d, %B %Y"),
+        ))
     link_list = '<ul>{}</ul>'.format(''.join(links))
     temp_f = build_template('src/template/contents.html', [['index', link_list]])
 
