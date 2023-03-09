@@ -1,6 +1,6 @@
 title: Static Site Generator
 date: 2023-03-03
-tags: meta,coding
+tags: meta,programming
 ---
 # Why blog?
 This is a project I've been meaning to start for a long time. I make a lot of things, and am terrible at documenting them. The best parts of the diy community are how much people share, their willingness to help someone learn, and their interest in taking what others have done and improving it even more. This site will hopefully help keep me accountable for recording the things I do, if not for other people, then at least as a personal journal.
@@ -114,3 +114,8 @@ There's still so many things I want to do with this script and this process. I'l
 - Index pages for posts with specific tags
 - Index pages for topics folders (subdirectories under `src/pages`)
 - Easier templating composition/reusable components
+- Post editor
+- Built in server
+  - Live rebuild on changed item
+  - Hot swapping/forced refresh
+- Only rebuild changed items

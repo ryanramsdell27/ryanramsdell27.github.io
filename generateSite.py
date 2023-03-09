@@ -21,7 +21,7 @@ def clean():
 def read_meta_data(file):
     t_header = file.split('---', 1)
     if len(t_header) <= 1:
-        return {'title': 'Post', 'date': '2023-01-01'}, file
+        return {'title': 'Post', 'date': '2023-01-01', 'tags': ''}, file
     meta_data = {}
     for line in t_header[0].split('\n'):
         attribute = line.split(': ')
@@ -37,10 +37,16 @@ def convert_md_file(file: Path):
     [meta_data, file_md] = read_meta_data(temp_md)
     md.reset()
     temp_html = md.convert(file_md)
-    temp_html = build_template('src/template/post.html',
+    print(meta_data)
+    tags = ''
+    if 'tags' in meta_data:
+        for tag in meta_data['tags'].split(','):
+            tags += build_template(components['chip'], [['content', tag]])
+    temp_html = build_template(POST_TEMPLATE,
                                [['content', temp_html],
                                 ['title', meta_data['title']],
-                                ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")]])
+                                ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")],
+                                ['tags', tags]])
 
     output_file = buildPath(file, SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
@@ -55,18 +61,23 @@ def copy_to_build_dir(file: Path, src: str, target: str):
     shutil.copyfile(file, output_file)
 
 
-def build_template(template, var_arr):
-    with open(template, 'r') as f:
+def load_file(file):
+    with open(file, 'r') as f:
         temp_f = f.read()
-    for component in components:
-        temp_f = temp_f.replace('{{component.%s}}' % component['name'], component['value'])
-    for [key, value] in var_arr:
-        temp_f = temp_f.replace('{{%s}}' % key, value)
     return temp_f
+
+
+def build_template(template, var_arr):
+    for [key, value] in components.items():
+        template = template.replace('{{component.%s}}' % key, value)
+    for [key, value] in var_arr:
+        template = template.replace('{{%s}}' % key, value)
+    return template
 
 
 def build_index(index: List):
     links = []
+    index.sort(key=lambda k: k['meta_data']['date'], reverse=True)
     for file in index:
         links.append('<li><a href={}>{}<span style="float:right;font-size:smaller;">{}</span></a></li>'.format(
             str(file['path']).replace(OUTPUT_DIR, ''),
@@ -74,7 +85,7 @@ def build_index(index: List):
             date.fromisoformat(file['meta_data']['date']).strftime("%A %d, %B %Y"),
         ))
     link_list = '<ul>{}</ul>'.format(''.join(links))
-    temp_f = build_template('src/template/contents.html', [['index', link_list]])
+    temp_f = build_template(CONTENTS_TEMPLATE, [['index', link_list]])
 
     output_file = buildPath(OUTPUT_DIR + 'index.html', SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
@@ -83,12 +94,12 @@ def build_index(index: List):
 
 
 def read_components():
-    components_list = []
+    components_list = {}
     for file in Path(COMPONENT_DIR).glob('**/*'):
         if file.suffix == '.html':
             with open(file, 'r') as f:
                 temp_f = f.read()
-            components_list.append({'name': file.name.removesuffix(file.suffix), 'value': temp_f})
+            components_list[file.name.removesuffix(file.suffix)] = temp_f
     return components_list
 
 
@@ -109,6 +120,8 @@ def process_files():
             copy_to_build_dir(file, TEMPLATE_DIR, OUTPUT_DIR + '/template')
 
 
+POST_TEMPLATE = load_file('src/template/post.html')
+CONTENTS_TEMPLATE = load_file('src/template/contents.html')
 components = read_components()
 clean()
 process_files()

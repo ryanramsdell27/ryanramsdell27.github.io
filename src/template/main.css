@@ -24,6 +24,8 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 pre {
     background-color: #f4f4f4;
@@ -57,4 +59,12 @@ header li a:hover {
 
 footer {
     font-size: smaller;
+}
+
+.chip {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    margin: 2px;
 }

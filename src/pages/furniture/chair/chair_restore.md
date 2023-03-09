@@ -1,5 +1,6 @@
 title: Chair Restoration
 date: 2023-03-08
+tags: woodworking,design,furniture
 ---
 ![Chair](chair_new_1.png)
 
