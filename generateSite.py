@@ -13,6 +13,10 @@ buildPath = lambda file, src: Path(str(file).replace('.md', '.html').replace(src
 md = markdown.Markdown(extensions=['fenced_code'])
 
 
+def clean():
+    shutil.rmtree(OUTPUT_DIR)
+
+
 def read_meta_data(file):
     t_header = file.split('---', 1)
     if len(t_header) <= 1:
@@ -92,4 +96,5 @@ def process_files():
             copy_to_build_dir(file, TEMPLATE_DIR)
 
 
+clean()
 process_files()
