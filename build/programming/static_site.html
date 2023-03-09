@@ -1,0 +1,127 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/template/main.css">
+    <title>Static Site Generator</title>
+</head>
+    <body>
+        <header>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tagged/furniture">Furniture</a></li>
+        <li><a href="/tagged/programming">Programming</a></li>
+    </ul>
+</header>
+        <article>
+            <h1>Static Site Generator</h1>
+            <h5>Friday 03, March 2023</h5>
+            <div class="chip">
+    <a href="/tagged/meta">meta</a>
+</div><div class="chip">
+    <a href="/tagged/programming">programming</a>
+</div>
+            <hr/>
+            <h1>Why blog?</h1>
+<p>This is a project I've been meaning to start for a long time. I make a lot of things, and am terrible at documenting them. The best parts of the diy community are how much people share, their willingness to help someone learn, and their interest in taking what others have done and improving it even more. This site will hopefully help keep me accountable for recording the things I do, if not for other people, then at least as a personal journal.</p>
+<p>There have been several attempts at starting this up. Usually trying to use cutting edge stacks and fancy site design. They have never panned out and sit on backup drives waiting to be purged when I eventually decide to clean up all that digital garbage. Hopefully this project won't meet the same fate.</p>
+<h1>Why write my own site generator?</h1>
+<ul>
+<li>I prefer writing in markdown over html </li>
+<li>I don't want to deal with existing generators (Jekyll)</li>
+<li>Full control over what is built</li>
+<li>Seems like a fun project</li>
+</ul>
+<p>The web has transformed a lot in even the short few years that I've been exposed to it. I'm sure I'm not the only one nostalgic for the way it used to be: online tutorials were, be default, text articles, sometimes with images, rarely with videos. It was searchable, you could easily flip back and forth between things, re-read passages without having to scrub through a youtube video. Look at project progress pictures without having to pause a tik-tok. Read a recipe without 6000 ads just begging you to click on them (well maybe there were a lot of banners back in the day too, but it was much easier to ignore on a desktop than on your phone).</p>
+<p>I love the new frameworks: react, vue, angular, next &#151; they make my day-to-day flow at my 9 to 5 so much easier. Enterprise grade apps are a breeze to build and API integration is beyond easy. But this is a blog site, and all I'm serving is static content.  I don't need the bloat of a full react app, or any other framework for that matter, so I've opted to build this by hand. It certainly isn't the most optimized code, or the prettiest, but I figured there is some value to having full control over what I'm publishing. Plus it's an interesting way to go back over the fundamentals.</p>
+<h1>Project Fundamentals</h1>
+<h2>File Structure</h2>
+<p>I'm not building this script for general purpose use, so I get to be as opinionated as I want. </p>
+<p>The basic structure is something along these lines</p>
+<pre><code>\src
+    \pages
+        \topic1
+            - article1.md
+            - article1Image.png
+        \topic2
+        ...
+    \template
+        - template1.html
+        - template2.html
+        - styles1.css
+</code></pre>
+<ul>
+<li>The <code>pages</code> directory stores blog posts, organized by topics.</li>
+<li>The <code>template</code> directory stores <code>.html</code> <a href="#templates">template files</a> that have special fields in them for replacement during the build script. It also stores any necessary styling information in <code>.css</code> files that are added to a <code>template</code> folder in the build destination.</li>
+</ul>
+<h2>Post Structure</h2>
+<p>Posts are <code>.md</code> files using markdown syntax with a special header that has metadata in it. </p>
+<p>For example, the header for this page is:</p>
+<pre><code>title: Static Site Generator
+date: 20230303
+tags: meta,coding
+---
+</code></pre>
+<ul>
+<li><code>title</code> is used for the page title and to populate the index files with links. </li>
+<li><code>date</code> is in the <code>yyyy-mm-dd</code> format and is the author date of the page.</li>
+<li><code>tags</code> is a comma-separated list of keywords related to the post</li>
+</ul>
+<p>The rest of the content under the header is processed as standard markdown syntax (for now). References to images stored under the <code>pages</code> directory will work in the static build output.</p>
+<h2>Templates <a name="templates"/></h2>
+<p>I've added a basic templating flow to ensure page consistency. Templates are <code>.html</code> files that contain keys <code>{{example}}</code> that get replaced with corresponding values. </p>
+<p>Consider this basic post template</p>
+<pre><code class="language-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;/template/main.css&quot;&gt;
+        &lt;title&gt;Static Site Generator&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;&lt;/header&gt;
+        &lt;article&gt;
+            {{content}}
+        &lt;/article&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>In the build script then I just need to do this to create a static <code>.html</code> file with whatever content I want in lieu of the <code>Static Site Generator</code> and <code>{{content}}</code> keys.</p>
+<pre><code class="language-python">temp_html = &quot;&lt;div&gt;&lt;p&gt;Hello World&lt;/p&gt;&lt;/div&gt;&quot;
+title = &quot;Hello World Page&quot;
+build_template('src/template/post.html', [['content', temp_html], ['title', title]])
+</code></pre>
+<h2>Build Process</h2>
+<p>The build process is pretty straight forward. At its core I walk the file tree of <code>src</code> and proces each file accordingly, building <code>.html</code> pages or copying over files to the build directory as needed. Some higher-level pages are then generated with information from the file-walk.</p>
+<ol>
+<li>Recursively iterate over file tree of <code>.src</code></li>
+<li>If file is <code>.md</code>:<ol>
+<li>Extract metadata header</li>
+<li>Convert markdown to html</li>
+<li>Use metadata and markdown-html with post template to build a full html page</li>
+<li>Write <code>.html</code> file to build directory with matching path</li>
+<li>Add page information to an index data structure to be used late</li>
+</ol>
+</li>
+<li>If file is anything else but <code>.md</code>, copy it to the matching path in the build directory</li>
+<li>Build an index/table of contents file from index data structure populated in the file walk and a template</li>
+</ol>
+<p>The script is written in Python for two main reasons. One, it's incredibly easy to read and work with. I can't imagine I'll be making many changes once I have a working script, meaning that when I do decide to make updates the code base will be absolutely foreign to me: readability will be key when the time for edits arrives. Secondly, Python has a lot of ease of use functionality and several modules that make coding with it just plain simple. I didn't particularly want to write a markdown compiler, so having that capability with a well maintained library I knew how to use made it a good choice.</p>
+<h1>What's Next</h1>
+<p>There's still so many things I want to do with this script and this process. I'll give a list here, in no particular order and with no promises of these features being completed.</p>
+<ul>
+<li>Custom markdown extensions</li>
+<li>Generate post-level table of contents</li>
+<li>Auto generate links for headers with <code>&lt;a name="link"/&gt;</code></li>
+<li>Image gallery components (I think this will be useful for image heavy posts)</li>
+<li><code>LaTeX</code> support for math stuff</li>
+<li>Index pages for posts with specific tags</li>
+<li>Index pages for topics folders (subdirectories under <code>src/pages</code>)</li>
+<li>Easier templating composition/reusable components</li>
+<li>Post editor</li>
+<li>Built in server</li>
+<li>Live rebuild on changed item</li>
+<li>Hot swapping/forced refresh</li>
+<li>Only rebuild changed items</li>
+</ul>
+        </article>
+        <footer>&copy Ryan Ramsdell 2023</footer>
+    </body>
+</html>
