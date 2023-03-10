@@ -2,7 +2,7 @@ title: Chair Restoration
 date: 2023-03-08
 tags: woodworking,design,furniture
 ---
-![Chair](chair_new_1.png)
+![Chair](chair_new_1.jpeg)
 
 This was a very long project in the making. I picked up this chair from the [UT Austin surplus store](https://facilitiesservices.utexas.edu/divisions/support/surplus-property/surplus-reuse-store) for $40. It's branded "W.H. Gunlocke Chair CO. Wayland New York". I wasn't able to find an exact match online for this model but Gunlocke seems to have been a pretty reputable manufacturer of office chairs. I unfortunately destroyed the paper tag from the underside of the chair while sanding.
 

@@ -81,7 +81,7 @@ def build_index(index: List, out: str, title: str):
         links.append('<li><a href=/{}>{}<span style="float:right;font-size:smaller;">{}</span></a></li>'.format(
             str(file['path']).replace(OUTPUT_DIR, ''),
             file['meta_data']['title'],
-            date.fromisoformat(file['meta_data']['date']).strftime("%A %d, %B %Y"),
+            date.fromisoformat(file['meta_data']['date']).strftime("%d %B %Y"),
         ))
     link_list = '<ul>{}</ul>'.format(''.join(links))
     temp_f = build_template(CONTENTS_TEMPLATE, [['index', link_list], ['title', title]])
