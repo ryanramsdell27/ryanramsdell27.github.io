@@ -75,3 +75,9 @@ footer {
 .chip:hover {
     background-color: #cfcfcf;
 }
+
+.notice {
+    font-style: italic;
+    font-size: x-small;
+    padding: 10px 0;
+}

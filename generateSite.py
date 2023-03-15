@@ -41,11 +41,15 @@ def convert_md_file(file: Path):
     if 'tags' in meta_data:
         for tag in meta_data['tags'].split(','):
             tags += build_template(components['chip'], [['content', tag]])
+
+    backdated = components['backdated'] if 'backdated' in meta_data and meta_data['backdated'] == 'true' else ''
+
     temp_html = build_template(POST_TEMPLATE,
                                [['content', temp_html],
                                 ['title', meta_data['title']],
                                 ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")],
-                                ['tags', tags]])
+                                ['tags', tags],
+                                ['backdated', backdated]])
 
     output_file = buildPath(file, SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
