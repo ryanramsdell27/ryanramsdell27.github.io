@@ -82,7 +82,7 @@ def build_index(index: List, out: str, title: str):
     links = []
     index.sort(key=lambda k: k['meta_data']['date'], reverse=True)
     for file in index:
-        links.append('<li><a href=/{}>{}<span style="float:right;font-size:smaller;">{}</span></a></li>'.format(
+        links.append('<li><a href=/{} class="truncate">{}<span class="right-date">{}</span></a></li>'.format(
             str(file['path']).replace(OUTPUT_DIR, ''),
             file['meta_data']['title'],
             date.fromisoformat(file['meta_data']['date']).strftime("%d %B %Y"),

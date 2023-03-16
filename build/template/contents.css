@@ -13,6 +13,16 @@ article li a {
     padding-bottom: 10px;
     padding-left: 5px;
     padding-right: 5px;
+ }
+ .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.right-date {
+    float:right;
+    font-size:smaller;
 }
 
 article li:hover {
