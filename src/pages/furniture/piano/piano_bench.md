@@ -1,6 +1,6 @@
 title: Piano Bench
 date: 2020-11-01
-tags: woodworking,furniture
+tags: woodworking,furniture,design
 backdated: true
 ---
 ![Bench](bench.jpeg)

@@ -1,6 +1,6 @@
 title: Piano Stand
 date: 2020-03-15
-tags: woodworking,furniture
+tags: woodworking,furniture,design
 backdated: true
 ---
 ![Piano](combo.jpeg)
