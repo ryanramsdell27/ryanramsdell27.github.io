@@ -97,7 +97,7 @@ The build process is pretty straight forward. At its core I walk the file tree o
       2. Convert markdown to html
       3. Use metadata and markdown-html with post template to build a full html page
       4. Write `.html` file to build directory with matching path
-      5. Add page information to an index data structure to be used late
+      5. Add page information to an index data structure to be used later
    2. If file is anything else but `.md`, copy it to the matching path in the build directory
 1. Build an index/table of contents file from index data structure populated in the file walk and a template
 
