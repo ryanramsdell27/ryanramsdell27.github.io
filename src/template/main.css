@@ -21,7 +21,7 @@ article {
     background-color: #fff;
     box-shadow: 2px 2px 10px lightgrey;
 }
-img {
+article p img {
     width: 50%;
     display: block;
     margin-left: auto;

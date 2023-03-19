@@ -1,5 +1,6 @@
 import markdown
 import shutil
+from PIL import Image
 from pathlib import Path
 from typing import List
 from datetime import date
@@ -8,6 +9,8 @@ SOURCE_DIR = 'src/pages/'
 TEMPLATE_DIR = 'src/template'
 COMPONENT_DIR = 'src/component'
 OUTPUT_DIR = 'build/'
+
+THUMBNAIL_SIZE = (128, 128)
 
 buildPath = lambda file, src, target: Path(str(file).replace('.md', '.html').replace(src, target))
 
@@ -30,11 +33,29 @@ def read_meta_data(file):
     return [meta_data, t_header[1]]
 
 
+def find_thumbnail(file, path: Path):
+    for l in file.split("\n"):
+        if l.startswith("!["):
+            file_name = l.split("](")[1].strip(")")
+            original_file = './' + str(path.parent) + '/' + file_name
+            thumbnail_file = str(path.parent) + '/thumbnail_' + file_name
+            thumbnail_output_path = buildPath(thumbnail_file, SOURCE_DIR, OUTPUT_DIR)
+            thumbnail_link = '/' + str(buildPath(thumbnail_file, SOURCE_DIR, ''))
+            image = Image.open(original_file)
+            image.thumbnail(THUMBNAIL_SIZE)
+            thumbnail_output_path.parent.mkdir(exist_ok=True, parents=True)
+            image.save(thumbnail_output_path)
+            return thumbnail_link
+    return None
+
+
 def convert_md_file(file: Path):
     print('Converting', file)
     with open(file, 'r') as f:
         temp_md = f.read()
     [meta_data, file_md] = read_meta_data(temp_md)
+    if 'thumbnail' not in meta_data:
+        meta_data['thumbnail'] = find_thumbnail(temp_md, file)
     md.reset()
     temp_html = md.convert(file_md)
     tags = ''
@@ -82,9 +103,13 @@ def build_index(index: List, out: str, title: str):
     links = []
     index.sort(key=lambda k: k['meta_data']['date'], reverse=True)
     for file in index:
-        links.append('<li><a href=/{} class="truncate">{}<span class="right-date">{}</span></a></li>'.format(
+        thumbnail = ''
+        if file['meta_data']['thumbnail'] is not None:
+            thumbnail = '<span class="right-date"><img height="64px" src="{}"/></span>'.format(file['meta_data']['thumbnail'])
+        links.append('<li><a href=/{} class="truncate">{}{}</br><span style="font-size:smaller">{}</span></a></li>'.format(
             str(file['path']).replace(OUTPUT_DIR, ''),
             file['meta_data']['title'],
+            thumbnail,
             date.fromisoformat(file['meta_data']['date']).strftime("%d %B %Y"),
         ))
     link_list = '<ul>{}</ul>'.format(''.join(links))
