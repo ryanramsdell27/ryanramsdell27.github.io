@@ -48,7 +48,7 @@ For example, the header for this page is:
 
 ```
 title: Static Site Generator
-date: 20230303
+date: 2023-03-03
 tags: meta,coding
 ---
 ```
