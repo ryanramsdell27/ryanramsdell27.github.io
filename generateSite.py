@@ -3,6 +3,7 @@ import shutil
 from pathlib import Path
 from typing import List
 from datetime import date
+from markdown.extensions.toc import TocExtension
 
 SOURCE_DIR = 'src/pages/'
 TEMPLATE_DIR = 'src/template'
@@ -10,8 +11,7 @@ COMPONENT_DIR = 'src/component'
 OUTPUT_DIR = 'build/'
 
 buildPath = lambda file, src, target: Path(str(file).replace('.md', '.html').replace(src, target))
-
-md = markdown.Markdown(extensions=['fenced_code'])
+md = markdown.Markdown(extensions=['fenced_code', TocExtension(permalink=True)])
 
 
 def clean():
