@@ -38,7 +38,7 @@ For example, the header for this page is:
 
 ```
 title: Static Site Generator
-date: 20230303
+date: 2023-03-03
 tags: meta,coding
 ---
 ```
@@ -46,8 +46,9 @@ tags: meta,coding
 The following metadata is read by the script:
 - `title` is used for the page title and to populate the index files with links.
 - `date` is in the `yyyy-mm-dd` format and is the author date of the page.
-- `tags` is a comma-separated list of keywords related to the post. These are used to generate indicies of all posts sharing the same tag
+- `tags` is a comma-separated list of keywords related to the post. These are used to generate indices of all posts sharing the same tag
 - `backdated: true` is used to indicate if the date of the post has been set to reflect when a project was completed instead of the date of publishing. This comes from a personal preference to keep the history of my projects in order.
+- `thumbnail` to override the default thumbnail generator with your own file. Will not resize or do anything special with it
 
 The rest of the content under the header is processed as standard markdown syntax (for now). References to images stored under the `pages` directory will work in the static build output.
 
@@ -134,12 +135,13 @@ The build process is pretty straight forward. At its core I walk the file tree o
 
 1. Recursively iterate over file tree of `.src`
     1. If file is `.md`:
-        1. Extract metadata header
-        2. Convert markdown to html
-        3. Use metadata and markdown-html with post template and components to build a full html page
-        4. Write `.html` file to build directory with matching path
-        5. Add page information to an index data structure to be used later
-        5. Add page information to an index data structure for each tag in the metadata to be used late
+       1. Extract metadata header
+       1. Convert markdown to html
+       1. Use metadata and markdown-html with post template and components to build a full html page
+       1. Write `.html` file to build directory with matching path
+       1. If the post has image(s) and no `thumbnail` path was specified in the metadata, read the first image from the `.md`, save a resized copy prefixed with `thumbnail_` in the build directory and add the file path to the metadata object returned for the indices 
+       1. Add page information to an index data structure to be used later
+       1. Add page information to an index data structure for each tag in the metadata to be used late
    2. If file is anything else but `.md`, copy it to the matching path in the build directory
 1. Build an index/table of contents file from index data structure populated in the file walk and a template
 1. Build an index/table for each tag
