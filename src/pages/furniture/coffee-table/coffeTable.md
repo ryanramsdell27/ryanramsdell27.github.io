@@ -6,7 +6,7 @@ I recently moved into a new apartment downtown. It's a pretty nice space but squ
 
 ![Table pic](finished4.jpeg)
 # Design
-The design of this table was heavily inspired by a similar table from one of my favorite design firms, Norm Architects. Specifically the [N - CT01](https://www.karimoku-casestudy.com/furniture/kinuta-n-ct01/) from the Karimoku Case Study - Kinuta Terrace collection. It's such a well-designed coffe table but unfortunately beyond my budget.
+The design of this table was heavily inspired by a similar table from one of my favorite design firms, Norm Architects. Specifically the [N - CT01](https://www.karimoku-casestudy.com/furniture/kinuta-n-ct01/) from the Karimoku Case Study - Kinuta Terrace collection. It's such a well-designed coffee table but unfortunately beyond my budget.
 
 ![Karimoku](karimoku1.jpeg)
 
@@ -38,11 +38,11 @@ The application could have been a bit better, there were a few bubbles. But the 
 The final iteration was a nice (re: expensive) oak board that had a strong grain pattern. 
 
 # Finishing touches
-The whole table was then finished in natural Danish Oil. My apartment smelt strongly of off-gasses for a couple days (definitely will be asking a friend to use their yard next time I stain/finish stuff).
+The whole table was then finished in natural Danish Oil. My apartment smelt strongly of off-gasses for a couple of days (definitely will be asking a friend to use their yard next time I stain/finish stuff).
 
 ![Table pic](finished1.jpeg)
 ![Table pic](finished3.jpeg)
 ![Table pic](finished2.jpeg)
 
 # Final thoughts
-I'm very happy with the current state of the coffe table. It looks great and is incredibly sturdy; I have no fears standing on it! If I were to do it again, I think for the cross supports between the legs I would have used through tenons instead of pegs. While the pegs certainly are strong enough, the look of the through tenons would really add to the overall hand-build quality I was going for. I still might get a piece of stone cut to size as well if I ever find a slab I like.
+I'm very happy with the current state of the coffee table. It looks great and is incredibly sturdy; I have no fears standing on it! If I were to do it again, I think for the cross supports between the legs I would have used through tenons instead of pegs. While the pegs certainly are strong enough, the look of the through tenons would really add to the overall hand-build quality I was going for. I still might get a piece of stone cut to size as well if I ever find a slab I like.

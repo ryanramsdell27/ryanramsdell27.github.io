@@ -3,7 +3,7 @@ date: 2023-03-19
 tags: recipe
 ---
 ![Cajun pork and rice](cajun_pork_and_rice.jpeg)
-This recipe is heavily inspired by the cochon de lait I get at a local Austin restaurant, Vic and Al's. Sadly I can't spit-roast a pig in my apartment, but I do have a great pork chashu recipe I make that always has enough pork for multiple meals &#8212 hence the need for something that isn't ramen. There's still some work to do balancing things out, all quantities are estimations since I don't really measure out anything besides the rice and water.
+This recipe is heavily inspired by the cochon de lait I get at a local Austin restaurant, Vic and Al's. Sadly I can't spit-roast a pig in my apartment, but I do have a great pork chashu recipe I make that always has enough pork for multiple meals --- hence the need for something that isn't ramen. There's still some work to do balancing things out, all quantities are estimations since I don't really measure out anything besides the rice and water.
 
 # Pork
 Prepare the pork a day in advance. Substitute white wine for sake. To reheat, shred the pork and place in a small sauce pan with some of the braising liquid on low for 10 minutes.

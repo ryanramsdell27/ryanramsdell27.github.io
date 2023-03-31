@@ -14,7 +14,7 @@ OUTPUT_DIR = 'build/'
 THUMBNAIL_SIZE = (128, 128)
 
 buildPath = lambda file, src, target: Path(str(file).replace('.md', '.html').replace(src, target))
-md = markdown.Markdown(extensions=['fenced_code', TocExtension(permalink=True)])
+md = markdown.Markdown(extensions=['fenced_code', TocExtension(permalink=True), 'smarty'])
 
 
 def clean():

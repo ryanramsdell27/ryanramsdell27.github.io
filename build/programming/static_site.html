@@ -25,20 +25,20 @@
 </div>
             <hr/>
             <h1 id="why-blog">Why blog?<a class="headerlink" href="#why-blog" title="Permanent link">&para;</a></h1>
-<p>This is a project I've been meaning to start for a long time. I make a lot of things, and am terrible at documenting them. The best parts of the diy community are how much people share, their willingness to help someone learn, and their interest in taking what others have done and improving it even more. This site will hopefully help keep me accountable for recording the things I do, if not for other people, then at least as a personal journal.</p>
-<p>There have been several attempts at starting this up. Usually trying to use cutting edge stacks and fancy site design. They have never panned out and sit on backup drives waiting to be purged when I eventually decide to clean up all that digital garbage. Hopefully this project won't meet the same fate.</p>
+<p>This is a project I&rsquo;ve been meaning to start for a long time. I make a lot of things, and am terrible at documenting them. The best parts of the diy community are how much people share, their willingness to help someone learn, and their interest in taking what others have done and improving it even more. This site will hopefully help keep me accountable for recording the things I do, if not for other people, then at least as a personal journal.</p>
+<p>There have been several attempts at starting this up. Usually trying to use cutting edge stacks and fancy site design. They have never panned out and sit on backup drives waiting to be purged when I eventually decide to clean up all that digital garbage. Hopefully this project won&rsquo;t meet the same fate.</p>
 <h1 id="why-write-my-own-site-generator">Why write my own site generator?<a class="headerlink" href="#why-write-my-own-site-generator" title="Permanent link">&para;</a></h1>
 <ul>
 <li>I prefer writing in markdown over html </li>
-<li>I don't want to deal with existing generators (Jekyll)</li>
+<li>I don&rsquo;t want to deal with existing generators (Jekyll)</li>
 <li>Full control over what is built</li>
 <li>Seems like a fun project</li>
 </ul>
-<p>The web has transformed a lot in even the short few years that I've been exposed to it. I'm sure I'm not the only one nostalgic for the way it used to be: online tutorials were, be default, text articles, sometimes with images, rarely with videos. It was searchable, you could easily flip back and forth between things, re-read passages without having to scrub through a youtube video. Look at project progress pictures without having to pause a tik-tok. Read a recipe without 6000 ads just begging you to click on them (well maybe there were a lot of banners back in the day too, but it was much easier to ignore on a desktop than on your phone).</p>
-<p>I love the new frameworks: react, vue, angular, next &#151; they make my day-to-day flow at my 9 to 5 so much easier. Enterprise grade apps are a breeze to build and API integration is beyond easy. But this is a blog site, and all I'm serving is static content.  I don't need the bloat of a full react app, or any other framework for that matter, so I've opted to build this by hand. It certainly isn't the most optimized code, or the prettiest, but I figured there is some value to having full control over what I'm publishing. Plus it's an interesting way to go back over the fundamentals.</p>
+<p>The web has transformed a lot in even the short few years that I&rsquo;ve been exposed to it. I&rsquo;m sure I&rsquo;m not the only one nostalgic for the way it used to be: online tutorials were, be default, text articles, sometimes with images, rarely with videos. It was searchable, you could easily flip back and forth between things, re-read passages without having to scrub through a youtube video. Look at project progress pictures without having to pause a tik-tok. Read a recipe without 6000 ads just begging you to click on them (well maybe there were a lot of banners back in the day too, but it was much easier to ignore on a desktop than on your phone).</p>
+<p>I love the new frameworks: react, vue, angular, next &mdash; they make my day-to-day flow at my 9 to 5 so much easier. Enterprise grade apps are a breeze to build and API integration is beyond easy. But this is a blog site, and all I&rsquo;m serving is static content.  I don&rsquo;t need the bloat of a full react app, or any other framework for that matter, so I&rsquo;ve opted to build this by hand. It certainly isn&rsquo;t the most optimized code, or the prettiest, but I figured there is some value to having full control over what I&rsquo;m publishing. Plus it&rsquo;s an interesting way to go back over the fundamentals.</p>
 <h1 id="project-fundamentals">Project Fundamentals<a class="headerlink" href="#project-fundamentals" title="Permanent link">&para;</a></h1>
 <h2 id="file-structure">File Structure<a class="headerlink" href="#file-structure" title="Permanent link">&para;</a></h2>
-<p>I'm not building this script for general purpose use, so I get to be as opinionated as I want. </p>
+<p>I&rsquo;m not building this script for general purpose use, so I get to be as opinionated as I want. </p>
 <p>The basic structure is something along these lines</p>
 <pre><code>\src
     \pages
@@ -71,7 +71,7 @@ tags: meta,coding
 </ul>
 <p>The rest of the content under the header is processed as standard markdown syntax (for now). References to images stored under the <code>pages</code> directory will work in the static build output.</p>
 <h2 id="templates">Templates <a name="templates"/><a class="headerlink" href="#templates" title="Permanent link">&para;</a></h2>
-<p>I've added a basic templating flow to ensure page consistency. Templates are <code>.html</code> files that contain keys <code>{{example}}</code> that get replaced with corresponding values. </p>
+<p>I&rsquo;ve added a basic templating flow to ensure page consistency. Templates are <code>.html</code> files that contain keys <code>{{example}}</code> that get replaced with corresponding values. </p>
 <p>Consider this basic post template</p>
 <pre><code class="language-html">&lt;html&gt;
     &lt;head&gt;
@@ -106,9 +106,9 @@ build_template('src/template/post.html', [['content', temp_html], ['title', titl
 <li>If file is anything else but <code>.md</code>, copy it to the matching path in the build directory</li>
 <li>Build an index/table of contents file from index data structure populated in the file walk and a template</li>
 </ol>
-<p>The script is written in Python for two main reasons. One, it's incredibly easy to read and work with. I can't imagine I'll be making many changes once I have a working script, meaning that when I do decide to make updates the code base will be absolutely foreign to me: readability will be key when the time for edits arrives. Secondly, Python has a lot of ease of use functionality and several modules that make coding with it just plain simple. I didn't particularly want to write a markdown compiler, so having that capability with a well maintained library I knew how to use made it a good choice.</p>
-<h1 id="whats-next">What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h1>
-<p>There's still so many things I want to do with this script and this process. I'll give a list here, in no particular order and with no promises of these features being completed.</p>
+<p>The script is written in Python for two main reasons. One, it&rsquo;s incredibly easy to read and work with. I can&rsquo;t imagine I&rsquo;ll be making many changes once I have a working script, meaning that when I do decide to make updates the code base will be absolutely foreign to me: readability will be key when the time for edits arrives. Secondly, Python has a lot of ease of use functionality and several modules that make coding with it just plain simple. I didn&rsquo;t particularly want to write a markdown compiler, so having that capability with a well maintained library I knew how to use made it a good choice.</p>
+<h1 id="whats-next">What&rsquo;s Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h1>
+<p>There&rsquo;s still so many things I want to do with this script and this process. I&rsquo;ll give a list here, in no particular order and with no promises of these features being completed.</p>
 <ul>
 <li>Custom markdown extensions</li>
 <li>Generate post-level table of contents</li>
