@@ -9,20 +9,33 @@ article li a {
     text-decoration: none;
     display: block;
     color: grey;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 0 5px;
+    border-bottom: 1px solid #EEE;
  }
+
+ article li:last-child a {
+    border: none;
+ }
+
  .truncate {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    hyphens: none;
+    -webkit-hyphens: none;
 }
 
-.right-date {
-    float:right;
-    font-size:smaller;
+.content-link {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+}
+
+.content-link img {
+    height: 48px;
+    width: 64px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 article li:hover {

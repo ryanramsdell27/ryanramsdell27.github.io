@@ -103,15 +103,13 @@ def build_index(index: List, out: str, title: str):
     links = []
     index.sort(key=lambda k: k['meta_data']['date'], reverse=True)
     for file in index:
-        thumbnail = ''
-        if file['meta_data']['thumbnail'] is not None:
-            thumbnail = '<span class="right-date"><img height="64px" src="{}"/></span>'.format(file['meta_data']['thumbnail'])
-        links.append('<li><a href=/{} class="truncate">{}{}</br><span style="font-size:smaller">{}</span></a></li>'.format(
-            str(file['path']).replace(OUTPUT_DIR, ''),
-            file['meta_data']['title'],
-            thumbnail,
-            date.fromisoformat(file['meta_data']['date']).strftime("%d %B %Y"),
-        ))
+        thumbnail = build_template(components.get('thumbnail'), [['thumbnail', file['meta_data']['thumbnail']]]) if file['meta_data']['thumbnail'] else ''
+        t = build_template(components.get('content_list_item'), [
+            ['link', str(file['path']).replace(OUTPUT_DIR, '')],
+            ['title', file['meta_data']['title']],
+            ['date', date.fromisoformat(file['meta_data']['date']).strftime("%d %B %Y")],
+            ['thumbnail', thumbnail]])
+        links.append(t)
     link_list = '<ul>{}</ul>'.format(''.join(links))
     temp_f = build_template(CONTENTS_TEMPLATE, [['index', link_list], ['title', title]])
 
