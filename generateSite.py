@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List
 from datetime import date
 from markdown.extensions.toc import TocExtension
+from markdown.extensions.footnotes import FootnoteExtension
 
 SOURCE_DIR = 'src/pages/'
 TEMPLATE_DIR = 'src/template'
@@ -14,7 +15,7 @@ OUTPUT_DIR = 'build/'
 THUMBNAIL_SIZE = (128, 128)
 
 buildPath = lambda file, src, target: Path(str(file).replace('.md', '.html').replace(src, target))
-md = markdown.Markdown(extensions=['fenced_code', TocExtension(permalink=True), 'smarty'])
+md = markdown.Markdown(extensions=['fenced_code', TocExtension(permalink=True), 'smarty', 'tables', 'md_in_html', FootnoteExtension(BACKLINK_TEXT="&#8617&#xFE0E")])
 
 
 def clean():

@@ -95,3 +95,41 @@ footer {
 .headerlink:hover {
     color: lightgrey;
 }
+
+tbody tr:nth-child(odd) {
+    background-color: #efefef;
+}
+tr:last-child {
+  border-bottom: none;
+}
+thead tr:first-child {
+  border-top: none;
+}
+table {
+  border-collapse: collapse;
+}
+tr {
+  border: solid;
+  border-width: 1px 0;
+}
+
+.table-scroll {
+    overflow: scroll;
+}
+
+.toc a {
+    text-decoration: none;
+    color: rgb(60, 107, 189);
+}
+.toc a:hover {
+    text-decoration: underline;
+}
+.toc ul{
+    list-style-type: none;
+}
+.toc {
+    border-style: 1rem solid;
+}
+.toc {
+    border: .1rem solid rgb(60, 107, 189);
+}
