@@ -153,7 +153,7 @@ def process_files():
     for tag in tag_index:
         build_index(tag_index[tag], 'tagged/' + tag, 'Tagged: ' + tag)
     for file in Path(TEMPLATE_DIR).glob('**/*'):
-        if file.suffix == '.css':
+        if file.suffix == '.css' or file.suffix == '.ico':
             copy_to_build_dir(file, TEMPLATE_DIR, OUTPUT_DIR + '/template')
 
 
