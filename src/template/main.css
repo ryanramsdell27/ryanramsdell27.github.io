@@ -33,6 +33,15 @@ article {
     background-color: #fff;
     box-shadow: 2px 2px 10px lightgrey;
 }
+h1 {
+    font-size: 20pt;
+}
+h2 {
+    font-size: 16pt;
+}
+h3,h4,h5 {
+    font-size: 12pt;
+}
 img {
     width: 100%;
     max-width: 525;
@@ -119,6 +128,7 @@ thead tr:first-child {
 }
 table {
   border-collapse: collapse;
+  margin: auto;
 }
 tr {
   border: solid;
@@ -127,6 +137,7 @@ tr {
 
 .table-scroll {
     overflow: scroll;
+    max-height: 70vh;
 }
 
 .toc a {
@@ -144,4 +155,23 @@ tr {
 }
 .toc {
     border: .1rem solid rgb(60, 107, 189);
+}
+
+.gallery {
+  margin-top:2rem;
+}
+.gallery > div {
+  columns:3;
+  gap:1.25rem;
+  padding-top:1.25rem;
+}
+.gallery img {
+  display:block;
+  width:100%;
+  margin-bottom:1.25rem;
+}
+@media (max-width:48rem) {
+ .gallery > div {
+   columns:2;
+  }
 }
