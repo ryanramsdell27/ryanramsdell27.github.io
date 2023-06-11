@@ -6,6 +6,7 @@ from typing import List
 from datetime import date
 from markdown.extensions.toc import TocExtension
 from markdown.extensions.footnotes import FootnoteExtension
+from pymdownx.arithmatex import ArithmatexExtension
 
 SOURCE_DIR = 'src/pages/'
 TEMPLATE_DIR = 'src/template'
@@ -15,7 +16,14 @@ OUTPUT_DIR = 'build/'
 THUMBNAIL_SIZE = (128, 128)
 
 buildPath = lambda file, src, target: Path(str(file).replace('.md', '.html').replace(src, target))
-md = markdown.Markdown(extensions=['fenced_code', TocExtension(permalink=True), 'smarty', 'tables', 'md_in_html', FootnoteExtension(BACKLINK_TEXT="&#8617&#xFE0E")])
+md = markdown.Markdown(extensions=['fenced_code',
+                                   TocExtension(permalink=True),
+                                   'smarty',
+                                   'tables',
+                                   'md_in_html',
+                                   FootnoteExtension(BACKLINK_TEXT="&#8617&#xFE0E"),
+                                   ArithmatexExtension(generic=True)
+                                   ])
 
 
 def clean():
