@@ -60,7 +60,7 @@ img {
 }
 pre {
     background-color: #f4f4f4;
-    overflow: scroll
+    overflow: scroll;
 }
 
 header {
@@ -165,20 +165,23 @@ tr {
 }
 
 .gallery {
-  margin-top:2rem;
+    margin-top:2rem;
 }
 .gallery > div {
-  columns:3;
-  gap:1.25rem;
-  padding-top:1.25rem;
+    columns:3;
+    gap:1.25rem;
+    padding-top:1.25rem;
 }
 .gallery img {
-  display:block;
-  width:100%;
-  margin-bottom:1.25rem;
+    display:block;
+    width:100%;
+    margin-bottom:1.25rem;
 }
 @media (max-width:48rem) {
- .gallery > div {
-   columns:2;
-  }
+    .gallery > div {
+        columns:2;
+    }
+}
+.arithmatex {
+    overflow-x: scroll;
 }

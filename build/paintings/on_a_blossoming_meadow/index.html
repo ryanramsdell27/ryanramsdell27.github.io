@@ -3,6 +3,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <link rel="stylesheet" href="/template/main.css">
     <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*",
+            processHtmlClass: "arithmatex"
+          }
+        };
+    </script>
     <title>On a Blossoming Meadow</title>
 </head>
     <body>

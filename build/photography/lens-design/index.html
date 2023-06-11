@@ -1,0 +1,204 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="/template/main.css">
+    <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*",
+            processHtmlClass: "arithmatex"
+          }
+        };
+    </script>
+    <title>Lens Design</title>
+</head>
+    <body>
+        <header>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tagged/furniture">Furniture</a></li>
+        <li><a href="/tagged/programming">Programming</a></li>
+        <li><a href="/tagged/art">Art</a></li>
+        <li><a href="/tagged/recipe">Recipes</a></li>
+    </ul>
+</header>
+        <article>
+            <h1>Lens Design</h1>
+            <h5>Friday 07, July 2023</h5>
+            
+            <div class="chip">
+    <a href="/tagged/art">art</a>
+</div><div class="chip">
+    <a href="/tagged/photography">photography</a>
+</div><div class="chip">
+    <a href="/tagged/3D print">3D print</a>
+</div>
+            <hr/>
+            <p>This is another photography project long in progress. Many years back (2017?) I purchased some surplus doublet lenses from a distributor in Pennsylvania with no plan and the only reason being they were cheap. A few months ago I decided it was time to use them in a diy camera lens.</p>
+<p><img alt="bindu" src="bindu.jpg" /></p>
+<div class="toc">
+<ul>
+<li><a href="#measuring-the-lenses">Measuring the Lenses</a><ul>
+<li><a href="#diameter">Diameter</a></li>
+<li><a href="#height">Height</a></li>
+<li><a href="#focal-length">Focal Length</a></li>
+</ul>
+</li>
+<li><a href="#optical-design">Optical Design</a><ul>
+<li><a href="#minimum-lower-bound">Minimum Lower Bound</a></li>
+<li><a href="#refining-the-lower-bound">Refining the lower bound</a></li>
+<li><a href="#why-bother">Why bother</a></li>
+<li><a href="#optical-ray-tracer">Optical Ray Tracer</a></li>
+</ul>
+</li>
+<li><a href="#drafting">Drafting</a><ul>
+<li><a href="#blender-afficionado">Blender afficionado?</a></li>
+<li><a href="#printing">Printing</a></li>
+</ul>
+</li>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#mounting">Mounting</a></li>
+<li><a href="#using-it">Using it</a></li>
+<li><a href="#final-thoughts">Final thoughts</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+<p>I definitely picked up the lens around the time I was taking a course on Southeast Asian art history. I was very into the work of S.H. Raza<sup id="fnref:SHRaza"><a class="footnote-ref" href="#fn:SHRaza">1</a></sup> in his Bindu series from the late 90s and early 00s and definitely posted a derivative work of it on my instagram that a friend mistook for a petri dish &mdash; art is what you interpret it I suppose. All the same, and same and all, I&rsquo;ve since lost the paperwork from the purchase in the several moves I&rsquo;ve made and had no documentation of any properties of these lenses. Consequently, the first step is to take some measurements so that I can plan out the design.</p>
+<p><img alt="nadbindu" src="nadbindu.jpg" /></p>
+<h1 id="measuring-the-lenses">Measuring the Lenses<a class="headerlink" href="#measuring-the-lenses" title="Permanent link">&para;</a></h1>
+<h2 id="diameter">Diameter<a class="headerlink" href="#diameter" title="Permanent link">&para;</a></h2>
+<p>The two lenses are the same size across their diameter, or at least any difference is indiscernible to me. Thankfully the geometry of this situation made measuring the diameter easy without a pair of calipers. Lay the two lenses side by side, run two straight boards parallel to each-other with the lenses in the middle, and measure the distance between the two boards to get the diameter of the lenses.</p>
+<pre><code>--------
+ ()  ()
+--------
+</code></pre>
+<h2 id="height">Height<a class="headerlink" href="#height" title="Permanent link">&para;</a></h2>
+<p>The maximum height of the lenses can be measured in the same way, this time with the lenses laid on their sides. </p>
+<p>The minimum height doesn&rsquo;t have to deal with finding gradient zero of a curved surface and can just use a regular ruler and the lens laid flat-side-down on the table.</p>
+<h2 id="focal-length">Focal Length<a class="headerlink" href="#focal-length" title="Permanent link">&para;</a></h2>
+<p>Now for an optical property of the lens. Focal length is a measure of how strongly a lens converges (or diverges) light. I&rsquo;m not doing anything critical or that can&rsquo;t be fixed by adding in some tolerances to the final build to compensate for inaccuracies or imprecision, so I took this measurement with the assumption of a thin lens.</p>
+<p>We have a fun little equation to use <span class="arithmatex">\(\frac{1}{f} = \frac{1}{u} + \frac{1}{v}\)</span> where <span class="arithmatex">\(f\)</span> is the focal length, <span class="arithmatex">\(u\)</span> is the distance from the object to the lens, and <span class="arithmatex">\(v\)</span> is the distance from the lens to the image.</p>
+<p>As <span class="arithmatex">\(u\)</span> increases, the term <span class="arithmatex">\(\frac{1}{u}\)</span> approaches <span class="arithmatex">\(0\)</span>, so for a sufficiently far enough subject, this term is negligible. Hence, we get <span class="arithmatex">\(f\approx v\)</span></p>
+<p>The set-up is simple:</p>
+<pre><code>|    ()            ☀️
+---------------------
+  v         u
+</code></pre>
+<p>Fix the lens in place pointed at a distant object, move a white card back and forth behind the lens until the distant object is in focus on the card. Measure the distance <span class="arithmatex">\(v\)</span> from the lens to the card, <span class="arithmatex">\(v \approx f\)</span>.</p>
+<p>The two lenses I am working with happened to be <span class="arithmatex">\(f_1=241\)</span>mm and <span class="arithmatex">\(f_2=132\)</span>mm.</p>
+<h1 id="optical-design">Optical Design<a class="headerlink" href="#optical-design" title="Permanent link">&para;</a></h1>
+<p>The two elements combined allow for a shorter focal length than either lens on its own. With a little math and a neat little java program I was able to engineer a system with a more desirable effective focal length.</p>
+<p>But the question is, what is the desired output of that system?</p>
+<h2 id="minimum-lower-bound">Minimum Lower Bound<a class="headerlink" href="#minimum-lower-bound" title="Permanent link">&para;</a></h2>
+<p>What&rsquo;s the smallest focal length that is useful in this lens design? I have three camera systems with interchangeable lenses: a Canon EOS Rebel T2i/550D, a Canon AT-1, and a Praktica FX, which have the Canon EF, Canon FD, and M42 mounts, respectively. I wanted to design my lens to be usable for all of these mount systems.</p>
+<p>The flange-to-focal distance is the measurement I needed for each mount specification. It is, as the name implies, the distance from the flange (opening of the camera body that the lens mounts into) to the focal plane of the camera (the film or electronic image sensor). Unfortunately I&rsquo;ve lost the thin lens approximation now that I&rsquo;m trying to combine the two lenses, but thankfully it doesn&rsquo;t really matter &mdash; I choose now to measure &ldquo;focal length&rdquo; as the <em>back focal distance</em>, which is this distance from the last optical piece of the system to the focal point of objects near infinity. Any lens mounted on the camera with flange-to-focal distance <span class="arithmatex">\(d\)</span> needs a back focal distance <span class="arithmatex">\(f\)</span> where <span class="arithmatex">\(f\geq d\)</span>. This ensures that when the lens focuses objects near infinity, the focused image is formed on the focal plane with the lens <em>outside</em> of the camera body. If <span class="arithmatex">\(f&lt;d\)</span>, then the lens would need to be positioned inside the camera, past the flange, in order to properly focus at infinity.</p>
+<p>Armed with this knowledge, picking the lower bound of <span class="arithmatex">\(f\)</span> amounts to choosing the longest flange-to-focal distance of the three camera bodies I owned, in this case the M42 mount on the Praktica FX. The other bodies, by nature of having shorter flange-to-focal distance, can have adaptors added to 1) convert the mounting mechanism from one type to the other, and 2) increase the overall distance to match the flange-to-focal distance of the M42. </p>
+<h2 id="refining-the-lower-bound">Refining the lower bound<a class="headerlink" href="#refining-the-lower-bound" title="Permanent link">&para;</a></h2>
+<p>Lower bound is a misleading term for what I was actually trying to measure here, which is this: the minimal distance <span class="arithmatex">\(d\)</span> from the rear of the last element in the lens system to the focal plane such that an object at infinity is in focus. (It&rsquo;s worth noting that things closer than infinity are focused on the focal plane by moving the lens further away) The rear of the lens system needs to be able to be positioned between the lower bound and the value we find here in order to ensure that the camera can focus at infinity. Truthfully this value is the <em>exact</em> closest point the lens needs to come to the image plane to focus at infinity, but it turns out machining stuff perfectly as a hobbyist maker is not easy, so it&rsquo;s always good to build some tolerance into our designs.</p>
+<p>Okay some quick math! For a combined lens system made from a thins lens with focal length <span class="arithmatex">\(f_1\)</span> and another with focal length <span class="arithmatex">\(f_2\)</span> separated by a distance <span class="arithmatex">\(d\)</span> we have <span class="arithmatex">\(\frac{1}{f} = \frac{1}{f_1} + \frac{1}{f_2} - \frac{d}{f_1 f_2}\)</span>. Do a little algebra, plugging in the values I measured for the lenses, <span class="arithmatex">\(f_1=241\)</span>mm and <span class="arithmatex">\(f_2=132\)</span>mm, we see <span class="arithmatex">\(f = \frac{241\cdot 132}{241 + 132 - d}\)</span>.</p>
+<p>This <span class="arithmatex">\(f\)</span> is not the back focal distance, however. To calculate that we need to take it one step further. For our system we have <span class="arithmatex">\(\delta=\frac{-d}{n} \frac{f}{f_1} = v' - v\)</span>. In air we have <span class="arithmatex">\(n=1\)</span>, so <span class="arithmatex">\(\delta = \frac{-df}{f_1}=v'-v\)</span>. Now, <span class="arithmatex">\(v\)</span> is the effective focal distance of the system, and also <span class="arithmatex">\(f\)</span> from above. <span class="arithmatex">\(v'\)</span> is the back focal distance, solving for that we have </p>
+<div class="arithmatex">\[v=v'- \frac{-d\cdot f}{f_1} = \frac{f_1\cdot f_2}{f_1+f_2-d} - \frac{-d\cdot \frac{f_1\cdot f_2}{f_1+f_2-d}}{f_1} \]</div>
+<p>Clean that up,</p>
+<div class="arithmatex">\[v= \left(\frac{f_1\cdot f_2}{f_1+f_2-d}\right)\left(1 + \frac{d}{f_1}\right)\]</div>
+<p>Plug some values in,</p>
+<div class="arithmatex">\[ v = \left(\frac{31812}{373-d}\right)\left(1 + \frac{d}{241}\right)\]</div>
+<p>Let&rsquo;s graph it
+<img alt="Distance" src="distance.png" />
+For a distance <span class="arithmatex">\(0\)</span> between the two lenses we get <span class="arithmatex">\(v\approx 85\)</span>. As <span class="arithmatex">\(d\)</span> increases, so does <span class="arithmatex">\(v\)</span> until we reach <span class="arithmatex">\(373\)</span>mm, which would be an absurdly long lens. The practical upshot of all of this is: the lenses can be as close or as far from each-other as needed without running into issues with focusing at infinity since <span class="arithmatex">\(85\geq 45.46\)</span>mm, the shortest possible distance with the given mount.</p>
+<h2 id="why-bother">Why bother<a class="headerlink" href="#why-bother" title="Permanent link">&para;</a></h2>
+<p>This may seem like a silly exercise in algebra for something that doesn&rsquo;t matter, just cram the two lenses together and see if the image they project is focused for an object at infinity with a back focal distance greater than the limitation imposed by the flange-focal-distance fo the lens mount. And you&rsquo;d be right! But sometimes it&rsquo;s nice to back things up with numbers, and it gives you some theory to play around with without having to deal with physical experimental setups and such. Now I can design new lens systems with glass I have yet to purchase, knowing just the focal length of the lenses. Or I can figure out how much room for play there is to add something like a mechanical iris or other system to work as an adjustable aperture on the complex lens.</p>
+<h2 id="optical-ray-tracer">Optical Ray Tracer<a class="headerlink" href="#optical-ray-tracer" title="Permanent link">&para;</a></h2>
+<p>A picture may be worth a thousand words, but Optical Ray Tracer is worth a billion calculations. Fill out some parameters to copy your lens, Move some things around, and suddenly you have a virtual version of the lenses that you can move around and ray trace with. This tool was incredibly helpful in the designing process and super easy to use. Not to mention it is released under GPL, it truly is a wonderful open-source project.<sup id="fnref:OpticalRayTracer"><a class="footnote-ref" href="#fn:OpticalRayTracer">2</a></sup></p>
+<p><img alt="Optical Ray Tracer" src="opticalRayTracer.jpeg" /></p>
+<h1 id="drafting">Drafting<a class="headerlink" href="#drafting" title="Permanent link">&para;</a></h1>
+<p>Modern lenses are mechanical beauties. So many small, intricate parts machined precisely and with great complexity. Simply put: beyond my construction abilities <em>(for now&hellip;)</em> But a lens doesn&rsquo;t need fancy helical focus systems, mechanical irises, or even (as you&rsquo;ll find out) a properly spec&rsquo;ed mount system. It really just needs to be a light tight tube that can move the lens back and forth for focus that can be affixed the camera.</p>
+<p><img alt="Paper design" src="paperDesign.jpeg" /></p>
+<h2 id="blender-afficionado">Blender afficionado?<a class="headerlink" href="#blender-afficionado" title="Permanent link">&para;</a></h2>
+<p>Towards that end, I can carve wood crudely, I&rsquo;ve worked with angle iron back when I thought I was going to be an engineer, and I have tried my hand at polymer clay &mdash; all three would have turned out with astonishingly horrible results even with this simplified design. However, and in my favor, I do have access to an SLA 3D printer that uses UV sensitive material to build up 3D objects using nothing more than an LCD screen that emits UV light and single-axis print bed. </p>
+<p>Ever the artist and technologist I have a pretty long history with the open source 3D modeling software <a href="https://www.blender.org">Blender</a>. It really is quite a powerhouse app, and I think one of the better examples of the beauty of open source software. Romanticism aside, it isn&rsquo;t exactly the <em>best</em> tool for printing objects, but I know how to use it, my designs are simple enough to draft accurately on a point-by-point basis, and it&rsquo;s free.</p>
+<p><img alt="blender design" src="blender.jpeg" /></p>
+<p>The basic design is simple: a big tube to connect to the camera body and a smaller tube to go inside the big tube that is made from two parts that hold the two lenses a fixed distance from each other. The two parts of the smaller tube have small annular &ldquo;shelves&rdquo; with an inner radius smaller than that of the lenses so that they can be glued into place without rotation on two axis (the third axis of the lenses are aligned through the optical center of each by virtue of the inner diameter of the smaller tube being equal to the diameter of the lenses themselves). </p>
+<h2 id="printing">Printing<a class="headerlink" href="#printing" title="Permanent link">&para;</a></h2>
+<p>The first iteration on this I tried to be fancy and included two &ldquo;improvements&rdquo; to the basic design</p>
+<ol>
+<li>M42 mount. This one seemed easy! Just make a threaded base that matches the spec of the M42 screw mount. Internal diameter 41mm, external diameter 42mm, 1mm thread pitch. Take a triangle with base 1mm and height 1mm, oriented with the base 41mm from the origin and the apex 42mm from the origin, spin it around a couple of revolution moving up 1mm with each full turn. It printed <strong>beautifully</strong>, I was so proud of my handiwork. Until I tried to screw it onto my Praktica and learned that SLA resin is not very strong and the metal on the screw mount of the camera absolutely decimated the threads. Ah well. I can work around it.</li>
+<li>Internal &ldquo;rails&rdquo; to keep the lens stable. These, as printed, would induce linear motion of the lens. This in and of itself isn&rsquo;t particularly useful for the lens design as is but is indeed a nice feature down the line especially when using something like a polarizing filter whose orientation greatly effects the image. The goal was to print these rails then modify the body afterwards to add an easy stop on the inside to limit focusing past infinity (build for tolerances then fine tune it). The first print I didn&rsquo;t scale down the rails enough for the smaller tube to fit in the larger. The second attempt I tried a print-in-place method that resulted in the tubes forever melded together. No third attempt but it could work, at any rate.</li>
+</ol>
+<p>I went back and removed all the complexity from the design and ran the print for another attempt. The results were&hellip;discouraging.</p>
+<p><img alt="parts" src="parts.jpg" /></p>
+<p>The people who have the patience to deal with this amaze me. I certainly didn&rsquo;t have the interest to try again. But over-engineering saved me again. The core part of the failed piece were printed correctly, namely the &ldquo;shelf&rdquo; and any semblance of a tube were enough to work with. The full length of this part was initially designed so that the bottom of it rested against the bottom of the larger tube with the rear lens exactly the back focal distance away from the focal plane. It&rsquo;s a shorter overall length but enough that the inner tube is still contained entirely within the outer tube even when focused on near object, so &ldquo;it&rsquo;s good enough&rdquo; was the prevailing wisdom.</p>
+<h1 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">&para;</a></h1>
+<p>The assembly of the lens was pretty straight forward. Clean the component lenses as well as possible. Glue both onto their corresponding shelves. Glue the two parts of the inner tube together. Insert the inner tube into the big tube. Voila, a lens.</p>
+<p><img alt="Me" src="test_shots/1.jpeg" /></p>
+<p>Wow so blurry and out of focus&hellip;it&rsquo;s artsy?</p>
+<h1 id="mounting">Mounting<a class="headerlink" href="#mounting" title="Permanent link">&para;</a></h1>
+<p>Okay assembly had one more thing to account for since my attempt to print the M42 screw mount failed miserably. I scraped the idea of mounting it to my Praktica (for now, although I&rsquo;m sure there is a way to do it by extending some platform right around the flange end of the larger cylinder and extensive use of rubber bands). Instead, I went with the mount on my digital camera which ultimately made testing the lens much easier than film ever would have been. Since the lens was designed to fit in a M42 mount without threading, I ordered an M42 to EF-S adapter, glued the large tube into place and suddenly I had an EF-S mount diy lens.</p>
+<p><img alt="Frost Tower" src="test_shots/2.jpeg" /></p>
+<h1 id="using-it">Using it<a class="headerlink" href="#using-it" title="Permanent link">&para;</a></h1>
+<p>Usage is pretty straight-forward: aim at a subject, pull the lens out to focus closely or move it in to focus farther away. There is no aperture to concern yourself with (so convenient!) so exposure needs to be controlled via shutter speed and ISO (or creative use of something else to make an ad-hoc aperture)
+The inner tube I downsized maybe slightly too much in that it wiggles a bit when extended for close focusing. &ldquo;Artistic limitations&rdquo;.</p>
+<p><img alt="Driskill" src="test_shots/3.jpeg" /></p>
+<p><img alt="Rooftops" src="test_shots/7.jpeg" /></p>
+<h1 id="final-thoughts">Final thoughts<a class="headerlink" href="#final-thoughts" title="Permanent link">&para;</a></h1>
+<p>I really enjoyed this project. It was a longggggg process in the making, and there is so much more I can improve on. For the next iteration I&rsquo;d like to figure out a better sliding mechanism, be that rails or some kind of helical screw. A proper aperture is also a must to help bring the edges of the photo in focus. See below for some results to judge the photo quality yourself.</p>
+<h1 id="gallery">Gallery<a class="headerlink" href="#gallery" title="Permanent link">&para;</a></h1>
+<p><section class="gallery" markdown="span">
+    <div markdown>
+<img alt="Stairs" src="1.jpeg" />
+<img alt="Bee" src="2.jpeg" />
+<img alt="Parrots" src="3.jpeg" />
+<img alt="Flower" src="4.jpeg" />
+<img alt="Rooftops at Night" src="test_shots/11.jpeg" />
+<img alt="Flowering Tree 1" src="5.jpeg" />
+<img alt="Dappled Tree" src="7.jpeg" />
+<img alt="Lake Water" src="9.jpeg" />
+<img alt="Carved Tree" src="10.jpeg" />
+<img alt="Nuts" src="11.jpeg" />
+<img alt="Fourth Street" src="test_shots/9.jpeg" />
+<img alt="Skyscraper" src="12.jpeg" />
+<img alt="Flower 2" src="13.jpeg" />
+<img alt="Skyscrapers" src="14.jpeg" />
+<img alt="City Behind Trees" src="15.jpeg" />
+<img alt="Water Leaf" src="16.jpeg" />
+<img alt="Construction" src="test_shots/8.jpeg" />
+<img alt="Leaf" src="17.jpeg" />
+<img alt="Path" src="8.jpeg" />
+    </div>
+</section></p>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:SHRaza">
+<p>S.H. Raza Nad Bindu. 1995, 175½ x 150 cms, acrylic on canvas. <a href="http://www.rlfinearts.com/artists/artist/s.h.-raza">rlfinearts</a>&#160;<a class="footnote-backref" href="#fnref:SHRaza" title="Jump back to footnote 1 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:OpticalRayTracer">
+<p>Optical Ray Tracer. Paul Lutus. <a href="https://arachnoid.com/OpticalRayTracer/">arachnoid</a>&#160;<a class="footnote-backref" href="#fnref:OpticalRayTracer" title="Jump back to footnote 2 in the text">&#8617&#xFE0E</a></p>
+</li>
+</ol>
+</div>
+        </article>
+        <footer>
+<!-- If you spam this email I will be sad -->
+    <script>
+        function decodeEmail(encoded) {
+            var address = atob(encoded);
+            window.location.href = "mailto:" + address;
+        }
+    </script>
+    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2023
+    <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
+</footer>
+    </body>
+</html>
