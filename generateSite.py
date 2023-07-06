@@ -7,6 +7,7 @@ from datetime import date
 from markdown.extensions.toc import TocExtension
 from markdown.extensions.footnotes import FootnoteExtension
 from pymdownx.arithmatex import ArithmatexExtension
+from generateRss import RssGen, Post
 
 SOURCE_DIR = 'src/pages/'
 TEMPLATE_DIR = 'src/template'
@@ -74,18 +75,18 @@ def convert_md_file(file: Path):
 
     backdated = components['backdated'] if 'backdated' in meta_data and meta_data['backdated'] == 'true' else ''
 
-    temp_html = build_template(POST_TEMPLATE,
-                               [['content', temp_html],
-                                ['title', meta_data['title']],
-                                ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")],
-                                ['tags', tags],
-                                ['backdated', backdated]])
+    temp_html_serve = build_template(POST_TEMPLATE,
+                                     [['content', temp_html],
+                                      ['title', meta_data['title']],
+                                      ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")],
+                                      ['tags', tags],
+                                      ['backdated', backdated]])
 
     output_file = buildPath(file, SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)
     with open(output_file, 'w') as f:
-        f.write(temp_html)
-    return meta_data
+        f.write(temp_html_serve)
+    return [meta_data, temp_html]
 
 
 def copy_to_build_dir(file: Path, src: str, target: str):
@@ -112,7 +113,8 @@ def build_index(index: List, out: str, title: str):
     links = []
     index.sort(key=lambda k: k['meta_data']['date'], reverse=True)
     for file in index:
-        thumbnail = build_template(components.get('thumbnail'), [['thumbnail', file['meta_data']['thumbnail']]]) if file['meta_data']['thumbnail'] else ''
+        thumbnail = build_template(components.get('thumbnail'), [['thumbnail', file['meta_data']['thumbnail']]]) if \
+        file['meta_data']['thumbnail'] else ''
         t = build_template(components.get('content_list_item'), [
             ['link', str(file['path']).replace(OUTPUT_DIR, '')],
             ['title', file['meta_data']['title']],
@@ -126,6 +128,19 @@ def build_index(index: List, out: str, title: str):
     output_file.parent.mkdir(exist_ok=True, parents=True)
     with open(output_file, 'w') as f:
         f.write(temp_f)
+
+
+def build_feed(index):
+    gen = RssGen()
+    index.sort(key=lambda k: k['meta_data']['date'], reverse=True)
+    for file in index[:25]:
+        post = Post()
+        post.atomId = str(file['path']).replace(OUTPUT_DIR, '')
+        post.updated = date.fromisoformat(file['meta_data']['date']).strftime("%Y-%m-%dT%H:%M:%SZ")
+        post.title = file['meta_data']['title']
+        post.content = file['html']
+        gen.append(post)
+    gen.save()
 
 
 def read_components():
@@ -146,8 +161,8 @@ def process_files():
         if not file.is_file():
             continue
         if file.suffix == '.md':
-            meta_data = convert_md_file(file)
-            index.append({'path': buildPath(file, SOURCE_DIR, OUTPUT_DIR), 'meta_data': meta_data})
+            [meta_data, temp_html] = convert_md_file(file)
+            index.append({'path': buildPath(file, SOURCE_DIR, OUTPUT_DIR), 'meta_data': meta_data, 'html': temp_html})
             if 'tags' in meta_data:
                 for tag in meta_data['tags'].split(','):
                     details = {'path': buildPath(file, SOURCE_DIR, OUTPUT_DIR), 'meta_data': meta_data}
@@ -158,10 +173,11 @@ def process_files():
         else:
             copy_to_build_dir(file, SOURCE_DIR, OUTPUT_DIR)
     build_index(index, '', 'All posts')
+    build_feed(index)
     for tag in tag_index:
         build_index(tag_index[tag], 'tagged/' + tag, 'Tagged: ' + tag)
     for file in Path(TEMPLATE_DIR).glob('**/*'):
-        if file.suffix == '.css' or file.suffix == '.ico':
+        if file.suffix in ['.css', '.ico', '.png']:
             copy_to_build_dir(file, TEMPLATE_DIR, OUTPUT_DIR + '/template')
 
 
