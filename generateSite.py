@@ -39,7 +39,7 @@ def read_meta_data(file):
     for line in t_header[0].split('\n'):
         attribute = line.split(': ')
         if len(attribute) > 1:
-            meta_data[attribute[0]] = attribute[1]
+            meta_data[attribute[0]] = ': '.join(attribute[1:])
     return [meta_data, t_header[1]]
 
 

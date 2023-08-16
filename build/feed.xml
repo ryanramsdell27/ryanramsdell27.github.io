@@ -3,7 +3,45 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>07-07-2023T11:34:08Z</updated>
+  <updated>16-08-2023T12:18:57Z</updated>
+  <entry>
+    <title>Lilies</title>
+    <id>paintings/lilies/index.html</id>
+    <updated>2023-08-10T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Lilies" src="lilies.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;8"x10"&lt;/code&gt; oil on canvas board&lt;/p&gt;
+&lt;p&gt;Lilies and mums painted from real life&lt;/p&gt;
+&lt;p&gt;Frame from local thrift shop&lt;/p&gt;
+&lt;h1 id="process-photos"&gt;Process Photos&lt;a class="headerlink" href="#process-photos" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Under painting" src="p1.jpeg" /&gt;
+&lt;img alt="More filled in" src="p2.jpeg" /&gt;&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/lilies/index.html" />
+  </entry>
+  <entry>
+    <title>Snow House</title>
+    <id>paintings/snow_house/index.html</id>
+    <updated>2023-08-04T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Snow House" src="snow_house.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;11"x14"&lt;/code&gt; oil on canvas board&lt;/p&gt;
+&lt;p&gt;Copy of a painting by contemporary artist Jeremy Miranda.&lt;/p&gt;
+&lt;p&gt;Waiting to glaze in 6 months to make everything more purple.&lt;/p&gt;
+&lt;p&gt;Not framed.&lt;/p&gt;
+&lt;h1 id="process-photos"&gt;Process Photos&lt;a class="headerlink" href="#process-photos" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Blocking" src="p1.jpeg" /&gt;
+&lt;img alt="More filled in" src="p2.jpeg" /&gt;&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/snow_house/index.html" />
+  </entry>
+  <entry>
+    <title>Book Review &#8212; Chen Village: Revolution to Globalization (Third Edition) by Anita Chan, Richard Madsen, and Jonathan Unger</title>
+    <id>reading/chenVillage.html</id>
+    <updated>2023-07-19T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;Many years ago I was an overly ambitious college freshman and decided to take a sociology class on contemporary Chinese society to max out my credits. It was a 3 hour weekly lecture that met late in the day and had the most readings of any class I would take for the rest of my time at school. I had several other demanding classes at the time, so I breezed through some of the readings in order to stay sane (although I was more attentive to the readings I did for this class than the French readings I would do while walking to lecture). All said, Chen Village was one of the selections that really stuck out to me from such a chaotic time in my life, and although I definitely didn&amp;rsquo;t glean as much out of it as I should have the first time, it remained in my memory as a decidedly good read. Thankfully I have more leisure time these days, and gave the book a seconds pass at a less break-neck speed and I cannot laud praises enough for just how great it is.&lt;/p&gt;
+&lt;p&gt;The book is the result of a multi-decade study on a village in the Pearl River Delta region in the southern coastal area of China. It follows the lives of the villagers and local leadership from the early 1960s through 2007, providing a microscopic view on the effects of the rise of Mao Zedong and communism in China, his campaigns, the aftermath of his death, the radical transformation ushered by Deng Xiaoping, and the rapid globalization that swept across coastal China. In a moment of clairvoyance the authors decided to start recording interviews with expats who had fled mainland China to Hong Kong in the 1970s. They eventually were able to visit the village for day trips when the country started opening up to foreigners again, and then multi day visits as restrictions further eased. The study, as a whole, is really quite an amazing undertaking and it started from just a few chance encounters!&lt;/p&gt;
+&lt;p&gt;Chen Village is certainly not indicative of all rural villages in China, it&amp;rsquo;s proximity to Hong Kong positioned it for rapid urban development following the rise of Deng Xiaoping, but provided a very real slice-of-life from such a tumultuous time. It featured both the existing peasantry from the town, the &amp;ldquo;sent-down youth&amp;rdquo; from a nearby city that were encouraged to join these rural communities, and, near the end, a section on the migrant workers working in the factories. A note of interest: current Party Secretary, Xi Jinping, was a sent-down youth himself, and the book helps to contextualize his rise to power.&lt;/p&gt;
+&lt;p&gt;I cannot express how well written the book is. While based on interviews and telling the story of a real village, you still get a sense of familiarity with the people as if they were characters in a fiction book. There were several times when I needed to remind myself that this was, in fact, the result of a sociology study. My only complaint is that the glue binding in the book itself did not survive the Texas heat &amp;mdash; the book is a tattered mess of loose pages now. I look forward to reading it again, maybe with a new copy :)&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Book" src="chenVillage.jpeg" /&gt;&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/reading/chenVillage.html" />
+  </entry>
   <entry>
     <title>Lens Design</title>
     <id>photography/lens-design/index.html</id>
@@ -1495,60 +1533,5 @@ An iteration on a previous design, this is scaled up floor lamp variation of my 
 The construction was essentially the same as the previous post. The biggest difference being that I used a proper shade I purchased from Ikea. I will probably redo the shade at some point, but for now the pink orb works well enough.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBent3.jpeg" /&gt;&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/bigBentLamp.html" />
-  </entry>
-  <entry>
-    <title>Shoal Creek at Pease Park</title>
-    <id>paintings/shoal_creek/index.html</id>
-    <updated>2022-12-31T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Shoal Creek at Pease Park" src="shoal_creek.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;12"x16"&lt;/code&gt; oil on canvas&lt;/p&gt;
-&lt;p&gt;Not framed.&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/shoal_creek/index.html" />
-  </entry>
-  <entry>
-    <title>Inkineule Sweater</title>
-    <id>knitting/inkineule/index.html</id>
-    <updated>2022-09-15T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Finished" src="finished.jpeg" /&gt;
-This was my second sweater (well I started one between the first one and this one, but that one never got finished).&lt;/p&gt;
-&lt;h1 id="project-details"&gt;Project Details&lt;a class="headerlink" href="#project-details" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="pattern"&gt;Pattern&lt;a class="headerlink" href="#pattern" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Inkineule by &lt;a href="https://villahullu.fi/en/"&gt;Heli Nikula&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I knit the large size&lt;/p&gt;
-&lt;h2 id="yarn"&gt;Yarn&lt;a class="headerlink" href="#yarn" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Lopi Lettlopi (Icelandic wool, 50 gram balls)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1403 Lapis Blue (8)&lt;/li&gt;
-&lt;li&gt;9431 Brick (2)&lt;/li&gt;
-&lt;li&gt;0051 White (2)&lt;/li&gt;
-&lt;li&gt;9427 Rust (1)&lt;/li&gt;
-&lt;li&gt;1703 Mimosa (1)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This is 100% icelandic wool. It&amp;rsquo;s very warm and easy to work with. It is considerably more scratchy than other yarns I&amp;rsquo;ve worked with.&lt;/p&gt;
-&lt;h2 id="needles"&gt;Needles&lt;a class="headerlink" href="#needles" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;3.5mm&lt;/li&gt;
-&lt;li&gt;4mm &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I used circular needles for the body and yoke, and dpns for the sleeves.&lt;/p&gt;
-&lt;h1 id="progress"&gt;Progress&lt;a class="headerlink" href="#progress" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Start" src="arms.jpeg" /&gt;
-This sweater is worked bottom up, which was very rewarding in the end. I still had the novelty of starting a new project for most of the body so the monotonous sea of blue went by pretty quickly.&lt;/p&gt;
-&lt;p&gt;Once you reach the armpit in the body you work the two sleves cuff-up and then join them all on to one circular needle to finish the yoke. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="flat1" src="flat1.jpeg" /&gt;
-My tension in the cuffs and the neck were a bit tighter than I wish, putting on and taking off the sweater is difficult with so little give in the fabric. But it&amp;rsquo;s workable, so I didn&amp;rsquo;t bother to redo them. I&amp;rsquo;ve done colorwork before but for this sweater I really honed working both continental and english knitting so that I could use both colors without having to switch the yarn in my working hand. There are a few places that use three colors in one row which was first for me, but ultimately the process was directly analogous to regular stranded color work.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="flat2" src="flat2.jpeg" /&gt;&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/knitting/inkineule/index.html" />
-  </entry>
-  <entry>
-    <title>Bent Lamp</title>
-    <id>furniture/lighting/bentLamp.html</id>
-    <updated>2022-08-09T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="BentLamp" src="bentLamp.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;This lamp was the result of experiments in kerf-bending for the seat in another project, &lt;a href="/furniture/chair/chair_restore.html"&gt;chair restoration&lt;/a&gt;. I cut a very similar shape in trying to match the profile of the original seat of that chair, and with some refinements in length and proportions of the overhangs I ended up with the design as it is currently.&lt;/p&gt;
-&lt;p&gt;The piece is made from &lt;code&gt;1"x2"&lt;/code&gt; red oak (actually &lt;code&gt;3/4"x1 1/2"&lt;/code&gt;). The bent part was first cut to length and then the central chanel routed out for the lamp cord. Using my circular saw I crosscut the piece leaving &lt;code&gt;1/4"&lt;/code&gt; of wood on the reverse side. Each corner was 19 cuts. To glue up the piece I filled the kerfs with wood glue and bent it into place with a ratchet strap. Next I drilled holes for the cord to enter and exit the lamp at the base and head.  For the feet, I chiseled out a notch to fit the base of the curved piece. No glue was needed to secure them as the opening was tight enough. All the wood was finished with natural Danish Oil.&lt;/p&gt;
-&lt;p&gt;The shade is a glass vase I picked up from Ikea. The diffuser inside is plastic I found from B&amp;amp;H photo. Inside the lip of the jar is two pieces of cardboard with a hole in the middle small enough for the lip of the light socket to not fit through. The lid is a circle of scrap pine I cut out with the router. The cord was fished through the lid and the light socket then wired into place.&lt;/p&gt;
-&lt;p&gt;See my larger version &lt;a href="/furniture/lighting/bigBentLamp.html"&gt;bent lamp&lt;/a&gt;&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/bentLamp.html" />
   </entry>
 </feed>
