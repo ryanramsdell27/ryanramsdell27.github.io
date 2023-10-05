@@ -3,7 +3,60 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>16-08-2023T12:18:57Z</updated>
+  <updated>04-10-2023T21:01:11Z</updated>
+  <entry>
+    <title>Passing View on County Road G</title>
+    <id>paintings/barn/index.html</id>
+    <updated>2023-10-23T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;Germantown WI&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Barn, study" src="barn.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;5.25"x6.5"&lt;/code&gt; oil on canvas paper&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Study and reproduction" src="mother_and_child.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;I tried my hand at painting it larger, but am not too fond of the outcome.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Barn" src="barn_big.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;16"x20"&lt;/code&gt; oil on canvas&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/barn/index.html" />
+  </entry>
+  <entry>
+    <title>Ducks</title>
+    <id>paintings/ducks/index.html</id>
+    <updated>2023-09-23T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Ducks" src="ducks.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;5"x8"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/ducks/index.html" />
+  </entry>
+  <entry>
+    <title>Sake</title>
+    <id>paintings/sake/index.html</id>
+    <updated>2023-09-23T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Sake" src="sake.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;5"x8"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/sake/index.html" />
+  </entry>
+  <entry>
+    <title>Studies</title>
+    <id>paintings/studies/index.html</id>
+    <updated>2023-09-16T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;A series of studies I did&lt;/p&gt;
+&lt;h2 id="still-life-in-my-living-room"&gt;Still Life in My Living Room&lt;a class="headerlink" href="#still-life-in-my-living-room" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="Living room" src="living_room.jpeg" /&gt;
+&lt;code&gt;6.5"x8"&lt;/code&gt; oil on canvas paper&lt;/p&gt;
+&lt;h2 id="mums"&gt;Mums&lt;a class="headerlink" href="#mums" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="mums" src="mums.jpeg" /&gt;
+&lt;code&gt;8.5"x6"&lt;/code&gt; oil on canvas paper&lt;/p&gt;
+&lt;h2 id="snow-golem-near-work"&gt;Snow Golem Near Work&lt;a class="headerlink" href="#snow-golem-near-work" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="Snow golem" src="snow_golem.jpeg" /&gt;
+&lt;code&gt;6"x7.5"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/studies/index.html" />
+  </entry>
+  <entry>
+    <title>Moonlight</title>
+    <id>paintings/moonlight/index.html</id>
+    <updated>2023-09-10T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Moonlight" src="moon.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;7"x4"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/moonlight/index.html" />
+  </entry>
   <entry>
     <title>Lilies</title>
     <id>paintings/lilies/index.html</id>
@@ -1341,197 +1394,5 @@ This recipe is heavily inspired by the cochon de lait I get at a local Austin re
 &lt;li&gt;Add protein (back) to sauce and serve, topping with cilantro&lt;/li&gt;
 &lt;/ul&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/curry.html" />
-  </entry>
-  <entry>
-    <title>Coffee Table</title>
-    <id>furniture/coffee-table/coffeTable.html</id>
-    <updated>2023-03-09T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;I recently moved into a new apartment downtown. It&amp;rsquo;s a pretty nice space but square footage is a premium and I have a shorter-than-average distance from couch to tv to work with. So many coffee tables on the market are fairly deep and would make my space feel even more cramped, so I opted to build my own table that fit the dimensions of my space.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Table pic" src="finished4.jpeg" /&gt;&lt;/p&gt;
-&lt;h1 id="design"&gt;Design&lt;a class="headerlink" href="#design" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;The design of this table was heavily inspired by a similar table from one of my favorite design firms, Norm Architects. Specifically the &lt;a href="https://www.karimoku-casestudy.com/furniture/kinuta-n-ct01/"&gt;N - CT01&lt;/a&gt; from the Karimoku Case Study - Kinuta Terrace collection. It&amp;rsquo;s such a well-designed coffee table but unfortunately beyond my budget.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Karimoku" src="karimoku1.jpeg" /&gt;&lt;/p&gt;
-&lt;h1 id="construction"&gt;Construction&lt;a class="headerlink" href="#construction" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;All the wood in the final project I used were red oak boards I picked up from the local big box store. &lt;/p&gt;
-&lt;p&gt;Since the boards were already joined and planed it was easy work, mostly just cutting, drilling, and gluing. Thankfully I had access to a miter saw (or chop box as my dad calls it) for this project.&lt;/p&gt;
-&lt;p&gt;The cut list (nominal sizes):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;1x2x11&lt;/code&gt; - 5 (cross support, at or shorter than top piece width)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;2x2x12&lt;/code&gt; - 4 (legs, pegs used to attach the longer supports running between two legs)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;1x2x12&lt;/code&gt; - 4 (support the top, at or longer than the top piece width)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;1x2x48&lt;/code&gt; - 2 (full length beams, pegs used to attach to the cross and leg supports )&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;1x12x55&lt;/code&gt; - 1 (top piece)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All joinery was done with &lt;code&gt;5/8"&lt;/code&gt; pegs. I did not glue the cross pieces into the full length beams but did glue legs to the cross pieces. The top is free floating and removable.&lt;/p&gt;
-&lt;h1 id="choosing-a-top"&gt;Choosing a top&lt;a class="headerlink" href="#choosing-a-top" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I originally built the project to match a cheaper 12 inch pine board that I was planning to coat in cement. My tests at coating scrap wood were unsuccessful, the cement was not suited for being in such thin coats, there was lots of cracking and adhesion was poor. If I were to try again I&amp;rsquo;d add some sort of substrate to the board and do a thicker covering.
-&lt;img alt="Table pic" src="pine-top1.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;I also considered getting a piece of stone cut to size. After scouring a couple of remnant countertop sites for a few weeks though I didn&amp;rsquo;t see any stone that fit my price range and was the warm off-white color I was looking for. So instead I tried a roll of marble-look contact paper on the pine top.
-&lt;img alt="Table pic" src="contanct-paper-top-1.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;The application could have been a bit better, there were a few bubbles. But the paper itself also had slight ridges to it that broke the illusion of stone. So that idea was scrapped in favor of a solid wood top.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Table pic" src="oak-top-unfinished1.jpeg" /&gt;
-The final iteration was a nice (re: expensive) oak board that had a strong grain pattern. &lt;/p&gt;
-&lt;h1 id="finishing-touches"&gt;Finishing touches&lt;a class="headerlink" href="#finishing-touches" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;The whole table was then finished in natural Danish Oil. My apartment smelt strongly of off-gasses for a couple of days (definitely will be asking a friend to use their yard next time I stain/finish stuff).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Table pic" src="finished1.jpeg" /&gt;
-&lt;img alt="Table pic" src="finished3.jpeg" /&gt;
-&lt;img alt="Table pic" src="finished2.jpeg" /&gt;&lt;/p&gt;
-&lt;h1 id="final-thoughts"&gt;Final thoughts&lt;a class="headerlink" href="#final-thoughts" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I&amp;rsquo;m very happy with the current state of the coffee table. It looks great and is incredibly sturdy; I have no fears standing on it! If I were to do it again, I think for the cross supports between the legs I would have used through tenons instead of pegs. While the pegs certainly are strong enough, the look of the through tenons would really add to the overall hand-build quality I was going for. I still might get a piece of stone cut to size as well if I ever find a slab I like.&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/coffee-table/coffeTable.html" />
-  </entry>
-  <entry>
-    <title>Chair Restoration</title>
-    <id>furniture/chair/chair_restore.html</id>
-    <updated>2023-03-08T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Chair" src="chair_new_1.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;This was a very long project in the making. I picked up this chair from the &lt;a href="https://facilitiesservices.utexas.edu/divisions/support/surplus-property/surplus-reuse-store"&gt;UT Austin surplus store&lt;/a&gt; for $40. It&amp;rsquo;s branded &amp;ldquo;W.H. Gunlocke Chair CO. Wayland New York&amp;rdquo;. I wasn&amp;rsquo;t able to find an exact match online for this model but Gunlocke seems to have been a pretty reputable manufacturer of office chairs. I unfortunately destroyed the paper tag from the underside of the chair while sanding.&lt;/p&gt;
-&lt;p&gt;The original chair was in rough shape. The varnish on it was not in great shape, with lots of marring and inconsistent color on it. The chair was upholstered in a grey vinyl, both the chair seat and the back. This too was not in the best condition, and after removing it the underlying foam was also not looking particularly good. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Old Chair" src="chair_old_front.jpeg" /&gt;&lt;/p&gt;
-&lt;h1 id="refinishing"&gt;Refinishing&lt;a class="headerlink" href="#refinishing" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="tear-down"&gt;Tear down&lt;a class="headerlink" href="#tear-down" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;To refinish the chair I started by removing the upholstery. Everything was held in place with more nails and staples than I cared to remove. With a good set of pliers and a small standard screwdriver I was able to remove most of the tacks, only a few casualties had to be cut down and sanded flush.&lt;/p&gt;
-&lt;p&gt;Removing the varnish took a while too. I started using a chemical stripper, citri-strip, which took off a fair amount but wasn&amp;rsquo;t entirely effective. After two strips I resorted to sanding off the rest, starting at 80 grit. There was still a considerable about of varnish on the chair and I gunked up a lot of sandpaper in the process, but eventually got down to bare wood.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Old Chair" src="chair_old_back.jpeg" /&gt;&lt;/p&gt;
-&lt;h2 id="staining-and-top-coat"&gt;Staining and Top Coat&lt;a class="headerlink" href="#staining-and-top-coat" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Handling the chair-back was a difficult decision: while it was originally upholstered, it wasn&amp;rsquo;t particularly attractive or an upholstery job I felt capable of taking on. Unfortunately underneath was a very blonde, unfinished wood (pine?) that didn&amp;rsquo;t match the rest of the chair. This turned out to be an easy fix with some stain, I used the water-based Behr Red Mahogany that I thinned out with water and tinted slightly with orange acrylic paint.&lt;/p&gt;
-&lt;p&gt;I finished the chair with Natural Danish Oil. Three coats were more than enough to get a good protective coat on the chair and bring out the color of the wood.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Old Chair" src="chair_old_side.jpeg" /&gt;&lt;/p&gt;
-&lt;h2 id="seat-restoration"&gt;Seat Restoration&lt;a class="headerlink" href="#seat-restoration" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I tried fixing the seat a couple of ways. The first attempt was reupholstering the old spring form. I cut new foam to size then glued and stapled new fabric over in a burnt orange color. While comfortable enough, I was ultimately not a fan of how warm colored the fabric was and the creases that formed around the seams. I don&amp;rsquo;t have a sewing machine, so creating matching beading wasn&amp;rsquo;t something I could do.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Old Chair" src="chair_old_seat.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;The next iteration was an attempt at a wooden frame with danish cord woven across. I kerf-bent a ~6ft board of red oak to match the original dimensions of the seat. I calculated about 19 cuts for each turn based on the kerf width of my circular saw, so some 76 cuts later I had a piece I could bend to shape. I cut a tongue and groove across the two ends to join the seat and glued everything up. This was successful, but the plan itself was infeasible for weaving across given how wide the curve radii were.&lt;/p&gt;
-&lt;p&gt;The final attempt was another wooden frame with danish cord. The frame itself is a red oak trapezoid, joined with butts and dowels. The front piece was cut with a slight curve to put a dip in the seat. I wove the seat in laced danish cording. A particularly useful website was this &lt;a href="http://www.modernchairrestoration.com/2016/05/how-to-do-the-looped-warp-weave-on-yugoslavian-folding-chair/"&gt;tutorial&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The final touches were adding some leftover cord around the connection between the chair arms and seat back, the old upholstery had left an unfortunate looking groove and the transition from the nice chair wood to the cheaper seat back wood needed hiding.&lt;/p&gt;
-&lt;h2 id="outcome"&gt;Outcome&lt;a class="headerlink" href="#outcome" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;In the end, I am very happy with the final outcome. The chair looks great in my living room, is comfortable, and the all in budget was significantly less than if I were to buy something similar new or professionally refinished. It was also a great project to get more practice with weaving and woodworking. The kerf bending technique I actually ended up using to make two lamps.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Chair new" src="chair_new_2.jpeg" /&gt;&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/chair/chair_restore.html" />
-  </entry>
-  <entry>
-    <title>Static Site Generator</title>
-    <id>programming/static_site.html</id>
-    <updated>2023-03-03T00:00:00Z</updated>
-    <content type="html">&lt;h1 id="why-blog"&gt;Why blog?&lt;a class="headerlink" href="#why-blog" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;This is a project I&amp;rsquo;ve been meaning to start for a long time. I make a lot of things, and am terrible at documenting them. The best parts of the diy community are how much people share, their willingness to help someone learn, and their interest in taking what others have done and improving it even more. This site will hopefully help keep me accountable for recording the things I do, if not for other people, then at least as a personal journal.&lt;/p&gt;
-&lt;p&gt;There have been several attempts at starting this up. Usually trying to use cutting edge stacks and fancy site design. They have never panned out and sit on backup drives waiting to be purged when I eventually decide to clean up all that digital garbage. Hopefully this project won&amp;rsquo;t meet the same fate.&lt;/p&gt;
-&lt;h1 id="why-write-my-own-site-generator"&gt;Why write my own site generator?&lt;a class="headerlink" href="#why-write-my-own-site-generator" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;I prefer writing in markdown over html &lt;/li&gt;
-&lt;li&gt;I don&amp;rsquo;t want to deal with existing generators (Jekyll)&lt;/li&gt;
-&lt;li&gt;Full control over what is built&lt;/li&gt;
-&lt;li&gt;Seems like a fun project&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The web has transformed a lot in even the short few years that I&amp;rsquo;ve been exposed to it. I&amp;rsquo;m sure I&amp;rsquo;m not the only one nostalgic for the way it used to be: online tutorials were, be default, text articles, sometimes with images, rarely with videos. It was searchable, you could easily flip back and forth between things, re-read passages without having to scrub through a youtube video. Look at project progress pictures without having to pause a tik-tok. Read a recipe without 6000 ads just begging you to click on them (well maybe there were a lot of banners back in the day too, but it was much easier to ignore on a desktop than on your phone).&lt;/p&gt;
-&lt;p&gt;I love the new frameworks: react, vue, angular, next &amp;mdash; they make my day-to-day flow at my 9 to 5 so much easier. Enterprise grade apps are a breeze to build and API integration is beyond easy. But this is a blog site, and all I&amp;rsquo;m serving is static content.  I don&amp;rsquo;t need the bloat of a full react app, or any other framework for that matter, so I&amp;rsquo;ve opted to build this by hand. It certainly isn&amp;rsquo;t the most optimized code, or the prettiest, but I figured there is some value to having full control over what I&amp;rsquo;m publishing. Plus it&amp;rsquo;s an interesting way to go back over the fundamentals.&lt;/p&gt;
-&lt;h1 id="project-fundamentals"&gt;Project Fundamentals&lt;a class="headerlink" href="#project-fundamentals" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="file-structure"&gt;File Structure&lt;a class="headerlink" href="#file-structure" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m not building this script for general purpose use, so I get to be as opinionated as I want. &lt;/p&gt;
-&lt;p&gt;The basic structure is something along these lines&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;\src
-    \pages
-        \topic1
-            - article1.md
-            - article1Image.png
-        \topic2
-        ...
-    \template
-        - template1.html
-        - template2.html
-        - styles1.css
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;pages&lt;/code&gt; directory stores blog posts, organized by topics.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;template&lt;/code&gt; directory stores &lt;code&gt;.html&lt;/code&gt; &lt;a href="#templates"&gt;template files&lt;/a&gt; that have special fields in them for replacement during the build script. It also stores any necessary styling information in &lt;code&gt;.css&lt;/code&gt; files that are added to a &lt;code&gt;template&lt;/code&gt; folder in the build destination.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="post-structure"&gt;Post Structure&lt;a class="headerlink" href="#post-structure" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Posts are &lt;code&gt;.md&lt;/code&gt; files using markdown syntax with a special header that has metadata in it. &lt;/p&gt;
-&lt;p&gt;For example, the header for this page is:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;title: Static Site Generator
-date: 2023-03-03
-tags: meta,coding
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;title&lt;/code&gt; is used for the page title and to populate the index files with links. &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;date&lt;/code&gt; is in the &lt;code&gt;yyyy-mm-dd&lt;/code&gt; format and is the author date of the page.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;tags&lt;/code&gt; is a comma-separated list of keywords related to the post&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The rest of the content under the header is processed as standard markdown syntax (for now). References to images stored under the &lt;code&gt;pages&lt;/code&gt; directory will work in the static build output.&lt;/p&gt;
-&lt;h2 id="templates"&gt;Templates &lt;a name="templates"/&gt;&lt;a class="headerlink" href="#templates" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve added a basic templating flow to ensure page consistency. Templates are &lt;code&gt;.html&lt;/code&gt; files that contain keys &lt;code&gt;{{example}}&lt;/code&gt; that get replaced with corresponding values. &lt;/p&gt;
-&lt;p&gt;Consider this basic post template&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-html"&gt;&amp;lt;html&amp;gt;
-    &amp;lt;head&amp;gt;
-        &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/template/main.css&amp;quot;&amp;gt;
-        &amp;lt;title&amp;gt;{{title}}&amp;lt;/title&amp;gt;
-    &amp;lt;/head&amp;gt;
-    &amp;lt;body&amp;gt;
-        &amp;lt;header&amp;gt;&amp;lt;/header&amp;gt;
-        &amp;lt;article&amp;gt;
-            {{content}}
-        &amp;lt;/article&amp;gt;
-    &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In the build script then I just need to do this to create a static &lt;code&gt;.html&lt;/code&gt; file with whatever content I want in lieu of the &lt;code&gt;{{title}}&lt;/code&gt; and &lt;code&gt;{{content}}&lt;/code&gt; keys.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-python"&gt;temp_html = &amp;quot;&amp;lt;div&amp;gt;&amp;lt;p&amp;gt;Hello World&amp;lt;/p&amp;gt;&amp;lt;/div&amp;gt;&amp;quot;
-title = &amp;quot;Hello World Page&amp;quot;
-build_template('src/template/post.html', [['content', temp_html], ['title', title]])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id="build-process"&gt;Build Process&lt;a class="headerlink" href="#build-process" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The build process is pretty straight forward. At its core I walk the file tree of &lt;code&gt;src&lt;/code&gt; and proces each file accordingly, building &lt;code&gt;.html&lt;/code&gt; pages or copying over files to the build directory as needed. Some higher-level pages are then generated with information from the file-walk.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Recursively iterate over file tree of &lt;code&gt;.src&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;If file is &lt;code&gt;.md&lt;/code&gt;:&lt;ol&gt;
-&lt;li&gt;Extract metadata header&lt;/li&gt;
-&lt;li&gt;Convert markdown to html&lt;/li&gt;
-&lt;li&gt;Use metadata and markdown-html with post template to build a full html page&lt;/li&gt;
-&lt;li&gt;Write &lt;code&gt;.html&lt;/code&gt; file to build directory with matching path&lt;/li&gt;
-&lt;li&gt;Add page information to an index data structure to be used later&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;If file is anything else but &lt;code&gt;.md&lt;/code&gt;, copy it to the matching path in the build directory&lt;/li&gt;
-&lt;li&gt;Build an index/table of contents file from index data structure populated in the file walk and a template&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The script is written in Python for two main reasons. One, it&amp;rsquo;s incredibly easy to read and work with. I can&amp;rsquo;t imagine I&amp;rsquo;ll be making many changes once I have a working script, meaning that when I do decide to make updates the code base will be absolutely foreign to me: readability will be key when the time for edits arrives. Secondly, Python has a lot of ease of use functionality and several modules that make coding with it just plain simple. I didn&amp;rsquo;t particularly want to write a markdown compiler, so having that capability with a well maintained library I knew how to use made it a good choice.&lt;/p&gt;
-&lt;h1 id="whats-next"&gt;What&amp;rsquo;s Next&lt;a class="headerlink" href="#whats-next" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;There&amp;rsquo;s still so many things I want to do with this script and this process. I&amp;rsquo;ll give a list here, in no particular order and with no promises of these features being completed.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Custom markdown extensions&lt;/li&gt;
-&lt;li&gt;Generate post-level table of contents&lt;/li&gt;
-&lt;li&gt;Auto generate links for headers with &lt;code&gt;&amp;lt;a name="link"/&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Image gallery components (I think this will be useful for image heavy posts)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LaTeX&lt;/code&gt; support for math stuff&lt;/li&gt;
-&lt;li&gt;Index pages for posts with specific tags&lt;/li&gt;
-&lt;li&gt;Index pages for topics folders (subdirectories under &lt;code&gt;src/pages&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;Easier templating composition/reusable components&lt;/li&gt;
-&lt;li&gt;Post editor&lt;/li&gt;
-&lt;li&gt;Built in server&lt;/li&gt;
-&lt;li&gt;Live rebuild on changed item&lt;/li&gt;
-&lt;li&gt;Hot swapping/forced refresh&lt;/li&gt;
-&lt;li&gt;Only rebuild changed items&lt;/li&gt;
-&lt;/ul&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/programming/static_site.html" />
-  </entry>
-  <entry>
-    <title>Lake Michigan at Port Washington</title>
-    <id>paintings/lake_michigan/index.html</id>
-    <updated>2023-02-01T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Lake Michigan at Port Washington" src="lake_michigan.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;11"x14"&lt;/code&gt; oil on hardboard&lt;/p&gt;
-&lt;p&gt;Reused frame from Goodwill.&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/lake_michigan/index.html" />
-  </entry>
-  <entry>
-    <title>Big Bent Lamp</title>
-    <id>furniture/lighting/bigBentLamp.html</id>
-    <updated>2023-01-21T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBent1.jpeg" /&gt;
-An iteration on a previous design, this is scaled up floor lamp variation of my &lt;a href="/furniture/lighting/bentLamp.html"&gt;bent lamp&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBent2.jpeg" /&gt;
-The construction was essentially the same as the previous post. The biggest difference being that I used a proper shade I purchased from Ikea. I will probably redo the shade at some point, but for now the pink orb works well enough.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBent3.jpeg" /&gt;&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/bigBentLamp.html" />
   </entry>
 </feed>
