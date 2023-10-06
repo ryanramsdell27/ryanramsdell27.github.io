@@ -1,5 +1,5 @@
 title: Passing View on County Road G
-date: 2023-10-23
+date: 2023-09-10
 tags: art,painting
 ---
 

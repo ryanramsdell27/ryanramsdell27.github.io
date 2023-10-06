@@ -3,28 +3,7 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>04-10-2023T21:01:11Z</updated>
-  <entry>
-    <title>Passing View on County Road G</title>
-    <id>paintings/barn/index.html</id>
-    <updated>2023-10-23T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;Germantown WI&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Barn, study" src="barn.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;5.25"x6.5"&lt;/code&gt; oil on canvas paper&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Study and reproduction" src="mother_and_child.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;I tried my hand at painting it larger, but am not too fond of the outcome.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Barn" src="barn_big.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;16"x20"&lt;/code&gt; oil on canvas&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/barn/index.html" />
-  </entry>
-  <entry>
-    <title>Ducks</title>
-    <id>paintings/ducks/index.html</id>
-    <updated>2023-09-23T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Ducks" src="ducks.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;5"x8"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/ducks/index.html" />
-  </entry>
+  <updated>06-10-2023T16:16:28Z</updated>
   <entry>
     <title>Sake</title>
     <id>paintings/sake/index.html</id>
@@ -32,6 +11,14 @@
     <content type="html">&lt;p&gt;&lt;img alt="Sake" src="sake.jpeg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;5"x8"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/sake/index.html" />
+  </entry>
+  <entry>
+    <title>Goose</title>
+    <id>paintings/goose/index.html</id>
+    <updated>2023-09-23T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Goose" src="goose.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;5"x8"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/goose/index.html" />
   </entry>
   <entry>
     <title>Studies</title>
@@ -56,6 +43,19 @@
     <content type="html">&lt;p&gt;&lt;img alt="Moonlight" src="moon.jpeg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;7"x4"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/moonlight/index.html" />
+  </entry>
+  <entry>
+    <title>Passing View on County Road G</title>
+    <id>paintings/barn/index.html</id>
+    <updated>2023-09-10T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;Germantown WI&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Barn, study" src="barn.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;5.25"x6.5"&lt;/code&gt; oil on canvas paper&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Study and reproduction" src="mother_and_child.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;I tried my hand at painting it larger, but am not too fond of the outcome.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Barn" src="barn_big.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;16"x20"&lt;/code&gt; oil on canvas&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/barn/index.html" />
   </entry>
   <entry>
     <title>Lilies</title>
