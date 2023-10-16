@@ -16,7 +16,7 @@ I definitely picked up the lens around the time I was taking a course on Southea
 
 ## Diameter
 The two lenses are the same size across their diameter, or at least any difference is indiscernible to me. Thankfully the geometry of this situation made measuring the diameter easy without a pair of calipers. Lay the two lenses side by side, run two straight boards parallel to each-other with the lenses in the middle, and measure the distance between the two boards to get the diameter of the lenses.
-```
+```{use_pygments=false}
 --------
  ()  ()
 --------
@@ -35,7 +35,7 @@ We have a fun little equation to use $\frac{1}{f} = \frac{1}{u} + \frac{1}{v}$ w
 As $u$ increases, the term $\frac{1}{u}$ approaches $0$, so for a sufficiently far enough subject, this term is negligible. Hence, we get $f\approx v$
 
 The set-up is simple:
-```
+```{use_pygments=false}
 |    ()            ☀️
 ---------------------
   v         u

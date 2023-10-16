@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List
 from datetime import date
 from markdown.extensions.toc import TocExtension
+from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.footnotes import FootnoteExtension
 from pymdownx.arithmatex import ArithmatexExtension
 from generateRss import RssGen, Post
@@ -17,7 +18,8 @@ OUTPUT_DIR = 'build/'
 THUMBNAIL_SIZE = (128, 128)
 
 buildPath = lambda file, src, target: Path(str(file).replace('.md', '.html').replace(src, target))
-md = markdown.Markdown(extensions=['fenced_code',
+md = markdown.Markdown(extensions=[CodeHiliteExtension(linenums=True),
+                                   'fenced_code',
                                    TocExtension(permalink=True),
                                    'smarty',
                                    'tables',

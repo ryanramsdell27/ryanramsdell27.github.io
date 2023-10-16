@@ -7,6 +7,7 @@
 @media (max-width: 1200px) {
   body {
     max-width: 700px;
+    -webkit-text-size-adjust: 100%;
   }
 }
 
@@ -33,6 +34,9 @@ article {
     background-color: #fff;
     box-shadow: 2px 2px 10px lightgrey;
 }
+h1, h2, h3, h4, h5, h6 {
+    text-align: left;
+}
 h1 {
     font-size: 20pt;
 }
@@ -41,6 +45,9 @@ h2 {
 }
 h3,h4,h5 {
     font-size: 12pt;
+}
+h4 {
+    font-style: italic;
 }
 img {
     width: 100%;
@@ -184,4 +191,12 @@ tr {
 }
 .arithmatex {
     overflow-x: scroll;
+}
+
+blockquote {
+    background-color: #f1f1f1;
+    padding: 1em;
+    margin-inline-end: unset;
+    border-left: rgb(60, 107, 189);
+    border-left-style: outset;
 }

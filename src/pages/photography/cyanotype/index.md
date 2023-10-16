@@ -83,7 +83,7 @@ Here's what I found in the first go
 
 ## Results
 ![batch 1](batch1paper.jpeg)
-A comparison of the glass plates with a piece of paper coated with the same gelatin mixture. Interesting how different the two blues are --- I think it may be because of the acidity of the paper but I'm not too sure.
+A comparison of the glass plates with a piece of paper coated with the same gelatin mixture. Interesting how different the two blues are --- I think it may be because of the acidity of the paper, but I'm not too sure.
 
 I need to improve the coating process, the gelatin did not adhere well and seemed to seize or bead based on the swirly patterns it formed. The mineral spirits may be to blame, or an otherwise bad cleaning process. The glass rod seems to have created an uneven coating especially at the edges.
 
