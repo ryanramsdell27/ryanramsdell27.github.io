@@ -3,13 +3,29 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>24-11-2023T09:35:59Z</updated>
+  <updated>24-11-2023T13:09:21Z</updated>
+  <entry>
+    <title>Christmas Tree Base</title>
+    <id>furniture/tree-base/index.html</id>
+    <updated>2023-11-24T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="base1" src="base1.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;I made this christmas tree base about 2 years ago now. The construction was simple, just some pine boards cut into triangles, joined into rhombuses, and then glued again into halves to fit around the tree. Each rhombus was planed by hand so that the long diagonal was higher. I cut out the center with a chisel so that the tree could sit on a flatter surface. The base of the tree sits in spray-painted tin can. &lt;/p&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+        &lt;img alt="base2" src="base2.jpeg" /&gt;
+        &lt;img alt="base3" src="base3.jpeg" /&gt;
+        &lt;img alt="base4" src="base4.jpeg" /&gt;
+        &lt;img alt="base5" src="base5.jpeg" /&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/tree-base/index.html" />
+  </entry>
   <entry>
     <title>[Update] Big Bent Lamp</title>
     <id>furniture/lighting/bigBentLampUpdate.html</id>
     <updated>2023-11-24T00:00:00Z</updated>
     <content type="html">&lt;p&gt;Just a quick update on the status of my &lt;a href="/furniture/lighting/bigBentLamp.html"&gt;big bent lamp&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBentupdate2.jpeg" /&gt;
+&lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBentUpdate2.jpeg" /&gt;
 I wasn&amp;rsquo;t a big fan of the pink shade so I swapped it out for a pleated paper shade.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBentUpdate1.jpeg" /&gt;
 The weight of the shade ended up being too much for kerf bend at the base to handle, and the lamp ended up snapping when a slight breeze from the patio door caused the shade to swing.&lt;/p&gt;
@@ -1347,34 +1363,5 @@ This recipe is heavily inspired by the cochon de lait I get at a local Austin re
 &lt;li&gt;Serve with chili oil&lt;/li&gt;
 &lt;/ol&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/tofu_noodles.html" />
-  </entry>
-  <entry>
-    <title>Rose Loaf</title>
-    <id>recipes/rose_loaf.html</id>
-    <updated>2023-03-14T00:00:00Z</updated>
-    <content type="html">&lt;h1 id="ingredients"&gt;Ingredients&lt;a class="headerlink" href="#ingredients" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;1 cup all-purpose flour&lt;/li&gt;
-&lt;li&gt;1 teaspoon baking powder&lt;/li&gt;
-&lt;li&gt;pinch salt&lt;/li&gt;
-&lt;li&gt;1/4 cup butter, softened&lt;/li&gt;
-&lt;li&gt;1/2 cup sugar&lt;/li&gt;
-&lt;li&gt;1 teaspoon vanilla extract&lt;/li&gt;
-&lt;li&gt;2 teaspoons rose water&lt;/li&gt;
-&lt;li&gt;1 large egg&lt;/li&gt;
-&lt;li&gt;1/2 cup milk&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id="instructions"&gt;Instructions&lt;a class="headerlink" href="#instructions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Pre-heat oven to 350F&lt;/li&gt;
-&lt;li&gt;Grease an 8&amp;rdquo; x 4&amp;rdquo; loaf pan, coat with flour&lt;/li&gt;
-&lt;li&gt;In a small mixing bowl combine the flour, baking powder, and salt, whisking gently to combine&lt;/li&gt;
-&lt;li&gt;In stand mixer, whisk the butter, sugar, vanilla, and rose water until pale and creamy, about 1 minute. Whisk in the egg until smooth&lt;/li&gt;
-&lt;li&gt;Add the flour and milk in alternating doses to the butter mixture until just combined&lt;/li&gt;
-&lt;li&gt;Pour the batter into the pan, bake 30 - 35 minutes until golden brown and a toothpick comes out of the center clean&lt;/li&gt;
-&lt;li&gt;Cool for 10 minutes, then transfer to wire rack&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Adapted from this &lt;a href="https://www.wrytoasteats.com/rose-water-tea-cake-two/"&gt;recipe&lt;/a&gt;&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/rose_loaf.html" />
   </entry>
 </feed>

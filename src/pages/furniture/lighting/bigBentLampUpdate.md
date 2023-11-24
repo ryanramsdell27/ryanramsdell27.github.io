@@ -5,7 +5,7 @@ tags: furniture,woodworking,design,lighting
 Just a quick update on the status of my [big bent lamp](/furniture/lighting/bigBentLamp.html).
 
 
-![Big Bent Lamp](bigBentupdate2.jpeg)
+![Big Bent Lamp](bigBentUpdate2.jpeg)
 I wasn't a big fan of the pink shade so I swapped it out for a pleated paper shade.
 
 ![Big Bent Lamp](bigBentUpdate1.jpeg)
