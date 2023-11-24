@@ -3,7 +3,20 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>06-10-2023T16:16:28Z</updated>
+  <updated>24-11-2023T09:35:59Z</updated>
+  <entry>
+    <title>[Update] Big Bent Lamp</title>
+    <id>furniture/lighting/bigBentLampUpdate.html</id>
+    <updated>2023-11-24T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;Just a quick update on the status of my &lt;a href="/furniture/lighting/bigBentLamp.html"&gt;big bent lamp&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBentupdate2.jpeg" /&gt;
+I wasn&amp;rsquo;t a big fan of the pink shade so I swapped it out for a pleated paper shade.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBentUpdate1.jpeg" /&gt;
+The weight of the shade ended up being too much for kerf bend at the base to handle, and the lamp ended up snapping when a slight breeze from the patio door caused the shade to swing.&lt;/p&gt;
+&lt;p&gt;The original freestanding lamp was not salvageable (glue did not work). Instead, I opted to lop off the original base and mount the remainder to the wall. 
+&lt;img alt="Big Bent Lamp" src="bigBentUpdate3.jpeg" /&gt;&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/bigBentLampUpdate.html" />
+  </entry>
   <entry>
     <title>Sake</title>
     <id>paintings/sake/index.html</id>
@@ -1363,36 +1376,5 @@ This recipe is heavily inspired by the cochon de lait I get at a local Austin re
 &lt;/ul&gt;
 &lt;p&gt;Adapted from this &lt;a href="https://www.wrytoasteats.com/rose-water-tea-cake-two/"&gt;recipe&lt;/a&gt;&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/rose_loaf.html" />
-  </entry>
-  <entry>
-    <title>Butter Chicken</title>
-    <id>recipes/curry.html</id>
-    <updated>2023-03-13T00:00:00Z</updated>
-    <content type="html">&lt;h1 id="ingredients"&gt;Ingredients&lt;a class="headerlink" href="#ingredients" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;14 ounces canned tomatoes&lt;/li&gt;
-&lt;li&gt;5-6 cloves garlic&lt;/li&gt;
-&lt;li&gt;1-2 teaspoons minced ginger&lt;/li&gt;
-&lt;li&gt;1 teaspoon turmeric&lt;/li&gt;
-&lt;li&gt;1 teaspoon smoked paprika&lt;/li&gt;
-&lt;li&gt;1 teaspoon salt&lt;/li&gt;
-&lt;li&gt;1 teaspoon garam masala (plus more for end)&lt;/li&gt;
-&lt;li&gt;1 teaspoon ground cumin&lt;/li&gt;
-&lt;li&gt;1/2 teaspoon chili powder&lt;/li&gt;
-&lt;li&gt;Protein (1 pound chicken thighs, paneer)&lt;/li&gt;
-&lt;li&gt;6 tablespoons butter&lt;/li&gt;
-&lt;li&gt;4 ounces heavy cream&lt;/li&gt;
-&lt;li&gt;Cilantro&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id="instructions"&gt;Instructions&lt;a class="headerlink" href="#instructions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Add everything to instant pot except butter, cream, cilantro, and paneer (if using)&lt;/li&gt;
-&lt;li&gt;Cook on high for 10 minutes. Allow pressure to release naturally for 10 minutes after, remove lid&lt;/li&gt;
-&lt;li&gt;Remove chicken (if using)&lt;/li&gt;
-&lt;li&gt;Stir in butter and cream, allowing butter to melt&lt;/li&gt;
-&lt;li&gt;Blend the sauce until smooth&lt;/li&gt;
-&lt;li&gt;Add protein (back) to sauce and serve, topping with cilantro&lt;/li&gt;
-&lt;/ul&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/curry.html" />
   </entry>
 </feed>
