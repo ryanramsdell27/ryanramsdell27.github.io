@@ -3,7 +3,29 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>24-11-2023T13:09:21Z</updated>
+  <updated>30-11-2023T22:59:53Z</updated>
+  <entry>
+    <title>Tank Light</title>
+    <id>furniture/lighting/tank-light/bentLamp.html</id>
+    <updated>2023-11-30T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Tank light" src="light1.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;This light was initially meant to serve as the main light on my fish tank. Unfortunately I made it too bright and algae growth was faster than I wanted to deal with, so now it serves as ambient lighting in my hallway.&lt;/p&gt;
+&lt;p&gt;Construction was generally straight forward. The main section of the light is large oak board with routed channels in which led strip lights sit. The &amp;lsquo;legs&amp;rsquo; of the lamp (what used to sit on top of the tank) are also oak, notched out with a hand saw and chisel to that the top sits flush with the main piece.&lt;/p&gt;
+&lt;p&gt;The led strips are all cut from the same ikea &lt;a href="https://www.ikea.com/us/en/p/myrvarv-led-light-strip-flexible-dimmable-90487191/"&gt;MYRVARV&lt;/a&gt; strip and powered by an &lt;a href="https://www.ikea.com/us/en/p/ansluta-led-driver-with-cord-white-90405845/"&gt;ANSLUTA&lt;/a&gt; driver. I had to solder the individual tracks together with some spare wire in order to light everything. The strips are held in place with hot glue.&lt;/p&gt;
+&lt;p&gt;There is another driver that supports dimming, so this may get resurrected as a tank light in the future, but for now I am happy with the light it gives in my hallway.&lt;/p&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+        &lt;img alt="Tank" src="tank1.jpeg" /&gt;
+        &lt;img alt="Tank light front" src="light2.jpeg" /&gt;
+        &lt;img alt="Tank light underside" src="light4.jpeg" /&gt;
+        &lt;img alt="LED wiring" src="light3.jpeg" /&gt;
+        &lt;img alt="LED wiring 2" src="light5.jpeg" /&gt;
+        &lt;img alt="LED wiring 2" src="light6.jpeg" /&gt;
+        &lt;img alt="Tank" src="tank2.jpeg" /&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/tank-light/bentLamp.html" />
+  </entry>
   <entry>
     <title>Christmas Tree Base</title>
     <id>furniture/tree-base/index.html</id>
@@ -1324,44 +1346,5 @@ This recipe is heavily inspired by the cochon de lait I get at a local Austin re
 &lt;li&gt;Sometimes I will replace some of the soy sauce with dark soy sauce or Knorr liquid seasoning &lt;/li&gt;
 &lt;/ul&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/pork_chashu.html" />
-  </entry>
-  <entry>
-    <title>Tofu with Crispy Noodles</title>
-    <id>recipes/tofu_noodles.html</id>
-    <updated>2023-03-15T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;This is a great, easy meal to make that scales well.&lt;/p&gt;
-&lt;p&gt;Yield: 2 servings
-&lt;img alt="Tofu Noodles" src="tofu_noodles.jpeg" /&gt;&lt;/p&gt;
-&lt;h1 id="ingredients"&gt;Ingredients&lt;a class="headerlink" href="#ingredients" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;2 packs of instant ramen&lt;/li&gt;
-&lt;li&gt;2 tablespoons vegetable (or other neutral) oil&lt;/li&gt;
-&lt;li&gt;1 tablespoon sesame oil&lt;/li&gt;
-&lt;li&gt;1/2 block of tofu&lt;/li&gt;
-&lt;li&gt;1 cup Baby bok choy, julienned&lt;/li&gt;
-&lt;li&gt;1/2 cup Cilantro&lt;/li&gt;
-&lt;li&gt;2 green onions, sliced&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id="marinade"&gt;Marinade&lt;a class="headerlink" href="#marinade" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;2 tablespoons hoisin sauce&lt;/li&gt;
-&lt;li&gt;1 tablespoon sesame oil&lt;/li&gt;
-&lt;li&gt;2-3 cloves garlic&lt;/li&gt;
-&lt;li&gt;1 tablespoon sesame seeds&lt;/li&gt;
-&lt;li&gt;1/2 tablespoon soy sauce&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id="prep"&gt;Prep&lt;a class="headerlink" href="#prep" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;Preheat oven to 425F&lt;/li&gt;
-&lt;li&gt;Grease a large sheet pan&lt;/li&gt;
-&lt;li&gt;Press and drain half a block of tofu, slice into strips 1cm x 1cm&lt;/li&gt;
-&lt;li&gt;Prepare two packages of instant ramen according to directions. Drain and set aside when done&lt;/li&gt;
-&lt;li&gt;Combine the ingredients for the marinade in a medium bowl. Coat tofu in marinade and place on the prepared sheet pan. Do not clean the marinade bowl&lt;/li&gt;
-&lt;li&gt;Coat the prepared ramen noodles in vegetable and sesame oils. Then spread out on the sheet pan, the more surface area covered, the crispier they will be&lt;/li&gt;
-&lt;li&gt;Cook tofu and noodles at 425F for 14 minutes&lt;/li&gt;
-&lt;li&gt;Meanwhile cut vegetables and coat in the remaining marinade, add to pan after timer stops. Broil for 4 minutes&lt;/li&gt;
-&lt;li&gt;Serve with chili oil&lt;/li&gt;
-&lt;/ol&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/tofu_noodles.html" />
   </entry>
 </feed>

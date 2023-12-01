@@ -1,0 +1,78 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="/template/main.css">
+    <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*",
+            processHtmlClass: "arithmatex"
+          }
+        };
+    </script>
+    <title>Tank Light</title>
+</head>
+    <body>
+        <header>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tagged/furniture">Furniture</a></li>
+        <li><a href="/tagged/programming">Programming</a></li>
+        <li><a href="/tagged/art">Art</a></li>
+        <li><a href="/tagged/recipe">Recipes</a></li>
+    </ul>
+</header>
+        <article>
+            <h1>Tank Light</h1>
+            <h5>Thursday 30, November 2023</h5>
+            
+            <div class="chip">
+    <a href="/tagged/furniture">furniture</a>
+</div><div class="chip">
+    <a href="/tagged/woodworking">woodworking</a>
+</div><div class="chip">
+    <a href="/tagged/design">design</a>
+</div><div class="chip">
+    <a href="/tagged/lighting">lighting</a>
+</div>
+            <hr/>
+            <p><img alt="Tank light" src="light1.jpeg" /></p>
+<p>This light was initially meant to serve as the main light on my fish tank. Unfortunately I made it too bright and algae growth was faster than I wanted to deal with, so now it serves as ambient lighting in my hallway.</p>
+<p>Construction was generally straight forward. The main section of the light is large oak board with routed channels in which led strip lights sit. The &lsquo;legs&rsquo; of the lamp (what used to sit on top of the tank) are also oak, notched out with a hand saw and chisel to that the top sits flush with the main piece.</p>
+<p>The led strips are all cut from the same ikea <a href="https://www.ikea.com/us/en/p/myrvarv-led-light-strip-flexible-dimmable-90487191/">MYRVARV</a> strip and powered by an <a href="https://www.ikea.com/us/en/p/ansluta-led-driver-with-cord-white-90405845/">ANSLUTA</a> driver. I had to solder the individual tracks together with some spare wire in order to light everything. The strips are held in place with hot glue.</p>
+<p>There is another driver that supports dimming, so this may get resurrected as a tank light in the future, but for now I am happy with the light it gives in my hallway.</p>
+<section class="gallery">
+    <div markdown>
+        <img alt="Tank" src="tank1.jpeg" />
+        <img alt="Tank light front" src="light2.jpeg" />
+        <img alt="Tank light underside" src="light4.jpeg" />
+        <img alt="LED wiring" src="light3.jpeg" />
+        <img alt="LED wiring 2" src="light5.jpeg" />
+        <img alt="LED wiring 2" src="light6.jpeg" />
+        <img alt="Tank" src="tank2.jpeg" />
+    </div>
+</section>
+        </article>
+        <footer>
+<!-- If you spam this email I will be sad -->
+    <script>
+        function decodeEmail(encoded) {
+            var address = atob(encoded);
+            window.location.href = "mailto:" + address;
+        }
+    </script>
+    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2023
+    <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
+</footer>
+    </body>
+</html>
