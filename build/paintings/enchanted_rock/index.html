@@ -1,0 +1,61 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="/template/main.css">
+    <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*",
+            processHtmlClass: "arithmatex"
+          }
+        };
+    </script>
+    <title>Enchanted Rock</title>
+</head>
+    <body>
+        <header>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tagged/furniture">Furniture</a></li>
+        <li><a href="/tagged/programming">Programming</a></li>
+        <li><a href="/tagged/art">Art</a></li>
+        <li><a href="/tagged/recipe">Recipes</a></li>
+    </ul>
+</header>
+        <article>
+            <h1>Enchanted Rock</h1>
+            <h5>Friday 01, December 2023</h5>
+            
+            <div class="chip">
+    <a href="/tagged/art">art</a>
+</div><div class="chip">
+    <a href="/tagged/painting">painting</a>
+</div>
+            <hr/>
+            <p><img alt="Enchanted Rock" src="EnchantedRock.jpeg" /></p>
+<p><code>6"x9"</code> oil on linen paper</p>
+<p>View of Enchanted Rock in Fredericksburg, TX.</p>
+        </article>
+        <footer>
+<!-- If you spam this email I will be sad -->
+    <script>
+        function decodeEmail(encoded) {
+            var address = atob(encoded);
+            window.location.href = "mailto:" + address;
+        }
+    </script>
+    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2023
+    <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
+</footer>
+    </body>
+</html>

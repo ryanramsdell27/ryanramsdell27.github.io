@@ -3,7 +3,16 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>30-11-2023T22:59:53Z</updated>
+  <updated>08-12-2023T15:30:31Z</updated>
+  <entry>
+    <title>Enchanted Rock</title>
+    <id>paintings/enchanted_rock/index.html</id>
+    <updated>2023-12-01T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Enchanted Rock" src="EnchantedRock.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;6"x9"&lt;/code&gt; oil on linen paper&lt;/p&gt;
+&lt;p&gt;View of Enchanted Rock in Fredericksburg, TX.&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/enchanted_rock/index.html" />
+  </entry>
   <entry>
     <title>Tank Light</title>
     <id>furniture/lighting/tank-light/bentLamp.html</id>
@@ -1316,35 +1325,5 @@ This recipe is heavily inspired by the cochon de lait I get at a local Austin re
 &lt;h1 id="final-prep"&gt;Final prep&lt;a class="headerlink" href="#final-prep" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Once everything is prepared, serve the rice topped with the pork, pickled shallots, sauce, and cilantro&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/cajun_pork_and_rice.html" />
-  </entry>
-  <entry>
-    <title>Pork Chashu</title>
-    <id>recipes/pork_chashu.html</id>
-    <updated>2023-03-18T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;This is a very forgiving recipe, make alterations as you see necessary. Perfect sliced up in ramen.&lt;/p&gt;
-&lt;h1 id="ingredients"&gt;Ingredients&lt;a class="headerlink" href="#ingredients" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Pork belly&lt;/li&gt;
-&lt;li&gt;1 cup soy sauce&lt;/li&gt;
-&lt;li&gt;1 cup sake&lt;/li&gt;
-&lt;li&gt;2 cups Water&lt;/li&gt;
-&lt;li&gt;1 tablespoon sugar&lt;/li&gt;
-&lt;li&gt;1 spring onion or 2-3 green onions&lt;/li&gt;
-&lt;li&gt;3-4 cloves of garlic&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id="instructions"&gt;Instructions&lt;a class="headerlink" href="#instructions" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;Roll and tie the pork belly (for larger portions) or cut into 1 inch wide strips&lt;/li&gt;
-&lt;li&gt;Sear the pork belly on medium-high heat until golden and crisp on all sides&lt;/li&gt;
-&lt;li&gt;Add everything to a pot, adjust soy sauce, sake, and water as necessary to submerge most/all the pork belly&lt;/li&gt;
-&lt;li&gt;Cook at a simmer for 2-3 hours&lt;/li&gt;
-&lt;li&gt;Allow to cool, transfer to container with liquid and store in fridge for 24 hours before serving&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id="alterations"&gt;Alterations&lt;a class="headerlink" href="#alterations" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;If I don&amp;rsquo;t have sake on hand I just use whatever white cooking wine I have on hand&lt;/li&gt;
-&lt;li&gt;Sometimes I will replace some of the soy sauce with dark soy sauce or Knorr liquid seasoning &lt;/li&gt;
-&lt;/ul&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/recipes/pork_chashu.html" />
   </entry>
 </feed>
