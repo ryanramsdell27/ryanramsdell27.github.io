@@ -1,6 +1,7 @@
 title: Lens Design
 date: 2023-07-07
 tags: art,photography,3D print
+mathjax: true
 ---
 This is another photography project long in progress. Many years back (2017?) I purchased some surplus doublet lenses from a distributor in Pennsylvania with no plan and the only reason being they were cheap. A few months ago I decided it was time to use them in a diy camera lens.
 

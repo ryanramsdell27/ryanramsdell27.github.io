@@ -76,13 +76,17 @@ def convert_md_file(file: Path):
             tags += build_template(components['chip'], [['content', tag]])
 
     backdated = components['backdated'] if 'backdated' in meta_data and meta_data['backdated'] == 'true' else ''
+    mathjax = components['mathjax'] if 'mathjax' in meta_data and meta_data['mathjax'] == 'true' else ''
+    codehilite = components['codehilite'] if 'codehilite' in meta_data and meta_data['codehilite'] == 'true' else ''
 
     temp_html_serve = build_template(POST_TEMPLATE,
                                      [['content', temp_html],
                                       ['title', meta_data['title']],
                                       ['date', date.fromisoformat(meta_data['date']).strftime("%A %d, %B %Y")],
                                       ['tags', tags],
-                                      ['backdated', backdated]])
+                                      ['backdated', backdated],
+                                      ['mathjax', mathjax],
+                                      ['codehilite', codehilite]])
 
     output_file = buildPath(file, SOURCE_DIR, OUTPUT_DIR)
     output_file.parent.mkdir(exist_ok=True, parents=True)

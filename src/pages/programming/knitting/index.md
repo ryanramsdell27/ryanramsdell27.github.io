@@ -1,9 +1,10 @@
 title: Knitting Interpreter
 date: 2024-02-26
 tags: programming,knitting
+mathjax: true
+codehilite: true
 ---
 <link rel="stylesheet" href="./knitting.css">
-<link rel="stylesheet" href="/template/codehilite.css">
 
 # Motivation
 This project began from the want to test knitting patterns before going through the labor of knitting it up physically. I had been drafting a cable-knit pattern for a long time, and each iteration meant a lot of wasted time plotting out cables and knitting a test piece. Naturally it got me thinking: can I do this with software?

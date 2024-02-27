@@ -9,7 +9,7 @@ I moved to Austin at the beginning of 2020 with no friends or family living near
 I hate the basic keyboard stand available from the stores, they are ugly utilitarian chunks of metal or particle board and lack the appeal of a traditional acoustic upright piano. So I made my own.
 
 # A Game of Limitations
-Mind you when I moved down here I fit everything I owned into my 2005 Cadillac STS and both of my parents. Re: I didn't bring much at all. Coupled with the fact I had $125 in my bank after the first months rent, I was working with limited funds and very few tools. This whole project I completed with the following tools:
+Mind you when I moved down here I fit everything I owned into my 2005 Cadillac STS and both of my parents. Re: I didn't bring much at all. Coupled with the fact I had $125 in my bank after the first month's rent, I was working with limited funds and very few tools. This whole project I completed with the following tools:
 
 - A cheap power drill
 - Hand miter saw

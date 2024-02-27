@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="/template/main.css">
     <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
-    <script>
+<script>
         window.MathJax = {
           tex: {
             inlineMath: [ ["\\(","\\)"] ],
@@ -19,7 +19,9 @@
             processHtmlClass: "arithmatex"
           }
         };
-    </script>
+</script>
+    <link rel="stylesheet" href="/template/codehilite.css">
+
     <title>Knitting Interpreter</title>
 </head>
     <body>
@@ -42,8 +44,7 @@
     <a href="/tagged/knitting">knitting</a>
 </div>
             <hr/>
-            <p><link rel="stylesheet" href="./knitting.css">
-<link rel="stylesheet" href="/template/codehilite.css"></p>
+            <p><link rel="stylesheet" href="./knitting.css"></p>
 <h1 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h1>
 <p>This project began from the want to test knitting patterns before going through the labor of knitting it up physically. I had been drafting a cable-knit pattern for a long time, and each iteration meant a lot of wasted time plotting out cables and knitting a test piece. Naturally it got me thinking: can I do this with software?</p>
 <p>There are three main components to the suite of tools that came from this idea: the parser generator, the knitting pattern api, and visualization. The three in tandem allow a user to parse a knitting pattern, translate it into a data structure, and then estimate the physical form of the finished object in 3d space.</p>
