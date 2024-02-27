@@ -3,23 +3,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <link rel="stylesheet" href="/template/main.css">
     <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <link rel="stylesheet" href="/template/codehilite.css">
 
-    <script>
-        window.MathJax = {
-          tex: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-          },
-          options: {
-            ignoreHtmlClass: ".*",
-            processHtmlClass: "arithmatex"
-          }
-        };
-    </script>
     <title>Static Site Generator</title>
 </head>
     <body>
@@ -58,7 +44,7 @@
 <h2 id="file-structure">File Structure<a class="headerlink" href="#file-structure" title="Permanent link">&para;</a></h2>
 <p>I&rsquo;m not building this script for general purpose use, so I get to be as opinionated as I want. </p>
 <p>The basic structure is something along these lines</p>
-<pre><code>\src
+<div class="codehilite"><pre><span></span><code>\src
     \pages
         \topic1
             - article1.md
@@ -69,7 +55,8 @@
         - template1.html
         - template2.html
         - styles1.css
-</code></pre>
+</code></pre></div>
+
 <ul>
 <li>The <code>pages</code> directory stores blog posts, organized by topics.</li>
 <li>The <code>template</code> directory stores <code>.html</code> <a href="#templates">template files</a> that have special fields in them for replacement during the build script. It also stores any necessary styling information in <code>.css</code> files that are added to a <code>template</code> folder in the build destination.</li>
@@ -77,11 +64,15 @@
 <h2 id="post-structure">Post Structure<a class="headerlink" href="#post-structure" title="Permanent link">&para;</a></h2>
 <p>Posts are <code>.md</code> files using markdown syntax with a special header that has metadata in it. </p>
 <p>For example, the header for this page is:</p>
-<pre><code>title: Static Site Generator
-date: 2023-03-03
-tags: meta,coding
----
-</code></pre>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">title</span><span class="o">:</span><span class="w"> </span><span class="n">Static</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">Generator</span>
+<span class="n">date</span><span class="o">:</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span>
+<span class="n">tags</span><span class="o">:</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="n">coding</span>
+<span class="o">---</span>
+</code></pre></div></td></tr></table></div>
+
 <ul>
 <li><code>title</code> is used for the page title and to populate the index files with links. </li>
 <li><code>date</code> is in the <code>yyyy-mm-dd</code> format and is the author date of the page.</li>
@@ -91,24 +82,39 @@ tags: meta,coding
 <h2 id="templates">Templates <a name="templates"/><a class="headerlink" href="#templates" title="Permanent link">&para;</a></h2>
 <p>I&rsquo;ve added a basic templating flow to ensure page consistency. Templates are <code>.html</code> files that contain keys <code>{{example}}</code> that get replaced with corresponding values. </p>
 <p>Consider this basic post template</p>
-<pre><code class="language-html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;link rel=&quot;stylesheet&quot; href=&quot;/template/main.css&quot;&gt;
-        &lt;title&gt;Static Site Generator&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;header&gt;&lt;/header&gt;
-        &lt;article&gt;
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/template/main.css&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Static Site Generator<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">article</span><span class="p">&gt;</span>
             {{content}}
-        &lt;/article&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+        <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+
 <p>In the build script then I just need to do this to create a static <code>.html</code> file with whatever content I want in lieu of the <code>Static Site Generator</code> and <code>{{content}}</code> keys.</p>
-<pre><code class="language-python">temp_html = &quot;&lt;div&gt;&lt;p&gt;Hello World&lt;/p&gt;&lt;/div&gt;&quot;
-title = &quot;Hello World Page&quot;
-build_template('src/template/post.html', [['content', temp_html], ['title', title]])
-</code></pre>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">temp_html</span> <span class="o">=</span> <span class="s2">&quot;&lt;div&gt;&lt;p&gt;Hello World&lt;/p&gt;&lt;/div&gt;&quot;</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Hello World Page&quot;</span>
+<span class="n">build_template</span><span class="p">(</span><span class="s1">&#39;src/template/post.html&#39;</span><span class="p">,</span> <span class="p">[[</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="n">temp_html</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">]])</span>
+</code></pre></div></td></tr></table></div>
+
 <h2 id="build-process">Build Process<a class="headerlink" href="#build-process" title="Permanent link">&para;</a></h2>
 <p>The build process is pretty straight forward. At its core I walk the file tree of <code>src</code> and proces each file accordingly, building <code>.html</code> pages or copying over files to the build directory as needed. Some higher-level pages are then generated with information from the file-walk.</p>
 <ol>
@@ -151,7 +157,7 @@ build_template('src/template/post.html', [['content', temp_html], ['title', titl
             window.location.href = "mailto:" + address;
         }
     </script>
-    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2023
+    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2024
     <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
 </footer>
     </body>

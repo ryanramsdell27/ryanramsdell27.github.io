@@ -1,7 +1,9 @@
 title: Static Site Generator
 date: 2023-03-03
 tags: meta,programming
+codehilite: true
 ---
+
 # Why blog?
 This is a project I've been meaning to start for a long time. I make a lot of things, and am terrible at documenting them. The best parts of the diy community are how much people share, their willingness to help someone learn, and their interest in taking what others have done and improving it even more. This site will hopefully help keep me accountable for recording the things I do, if not for other people, then at least as a personal journal.
 
@@ -24,7 +26,7 @@ I'm not building this script for general purpose use, so I get to be as opiniona
 
 The basic structure is something along these lines
 
-```
+```{linenums=False}
 \src
     \pages
         \topic1

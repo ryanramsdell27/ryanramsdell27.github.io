@@ -1,0 +1,535 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="/template/main.css">
+    <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*",
+            processHtmlClass: "arithmatex"
+          }
+        };
+</script>
+    <link rel="stylesheet" href="/template/codehilite.css">
+
+    <title>Knitting Tools</title>
+</head>
+    <body>
+        <header>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tagged/furniture">Furniture</a></li>
+        <li><a href="/tagged/programming">Programming</a></li>
+        <li><a href="/tagged/art">Art</a></li>
+        <li><a href="/tagged/recipe">Recipes</a></li>
+    </ul>
+</header>
+        <article>
+            <h1>Knitting Tools</h1>
+            <h5>Monday 26, February 2024</h5>
+            
+            <div class="chip">
+    <a href="/tagged/programming">programming</a>
+</div><div class="chip">
+    <a href="/tagged/knitting">knitting</a>
+</div>
+            <hr/>
+            <p><link rel="stylesheet" href="./knitting.css"></p>
+<h1 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h1>
+<p>This project began from the want to test knitting patterns before going through the labor of knitting it up physically. I had been drafting a cable-knit pattern for a long time, and each iteration meant a lot of wasted time plotting out cables and knitting a test piece. Naturally it got me thinking: can I do this with software?</p>
+<p>There are three main components to the suite of tools that came from this idea: the parser generator, the knitting pattern api, and visualization. The three in tandem allow a user to parse a knitting pattern, translate it into a data structure, and then estimate the physical form of the finished object in 3d space.</p>
+<figure class="figure">
+
+<img alt="duckbrella" src="duckbrella.jpeg" />
+<img alt="plot of hat" src="mds-metric-init.jpeg" />
+<figcaption>A knitted hat for the duckbrella and its estimated visualization
+<br/>
+
+<code>co20 (k20)10 (k2tog k5)18</code>
+</figcaption>
+</figure>
+<p><em><strong>Find the code on <a href="https://github.com/ryanramsdell27/knitting">Github</a></strong></em></p>
+<div class="toc">
+<ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#defining-a-formal-language-concepts-of-knitting">Defining a formal language: concepts of knitting</a><ul>
+<li><a href="#casting-on">Casting on</a></li>
+<li><a href="#knitting">Knitting</a></li>
+<li><a href="#purling">Purling</a></li>
+<li><a href="#decreases">Decreases</a></li>
+<li><a href="#increases">Increases</a></li>
+<li><a href="#repeats">Repeats</a></li>
+</ul>
+</li>
+<li><a href="#javacc-parser-generator">JavaCC: parser generator</a><ul>
+<li><a href="#jjtree">JJTree</a></li>
+<li><a href="#tooling">Tooling</a></li>
+</ul>
+</li>
+<li><a href="#grammar-specification">Grammar specification</a><ul>
+<li><a href="#tokens">Tokens</a></li>
+<li><a href="#expressionsproductions">Expressions/productions</a></li>
+</ul>
+</li>
+<li><a href="#interpreting-a-tree">Interpreting a tree</a></li>
+<li><a href="#a-knitting-api">A knitting API</a></li>
+<li><a href="#visualization">Visualization</a><ul>
+<li><a href="#naive-approach">Naïve approach</a></li>
+<li><a href="#multidimensional-scaling">Multidimensional scaling</a><ul>
+<li><a href="#why-should-this-work">Why should this work?</a></li>
+<li><a href="#constructing-a-distance-matrix">Constructing a distance matrix</a><ul>
+<li><a href="#depth-limited-bfs">Depth limited BFS</a></li>
+<li><a href="#floyd-warshall4">Floyd-Warshall4</a></li>
+<li><a href="#repeated-dijkstras">Repeated Dijkstra&rsquo;s</a></li>
+<li><a href="#johnsons-algorithm8">Johnson&rsquo;s algorithm8</a></li>
+</ul>
+</li>
+<li><a href="#performing-mds">Performing MDS</a><ul>
+<li><a href="#metric-vs-non-metric">Metric vs non-metric</a></li>
+<li><a href="#computational-limitations">Computational limitations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#closing-thoughts">Closing thoughts</a></li>
+<li><a href="#references-and-notes">References and Notes</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="defining-a-formal-language-concepts-of-knitting">Defining a formal language: concepts of knitting<a class="headerlink" href="#defining-a-formal-language-concepts-of-knitting" title="Permanent link">&para;</a></h1>
+<p>What&rsquo;s a knitting pattern other than a program you can execute on knitting needles? No pattern writer follows an exact set of rules when writing out a pattern, but there are a number of widely adopted norms that make defining a formal knitting language easy.</p>
+<h2 id="casting-on">Casting on<a class="headerlink" href="#casting-on" title="Permanent link">&para;</a></h2>
+<p>The first step when knitting is always to cast on stitches &ndash; this places new live stitches on the needle that can be knit from later.</p>
+<p>Generally this is represented in a pattern as some variation of <code>cast on X</code> or <code>coX</code> for <code>X</code> number of stitches.</p>
+<h2 id="knitting">Knitting<a class="headerlink" href="#knitting" title="Permanent link">&para;</a></h2>
+<p>The knit stitch is the most basic knitting operation. It creates a new loop on top of the next live stitch.</p>
+<p>This is denoted with <code>knit</code> or <code>k</code> for singular operations, or <code>knit X</code> or <code>kX</code> for doing <code>X</code> number of stitches.</p>
+<h2 id="purling">Purling<a class="headerlink" href="#purling" title="Permanent link">&para;</a></h2>
+<p>Purling is the reverse of a knit stitch.</p>
+<p>This is denoted with <code>purl</code> or <code>p</code> for singular operations, or <code>purl X</code> or <code>pX</code> for doing <code>X</code> number of stitches.</p>
+<h2 id="decreases">Decreases<a class="headerlink" href="#decreases" title="Permanent link">&para;</a></h2>
+<p>Decreases are a way of reducing the total number of live stitches on the needles. There are several ways of doing a decrease, including slipping stitches over others, and knitting or purling stitches together. For now, I consider just two forms: knitting or purling some number X of stitches together. This operation builds the new stitch with the next X live stitches as its parents.</p>
+<p>These decreases are expressed as <code>knitXtog</code> or <code>kXtog</code> for knitting <code>X</code> live stitches together, or analogously <code>purlXtog</code> and <code>pXtog</code> for purling.</p>
+<h2 id="increases">Increases<a class="headerlink" href="#increases" title="Permanent link">&para;</a></h2>
+<p>Increases are the opposite of decreases, and add additional live stitches onto the needles. For the purpose of this program, increases will be interpreted as &ldquo;makes&rdquo;, which take a single live stitch and builds two children stitches with the single shared parent. These increases can be done as knits (default) or &ldquo;purlwise&rdquo;, and also can be done to have a left or right lean to them.</p>
+<p>Increases can be given as <code>make X</code> or <code>mX</code> for adding <code>X</code> stitches. Adding in the optional specifiers, we should also aim to capture <code>make X purlwise left</code> or <code>mXpl</code>.</p>
+<h2 id="repeats">Repeats<a class="headerlink" href="#repeats" title="Permanent link">&para;</a></h2>
+<p>A key structural tool in knitting patterns is the concept of the repeat, which tells the knitter to do some combination of stitches multiple times. This is already seen in the <a href="#knitting">knit</a> and <a href="#purling">purl</a> productions, like the construction <code>k5</code>, but can be generalized to a combination of expressions, i.e. doing the sequence <code>knit 5 purl 4 k2tog</code> 5 times.</p>
+<p>To represent repeats for an expression, I&rsquo;ve adopted the notation <code>(&lt;EXP&gt;)X</code> where <code>&lt;EXP&gt;</code> is any valid sequence of operations, including other repeats, that will be done in sequence <code>X</code> number of times. For example, <code>((purl 2)4 knit 2)5</code> will result in 50 stitches.</p>
+<hr />
+<h1 id="javacc-parser-generator">JavaCC: parser generator<a class="headerlink" href="#javacc-parser-generator" title="Permanent link">&para;</a></h1>
+<p>Parsing a pattern isn&rsquo;t a trivial exercise, especially with looping and nesting constructs. To simplify this process, I&rsquo;ve made use of JavaCC<sup id="fnref:javacc"><a class="footnote-ref" href="#fn:javacc">1</a></sup> (Java compiler compiler). By equipping this parser-generator with a grammar specification, it produces java code capable of interpreting/matching input (in this case a knitting pattern) to that grammar.</p>
+<h2 id="jjtree">JJTree<a class="headerlink" href="#jjtree" title="Permanent link">&para;</a></h2>
+<p>In addition to the parser generator, JavaCC includes JJTree which produces a tree representation of the input sent to the parser. JJTree specific metadata can be included in the grammar specification used by JavaCC through the definition of Abstract Syntax Tree (AST) nodes. </p>
+<p>When the generated parser produces a tree, it maps a matched production (like <code>knit 8</code> or <code>(p3 k4)6</code>) to a well-defined object (AST class), with information that can be used in interpreting the tree<sup id="fnref:nmsu"><a class="footnote-ref" href="#fn:nmsu">2</a></sup>. For example, the grammar can specify that JavaCC should recognize <code>knit 8</code> as a valid expression, the jjtree information within that grammar spec will turn that expression into some object that semantically knows that the instruction was <code>knit</code> and that there are <code>8</code> stitches, which then becomes accessible information when interpreting the tree later. The AST classes defining such objects are auto-generated but can be overwritten to include the additional metadata.</p>
+<h2 id="tooling">Tooling<a class="headerlink" href="#tooling" title="Permanent link">&para;</a></h2>
+<p>Working with JavaCC is a bit cumbersome by default. JavaCC reads a grammar specification, generates java code (the actual parser) which then needs to be compiled within the context of some other application in order to be useful. Java&rsquo;s dependency managers help simplify this process.</p>
+<p>I made use of the JavaCC Compiler Plugin for Gradle<sup id="fnref:javaccGradle"><a class="footnote-ref" href="#fn:javaccGradle">3</a></sup>. Configuration is easy, and the parser generator runs at build time before compiling the rest of the code so that the necessary files (parser and jjtree AST classes) are in place for the rest of the build.</p>
+<hr />
+<h1 id="grammar-specification">Grammar specification<a class="headerlink" href="#grammar-specification" title="Permanent link">&para;</a></h1>
+<h2 id="tokens">Tokens<a class="headerlink" href="#tokens" title="Permanent link">&para;</a></h2>
+<p>The first step in writing the grammar specification is to define some tokens. These are the regular expressions that the parser will recognize as valid strings in the grammar.</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code>SKIP : { &quot; &quot; }
+SKIP : { &quot;\n&quot; | &quot;\r&quot; | &quot;\r\n&quot; }
+TOKEN : { &lt; NUMBER : ([&quot;0&quot;-&quot;9&quot;])+ &gt; }
+TOKEN : { &lt; CAST_ON : &quot;cast on&quot; | &quot;co&quot; | &quot;caston&quot;&gt;}
+TOKEN : { &lt; KNIT : &quot;knit&quot; | &quot;k&quot; &gt;}
+TOKEN : { &lt; KNITWISE : &lt;KNIT&gt; | &quot;knitwise&quot; &gt;}
+TOKEN : { &lt; PURL : &quot;purl&quot; | &quot;p&quot; &gt;}
+TOKEN : { &lt; PURLWISE : &lt;PURL&gt; | &quot;purlwise&quot; &gt;}
+TOKEN : { &lt; TOG : &quot;together&quot; | &quot;tog&quot; &gt; }
+TOKEN : { &lt; MAKE : &quot;make&quot; | &quot;m&quot; &gt; }
+TOKEN : { &lt; LEFT : &quot;left&quot; | &quot;l&quot; &gt; }
+TOKEN : { &lt; RIGHT : &quot;right&quot; | &quot;r&quot; &gt; }
+TOKEN : { &lt; OPEN_PAR : &quot;(&quot; &gt; }
+TOKEN : { &lt; CLOSE_PAR : &quot;)&quot; &gt; }
+TOKEN : { &lt; QUALIFIER : &quot;:&quot; &lt;OPEN_PAR&gt; ([&quot;a&quot;-&quot;z&quot;,&quot;A&quot;-&quot;Z&quot;,&quot;0&quot;-&quot;9&quot;])+ &lt;CLOSE_PAR&gt; &gt; }
+</code></pre></div></td></tr></table></div>
+
+<p>The <code>SKIP</code> tokens are used to tell the parser that those inputs are to be ignored, in this case white spaces and new lines (with and without carriage returns)</p>
+<p>The <code>&lt;NUMBER&gt;</code> token matches 1 or more repetitions of digits 0-9.</p>
+<p>Everything after is some combination of strings, where things that are semantically the same, such as <code>knit</code> and <code>k</code>, are parsed as the same token.</p>
+<p>The <code>&lt;QAULIFIER&gt;</code> token matches strings of the form <code>:(\w)</code> where <code>\w</code> is an alphanumeric &ldquo;word&rdquo;.</p>
+<p>JavaCC gives precedence to tokens in the order they are defined. For this matter, since <code>&lt;PURLWISE&gt;</code> also matches on the token for <code>&lt;PURL&gt;</code> it needs to be defined after <code>&lt;PURL&gt;</code>. Purlwise is a modifier used to describe an increase/decrease, and syntactically comes after declaring the stitch, i.e. <code>purl 3 make 1 purlwise</code>. If the order were switched in defining these tokens, then the parser would output something like <code>purlwise 3 make 1 purl</code>, which is garbage.</p>
+<h2 id="expressionsproductions">Expressions/productions<a class="headerlink" href="#expressionsproductions" title="Permanent link">&para;</a></h2>
+<p>Parsing tokens by themselves do not provide us with enough information to do anything meaningful, the context in which they appear also needs to be considered! To do that, we define expressions (productions) that the parser will look for, which are strings of tokens to match.</p>
+<p>Let&rsquo;s examine the expression for a basic stitch:</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">void</span><span class="w"> </span><span class="nt">Stitch</span><span class="o">()</span><span class="w"> </span><span class="o">:</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="err">Token</span><span class="w"> </span><span class="err">stitchType</span><span class="p">;</span>
+<span class="w">    </span><span class="err">Token</span><span class="w"> </span><span class="err">num</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">null</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="err">(stitchType</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">&lt;CAST_ON&gt;</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">stitchType</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">&lt;KNIT&gt;</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">stitchType</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">&lt;PURL&gt;)</span>
+<span class="w">    </span><span class="cp">[</span><span class="nx">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">NUMBER</span><span class="o">&gt;</span><span class="cp">]</span>
+<span class="w">    </span><span class="err">{</span>
+<span class="w">        </span><span class="err">int</span><span class="w"> </span><span class="err">n</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">num</span><span class="w"> </span><span class="err">!=</span><span class="w"> </span><span class="err">null</span><span class="w"> </span><span class="err">?</span><span class="w"> </span><span class="err">Integer.parseInt(num.image)</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="err">1</span><span class="p">;</span>
+<span class="w">        </span><span class="err">switch</span><span class="w"> </span><span class="err">(stitchType.kind)</span><span class="w"> </span><span class="err">{</span>
+<span class="w">            </span><span class="err">case</span><span class="w"> </span><span class="n">CAST_ON</span><span class="p">:</span>
+<span class="w">                </span><span class="n">jjtThis</span><span class="o">.</span><span class="nf">setType</span><span class="p">(</span><span class="n">StitchType</span><span class="err">.</span><span class="n">CAST_ON</span><span class="p">);</span>
+<span class="w">                </span><span class="err">break</span><span class="p">;</span>
+<span class="w">            </span><span class="err">case</span><span class="w"> </span><span class="n">KNIT</span><span class="p">:</span>
+<span class="w">                </span><span class="n">jjtThis</span><span class="o">.</span><span class="nf">setType</span><span class="p">(</span><span class="n">StitchType</span><span class="err">.</span><span class="n">KNIT</span><span class="p">);</span>
+<span class="w">                </span><span class="err">break</span><span class="p">;</span>
+<span class="w">            </span><span class="err">case</span><span class="w"> </span><span class="n">PURL</span><span class="p">:</span>
+<span class="w">                </span><span class="n">jjtThis</span><span class="o">.</span><span class="nf">setType</span><span class="p">(</span><span class="n">StitchType</span><span class="err">.</span><span class="n">PURL</span><span class="p">);</span>
+<span class="w">                </span><span class="err">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nt">jjtThis</span><span class="p">.</span><span class="nc">setNum</span><span class="o">(</span><span class="nt">n</span><span class="o">);</span>
+<span class="w">    </span><span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div></td></tr></table></div>
+
+<p>Lines 3 and 4 are just declaring variables to be used later.</p>
+<p>Lines 7 and 8 are the pattern to match. It checks for <code>CAST_ON</code>, <code>KNIT</code>, or <code>PURL</code> and assigns that token to the <code>stitchType</code> variable. It then looks for an optional <code>NUMBER</code> token and assigns that to <code>num</code>.</p>
+<p>Next, the parsed tokens are converted into more strongly typed objects, in this case <code>num</code> becomes an <code>int</code> and <code>stitchType</code> is mapped to the enum <code>StitchType</code>.</p>
+<p>Associated with this production is an <code>AST</code> (abstract syntax tree) class, a syntax tree node that extends <code>SimpleNode</code>.<sup id="fnref2:nmsu"><a class="footnote-ref" href="#fn:nmsu">2</a></sup> This is the object produced by the parser and represents the expression in the overall tree once the entire pattern has been parsed.  It can be auto-generated, or  pre-defined with additional fields. In this example, <code>ASTStitch</code> has the fields <code>StitchType type</code> and  <code>Integer num</code>. The production&rsquo;s node is accessible through <code>jjtThis</code>, allowing those fields to be set in the parsing phase.</p>
+<hr />
+<h1 id="interpreting-a-tree">Interpreting a tree<a class="headerlink" href="#interpreting-a-tree" title="Permanent link">&para;</a></h1>
+<p>Now that the JavaCC parser generator has created a parser, and the parser has been used with JJTree to produce a tree, the tree still needs to be interpreted.</p>
+<p>The process is simple: work down leaves of the tree at the same level in order. For any leaf with children nodes (only repeats in this grammar), work through those children (in order again) the number of times specified by the repeat.</p>
+<p>While traversing the tree, any knitting instructions are executed via the <a href="#a-knitting-api">knitting API</a>. The implementation of the API determines what objects you build, in this case I&rsquo;ve written two: a simple pattern class that keeps track of stitches and their neighbors (predecessors, successors, and parent/children links), and another that keeps track of the total number of stitches performed as a means to estimate total yarn yardage. This tree traversal effectively converts the input into a linear program, and would be every step a knitter performs in sequence when following a pattern.</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TreeInterpreter</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">KPattern</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">interpret</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ASTStitch</span><span class="w"> </span><span class="n">castOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ASTStitch</span><span class="p">)</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">root</span><span class="p">.</span><span class="na">jjtGetChild</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="p">(</span><span class="n">castOn</span><span class="p">.</span><span class="na">getType</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">StitchType</span><span class="p">.</span><span class="na">CAST_ON</span><span class="p">));</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">pattern</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">castOn</span><span class="p">.</span><span class="na">getNum</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">root</span><span class="p">.</span><span class="na">jjtGetNumChildren</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">processNode</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">root</span><span class="p">.</span><span class="na">jjtGetChild</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">pattern</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">pattern</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processNode</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">pattern</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">ASTStitch</span><span class="p">.</span><span class="na">class</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">ASTStitch</span><span class="w"> </span><span class="n">stitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ASTStitch</span><span class="p">)</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">stitch</span><span class="p">.</span><span class="na">getNum</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pattern</span><span class="p">.</span><span class="na">basicStitch</span><span class="p">(</span><span class="n">stitch</span><span class="p">.</span><span class="na">getType</span><span class="p">());</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">ASTRepeat</span><span class="p">.</span><span class="na">class</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">ASTRepeat</span><span class="w"> </span><span class="n">repeat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ASTRepeat</span><span class="p">)</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">repeat</span><span class="p">.</span><span class="na">getNum</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">repeat</span><span class="p">.</span><span class="na">jjtGetNumChildren</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">processNode</span><span class="p">(</span><span class="n">repeat</span><span class="p">.</span><span class="na">jjtGetChild</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="w"> </span><span class="n">pattern</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">ASTDecrease</span><span class="p">.</span><span class="na">class</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">ASTDecrease</span><span class="w"> </span><span class="n">decrease</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ASTDecrease</span><span class="p">)</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">      </span><span class="n">pattern</span><span class="p">.</span><span class="na">decrease</span><span class="p">(</span><span class="n">decrease</span><span class="p">.</span><span class="na">getType</span><span class="p">(),</span><span class="w"> </span><span class="n">decrease</span><span class="p">.</span><span class="na">getNum</span><span class="p">(),</span><span class="w"> </span><span class="n">decrease</span><span class="p">.</span><span class="na">getDecreaseType</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">ASTIncrease</span><span class="p">.</span><span class="na">class</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">ASTIncrease</span><span class="w"> </span><span class="n">increase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ASTIncrease</span><span class="p">)</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">      </span><span class="n">pattern</span><span class="p">.</span><span class="na">increase</span><span class="p">(</span><span class="n">increase</span><span class="p">.</span><span class="na">getType</span><span class="p">(),</span><span class="w"> </span><span class="n">increase</span><span class="p">.</span><span class="na">getNum</span><span class="p">(),</span><span class="w"> </span><span class="n">increase</span><span class="p">.</span><span class="na">getIncreaseType</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+
+<p>The interpretation phase starts with the assumption that the first node in sequence will be <code>ASTStich</code> with type <code>cast on</code>. The API specifies an <code>init</code> method that will set up the first cast on stitches, since they can behave differently than other stitches: they have no parents and joining in the round requires making non-standard links.</p>
+<p>Following that, nodes in the tree are processed by working down the tree. The only branching mechanism here is the <code>Repeat</code> production, which recursively and repeatedly processes its children nodes. The other expressions map to constructs of the API, so the chosen implementation calls the associated method, passing the proper meta-data as gathered from the parsing step.</p>
+<hr />
+<h1 id="a-knitting-api">A knitting API<a class="headerlink" href="#a-knitting-api" title="Permanent link">&para;</a></h1>
+<p>In much the same way the parser grammar was constructed, there needs to be something to map input into actual instructions. The API can be used for generating a pattern object for analyzing the final network of linked stitches, as a base for building a mesh representation of the knitted object to be loaded in some 3d visualization software, or really anything as long as it supports the following methods.</p>
+<p><em><strong>void init(int numStitches, boolean join);</strong></em></p>
+<blockquote>
+<p>Initial cast on of a project. It takes the number of stitches to initially cast on and whether to join in the round. The join param is still in process, the parser currently has no mechanism for identifying joins, and all implementations of this API default to being in the round.</p>
+</blockquote>
+<p><em><strong>Stitch basicStitch(StitchType type);</strong></em></p>
+<blockquote>
+<p>Performs a stitch operation of StitchType type onto the current knitting pattern, i.e. knit, purl, cast on. It will return the stitch object it performed.</p>
+</blockquote>
+<p><em><strong>void decrease(StitchType type, int num, DecreaseType decreaseType);</strong></em></p>
+<blockquote>
+<p>Perform a decrease that combines num stitches together.</p>
+</blockquote>
+<p><em><strong>void increase(StitchType type, int num, IncreaseType increaseType);</strong></em></p>
+<blockquote>
+<p>Perform an increase of num stitches.</p>
+</blockquote>
+<hr />
+<h1 id="visualization">Visualization<a class="headerlink" href="#visualization" title="Permanent link">&para;</a></h1>
+<p>Once a pattern has been parsed and interpreted into some data structure, it can then be visualized. The goal here is to convert a graph (a collection of vertices with weighted edges) into a 3d mesh, preserving edge weights as pairwise distances between vertices.</p>
+<h2 id="naive-approach">Naïve approach<a class="headerlink" href="#naive-approach" title="Permanent link">&para;</a></h2>
+<p>The current linear time solution is to map stitches to coordinates in 3d space by estimating where they would be based on which row/round in the pattern the stitch is, and how many stitches are in a round. This will place each stitch on a circle with a radius determined by the number of working stitches. This is not very accurate for anything besides tubes.</p>
+<figure class="figure">
+
+<img alt="naive hat" src="naive-hat.jpeg" />
+<img alt="mds hat" src="hat.jpeg" />
+<figcaption>The naïve approach vs MDS for a &ldquo;hat&rdquo; pattern<br/>
+
+<code>co20 (k20)5 (k2tog k4)5 (k2tog k3)4 (k2tog k2)3 k8tog</code>
+</figcaption>
+</figure>
+<p>Notice that it fails to consider the pull of neighboring stitches as decreases are performed, resulting in each round/row being equidistant (conical shape). Instead, as in the MDS case, the final form is much rounder.</p>
+<figure class="figure">
+
+<img alt="real hat" src="real_hat.jpeg" />
+<figcaption>An object in the real world</figcaption>
+</figure>
+<p>The physical object turns out to be even stouter than either estimation.</p>
+<h2 id="multidimensional-scaling">Multidimensional scaling<a class="headerlink" href="#multidimensional-scaling" title="Permanent link">&para;</a></h2>
+<p>An alternate solution is through constructing a dissimilarity matrix based on distance along the surface of the knitted object as represented as walks on the graph of stitches (with edge weights determined by stitch type). This matrix is constructed by finding the shortest paths between each set of points, and then through multidimensional scaling (aka principal coordinate analysis) it can estimate coordinates in euclidean space.</p>
+<h3 id="why-should-this-work">Why should this work?<a class="headerlink" href="#why-should-this-work" title="Permanent link">&para;</a></h3>
+<p>MDS takes <code>n</code> data points in <code>m</code> space, and reduces it to an <code>nxr</code> matrix for some chosen value of <code>r</code>, trying to preserve pairwise ditances between each of the <code>n</code> points. Generally the <code>m</code> coordinates of a datapoint is some collection of meta-data. As an example, it could be results of a survey on cheeses, each datapoint corresponds to a cheese, and is a vector of measures like (hardness, scent, nuttiness, age, fat percentage, tonnage produced per year). </p>
+<p>We could then reduce these 6 dimensions to 2 by performing MDS. The dissimilarity matrix is simply made up of entries that are the pairwise euclidean distance in <span class="arithmatex">\(\mathbb{R}^6\)</span> between each cheese type. The resulting <code>nx2</code> matrix maps each of the <code>n</code> cheeses to only 2 dimensions, the semantics of which we don&rsquo;t know. But the beauty of MDS is that this dimensionality reduction may show some pattern in the data: there could be a strong correlation between hardness, age, and nuttiness so cheeses that had similar values in all three of those categories, may be mapped to similar locations in 2-space.</p>
+<p>Now back to the case of knitting, the dissimilarity matrix is the collection of shortest-paths between each point. Path length is itself a measure of distance, so the resulting 3-space coordinates from MDS will be strongly tied to this relative distance as it tries to preserve each pairwise path-distance now with a new (euclidean) metric. </p>
+<figure class="figure">
+<img alt="flat-hat" src="flat-hat.jpeg" />
+<figcaption>2d projection of the "hat" pattern</figcaption>
+</figure>
+<h3 id="constructing-a-distance-matrix">Constructing a distance matrix<a class="headerlink" href="#constructing-a-distance-matrix" title="Permanent link">&para;</a></h3>
+<p>The first step in performing MDS is constructing a dissimilarity matrix <span class="arithmatex">\(M\)</span> given the graph <span class="arithmatex">\(P\)</span> of stitches <span class="arithmatex">\(s_i\)</span> in the pattern. Each entry <span class="arithmatex">\(e_ij \in M\)</span> is the distance <span class="arithmatex">\(d(s_i,s_j)\)</span> for stitches <span class="arithmatex">\(s_i,s_j\in P\)</span>. </p>
+<p>There are many ways to define distance, but in this case we consider it to be the shortest path between stitches in the graph. For the initial phase of this project we assume that if <span class="arithmatex">\(s_i\)</span> and <span class="arithmatex">\(s_j\)</span>  share an edge (i.e. are neighbors), then the length of that edge is <span class="arithmatex">\(1\)</span>. In real life, this number is likely to be different depending on the type of stitches &mdash; switching between knits and purls produces ribbing that is more elastic than stockinette (straight knits or purls in the round), which suggests that the distance between knits and purls is shorter than that between stitches of the same type. Additionally, left-right distances are often longer than up-down.</p>
+<p>Finding the shortest path on a graph is a well known problem in computer science, and there are multiple algorithms that may be helpful.</p>
+<h4 id="depth-limited-bfs">Depth limited BFS<a class="headerlink" href="#depth-limited-bfs" title="Permanent link">&para;</a></h4>
+<p>This implementation arose from the goal to build fast without worrying about complexity or problems with scale. It performs breadth-first search starting from each stitch, initialized with its neighbors in the queue. This search is limited to a fixed number of hops from the source, and the distance matrix is updated with the shortest path found between the source and the node.</p>
+<p>It relies on the assumption that edges are positive, non-zero lengths and that the graph is connected. </p>
+<p>The distance matrix can be rather sparse with this algorithm. Since not all stitches will connect in a path shorter than the limited depth, the matrix will potentially have several 0 distance entries. The MDS algorithm needs to be aware that these 0 distances are not that the stitches are superimposed, but instead that their relative effect on each-other is negligible. </p>
+<p>It is incredibly inefficient. But works fine enough on smaller graphs that it filled the need as I built out other parts of the system.</p>
+<h4 id="floyd-warshall4">Floyd-Warshall<sup id="fnref:rosen"><a class="footnote-ref" href="#fn:rosen">4</a></sup><a class="headerlink" href="#floyd-warshall4" title="Permanent link">&para;</a></h4>
+<p>Consider <span class="arithmatex">\(G\)</span>, a directed weighted graph with no negative cycles on <span class="arithmatex">\(n\)</span> vertices. The Floyd-Warshall algorithm finds all pairwise-shortest paths between each of the n vertices in <span class="arithmatex">\(\mathcal{O}(n^3)\)</span> time. The basic principle is that it checks if the known distance between two vertices, <span class="arithmatex">\(j\)</span> and <span class="arithmatex">\(k\)</span>, can be made shorter by going through an intermediary vertex <span class="arithmatex">\(i\)</span>.</p>
+<p>Space is bounded by the distance matrix, so it&rsquo;s necessarily <span class="arithmatex">\(\mathcal{O}(n^2)\)</span>.<sup id="fnref:floydNote"><a class="footnote-ref" href="#fn:floydNote">5</a></sup></p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">let</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">nxn</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="n">initialized</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">infinity</span>
+<span class="k">for</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">e_ij</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">G</span><span class="p">:</span>
+<span class="w">  </span><span class="n">D</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">e_ij</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nl">n</span><span class="p">:</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nl">n</span><span class="p">:</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nl">n</span><span class="p">:</span>
+<span class="w">      </span><span class="n">D</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">D</span><span class="o">[</span><span class="n">j,k</span><span class="o">]</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">D</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">D</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">k</span><span class="o">]</span>
+</code></pre></div></td></tr></table></div>
+
+<h4 id="repeated-dijkstras">Repeated Dijkstra&rsquo;s<a class="headerlink" href="#repeated-dijkstras" title="Permanent link">&para;</a></h4>
+<p>Dijkstra&rsquo;s algorithm produces the shortest path tree for vertex <span class="arithmatex">\(s_i\)</span> to all <span class="arithmatex">\(s_j\)</span> in graph <span class="arithmatex">\(G\)</span><sup id="fnref:dijkstraNote"><a class="footnote-ref" href="#fn:dijkstraNote">6</a></sup>. Running this algorithm for each vertex in <span class="arithmatex">\(G\)</span> then would be enough to generate a dissimilarity matrix for the whole graph.</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">let</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">nx1</span><span class="w"> </span><span class="n">matrix</span>
+<span class="n">let</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">queue</span>
+<span class="k">for</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">G</span><span class="p">:</span>
+<span class="w">  </span><span class="n">d</span><span class="o">[</span><span class="n">v</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">infinity</span>
+<span class="w">  </span><span class="k">add</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">q</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">empty</span><span class="p">:</span>
+<span class="w">    </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nf">min</span><span class="w"> </span><span class="n">d</span><span class="o">[</span><span class="n">u</span><span class="o">]</span>
+<span class="w">    </span><span class="n">remove</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">q</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="n">neighbor</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="n">still</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">q</span><span class="p">:</span>
+<span class="w">      </span><span class="n">alt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="o">[</span><span class="n">u</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e_uv</span><span class="w">                   </span><span class="n">#e_uv</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="ow">between</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">v</span>
+<span class="w">      </span><span class="n">d</span><span class="o">[</span><span class="n">v</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">d</span><span class="o">[</span><span class="n">v</span><span class="o">]</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">alt</span>
+<span class="k">return</span><span class="w"> </span><span class="n">d</span>
+</code></pre></div></td></tr></table></div>
+
+<p>On graph <span class="arithmatex">\(G\)</span> with <span class="arithmatex">\(n\)</span> vertices and <span class="arithmatex">\(m\)</span> edges, the base operation of the algorithm is <span class="arithmatex">\(\mathcal{O}(n^2)\)</span> for a single vertex in <span class="arithmatex">\(G\)</span>, so total complexity is <span class="arithmatex">\(\mathcal{O}(n^3)\)</span>.</p>
+<p>This can be improved using a min priority queue, reducing base complexity to <span class="arithmatex">\(\mathcal{O}(m + n\log{n})\)</span> and total to <span class="arithmatex">\(\mathcal{O}(nm + n^2\log{n})\)</span><sup id="fnref:dijkstras"><a class="footnote-ref" href="#fn:dijkstras">7</a></sup>, I have yet to do this, but it is promising, as most stitches are only connected to 4 others (a parent, a predecessor, a successor, and a child), so the <span class="arithmatex">\(m\)</span> term is likely on the same order as <span class="arithmatex">\(n\)</span> for most valid patterns.</p>
+<h4 id="johnsons-algorithm8">Johnson&rsquo;s algorithm<sup id="fnref:johnsons"><a class="footnote-ref" href="#fn:johnsons">8</a></sup><a class="headerlink" href="#johnsons-algorithm8" title="Permanent link">&para;</a></h4>
+<p>I haven&rsquo;t implemented this algorithm. It supposedly is also <span class="arithmatex">\(\mathcal{O}(nm + n^2\log{n})\)</span> for a graph on <span class="arithmatex">\(n\)</span> vertices with <span class="arithmatex">\(m\)</span> edges.</p>
+<h3 id="performing-mds">Performing MDS<a class="headerlink" href="#performing-mds" title="Permanent link">&para;</a></h3>
+<p>With a dissimilarity matrix in hand we can now use multidimensional scaling to map our vertices into 3d euclidean space. </p>
+<p>There are a few publicly available libraries that implement MDS. An opensource java library is available from the University of Konstanz<sup id="fnref:mdsj"><a class="footnote-ref" href="#fn:mdsj">9</a></sup>, although I opted not to use this one because I was unsure of what licensing (if any) that I wanted to use here. </p>
+<p>Instead, I made use of the python scikit-learn<sup id="fnref:sklearn"><a class="footnote-ref" href="#fn:sklearn">10</a></sup><sup id="fnref:sklearnUG"><a class="footnote-ref" href="#fn:sklearnUG">11</a></sup> library, a collection of ai/data tools built around numpy, scipy, and matplotlib.</p>
+<h4 id="metric-vs-non-metric">Metric vs non-metric<a class="headerlink" href="#metric-vs-non-metric" title="Permanent link">&para;</a></h4>
+<p>The scikit docs explain it better than I can</p>
+<blockquote>
+<p>In Metric MDS, the input similarity matrix arises from a metric (and thus respects the triangular inequality), the distances between output two points are then set to be as close as possible to the similarity or dissimilarity data. In the non-metric version, the algorithms will try to preserve the order of the distances, and hence seek for a monotonic relationship between the distances in the embedded space and the similarities/dissimilarities.<sup id="fnref2:sklearnUG"><a class="footnote-ref" href="#fn:sklearnUG">11</a></sup></p>
+</blockquote>
+<p>A key part of these distinctions is that non-metric mds can have 0-weighted edge length to indicate missing values. This allows for an incomplete dissimilarity matrix as would be the case for <a href="#depth-limited-bfs">depth limited bfs</a>. This also opens the door to limit other algorithms, possibly reducing their overall runtime complexity.</p>
+<p>The following figures are the output of the pattern <code>co20 (k20)10 (k2tog k5)18</code>, using the repeated Dijkstra&rsquo;s algorithm for generating the dissimilarity matrix.</p>
+<p>I found that non-metric mds does not do well unsupervised, and is better suited for refining coordinates rather than generating them.</p>
+<figure class="figure">
+
+<img alt="mds non metric un-initialized" src="mds-non-metric-uninit.jpeg" />
+<img alt="mds non metric initialized" src="mds-non-metric-init.jpeg" />
+
+<figcaption>Uninitialized non-metric MDS vs initialized</figcaption>
+</figure>
+<p>Wow that&rsquo;s a big difference! And this is using a complete dissimilarity matrix.</p>
+<p>As for metric MDS, the algorithm is able to infer the general shape without any prior coordinate information! Furthermore, initialization only makes a subtle difference.</p>
+<figure class="figure">
+<img alt="mds metric un-initialized" src="mds-metric-uninit.jpeg" />
+<img alt="mds metric initialized" src="mds-metric-init.jpeg" />
+<figcaption>Uninitialized metric MDS vs initialized</figcaption>
+</figure>
+<p>One thing to note is that in both the initialized and uninitialized metric case, there is an observed flaring near the bottom of each graph which is not present in the non-metric initialized output, and we actually get the opposite effect in real life.</p>
+<figure class="figure">
+
+<img alt="funnel hat" src="real_funnel.jpeg" />
+<figcaption>The knitted funnel "hat", complete with pom-pom</figcaption>
+</figure>
+<h4 id="computational-limitations">Computational limitations<a class="headerlink" href="#computational-limitations" title="Permanent link">&para;</a></h4>
+<p><img alt="shortest-path-graph" src="shortest-path-graph.jpeg" /></p>
+<p>Unfortunately, this is not a cheap analysis to perform. The shortest path algorithms all are <span class="arithmatex">\(\mathcal{O}(n^3)\)</span> for <span class="arithmatex">\(n\)</span> stitches (although this can be improved given the assumption that we don&rsquo;t have a complete<sup id="fnref:completeGraph"><a class="footnote-ref" href="#fn:completeGraph">12</a></sup> graph, as seen with Floyd-Warshall, Dijkstra&rsquo;s, and Johnson&rsquo;s). There are other algorithms than have stricter requirements on the starting graphs with better bounds, that may be applicable to this use case, see Raman<sup id="fnref:raman"><a class="footnote-ref" href="#fn:raman">13</a></sup> and Thorup<sup id="fnref:thorup"><a class="footnote-ref" href="#fn:thorup">14</a></sup>.</p>
+<p>Space also becomes an issue as patterns become larger. Everything is bounded below by the size of the dissimilarity matrix, which is <span class="arithmatex">\(\mathcal{O}(n^2)\)</span>. Since I want to support non-integer distances (knit-knit edges are longer than knit-purl), I&rsquo;ve opted to use the <code>double</code> type in java. This is an 8 byte type, if we take a max heap size for the jvm of 2gb and assume our <code>double[][]</code> array can use it all with no overhead from the rest of the app, we&rsquo;re looking 2e+9 bytes = 250000000 doubles = (roughly) 15811 stitches. This is under the median number of stitches in a sweater (20,000)<sup id="fnref:fruehwald"><a class="footnote-ref" href="#fn:fruehwald">15</a></sup> and already the problem is feasibly incalculable! Switching the type to <code>int</code>, at 4 bytes, would get us to some 22360 stitches in that 2gb space, but the math doesn&rsquo;t bode well for scaling. I could switch data types to use a disk-backed array, but I fear that time considerations would only be made worse with constant lookups.</p>
+<p>Classical MDS might not be a tenable solution for larger datasets. As an alternative, there are a few algorithms that approximate MDS without needing the entire dissimilarity matrix in memory, or the large time constraints<sup id="fnref:delicado"><a class="footnote-ref" href="#fn:delicado">16</a></sup>. An interpolation-based algorithm using Gowler&rsquo;s interpolation forumla<sup id="fnref:gowler"><a class="footnote-ref" href="#fn:gowler">17</a></sup> seems a promising solution but still holds a lot to be explored. My current concerns are: I&rsquo;ve never used R, and the implementation provided by Delicado implicitly uses the euclidean distance on subsets of the data &ndash; I&rsquo;d have to re-implement the shortest path metric, repeated Dijktra&rsquo;s is a strong contender since that one can be modified so as not to produce the entire <code>nxn</code> dissimilarity matrix, but possibly Johnson&rsquo;s, Raman, or Thorup may work as well.</p>
+<hr />
+<h1 id="closing-thoughts">Closing thoughts<a class="headerlink" href="#closing-thoughts" title="Permanent link">&para;</a></h1>
+<p>Altogether, I am quite happy with how this project has been coming along. The parser-generator can interpret patterns closely resembling those in the real world, the knitting API is simple enough to be implemented multiple ways, but expressive enough to capture key information about a knitting pattern, and the visualization via both geometric and statistical methods produce a plausible 3d representation of a knitted object.</p>
+<p>Of course, there is still a lot to improve on. So many features to implement from the parsing side: cables, stranded color work, short rows, flat knitting, intarsia, lacework, etc. Expanding the API to support all of those will likely introduce some complexity &ndash; particularly the color work seems troublesome. And then finally reflecting those new features in the visualization will undoubtedly have its issues. Beyond that, performance enhancements for MDS on larger data sets depend on rethinking the approach from the classical implementation to one of the algorithms given in Delicado<sup id="fnref2:delicado"><a class="footnote-ref" href="#fn:delicado">16</a></sup>. I&rsquo;ve also done some simulation work with Blender with the naïve visualization approach, but haven&rsquo;t updated it to use the output of MDS. Improving the mesh generation part of that code to produces proper edges and faces would be ideal, and using the fabric simulator there may produce interesting results.</p>
+<h1 id="references-and-notes">References and Notes<a class="headerlink" href="#references-and-notes" title="Permanent link">&para;</a></h1>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:javacc">
+<p>Java Compiler Compiler <a href="https://javacc.github.io/javacc/">docs</a>&#160;<a class="footnote-backref" href="#fnref:javacc" title="Jump back to footnote 1 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:nmsu">
+<p>Roger Hartley. Writing Interpreters with JavaCC. New Mexico State University. <a href="https://www.cs.nmsu.edu/~rth/cs/cs471/InterpretersJavaCC.html">site</a>&#160;<a class="footnote-backref" href="#fnref:nmsu" title="Jump back to footnote 2 in the text">&#8617&#xFE0E</a><a class="footnote-backref" href="#fnref2:nmsu" title="Jump back to footnote 2 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:javaccGradle">
+<p>JavaCC Compiler Plugin for Gradle <a href="https://github.com/javacc/javaccPlugin">repo</a>&#160;<a class="footnote-backref" href="#fnref:javaccGradle" title="Jump back to footnote 3 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:rosen">
+<p>Keneth H Rosen. Discrete Mathematics and Its Applications (With Combinatorics and Graph Theory), Seventh Edition. Graphs, section 8.6 Shortest-Path Problems. McGraw Hill.&#160;<a class="footnote-backref" href="#fnref:rosen" title="Jump back to footnote 4 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:floydNote">
+<p><em>I present these bounds as fact, but you can verify yourself.</em> Further reading on Wikipedia <a href="https://en.wikipedia.org/wiki/Floyd–Warshall_algorithm">Floyd-Warshall algorithm</a>&#160;<a class="footnote-backref" href="#fnref:floydNote" title="Jump back to footnote 5 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:dijkstraNote">
+<p><em>The original variant only produced the shortest path from <span class="arithmatex">\(s_i\)</span> to <span class="arithmatex">\(s_j\)</span>.</em> See more on Wikipedia <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra&rsquo;s algorithm</a>&#160;<a class="footnote-backref" href="#fnref:dijkstraNote" title="Jump back to footnote 6 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:dijkstras">
+<p><a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra&rsquo;s algorithm</a>&#160;<a class="footnote-backref" href="#fnref:dijkstras" title="Jump back to footnote 7 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:johnsons">
+<p><a href="https://en.wikipedia.org/wiki/Johnson%27s_algorithm">Johnson&rsquo;s algorithm</a>&#160;<a class="footnote-backref" href="#fnref:johnsons" title="Jump back to footnote 8 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:mdsj">
+<p>Algorithmics Group. MDSJ: Java Library for Multidimensional Scaling (Version 0.2). Available <a href="http://www.inf.uni-konstanz.de/algo/software/mdsj/">here</a>. University of Konstanz, 2009.&#160;<a class="footnote-backref" href="#fnref:mdsj" title="Jump back to footnote 9 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:sklearn">
+<p>Scikit Learn. <a href="https://scikit-learn.org/stable/modules/generated/sklearn.manifold.MDS.html">MDS Docs</a>.&#160;<a class="footnote-backref" href="#fnref:sklearn" title="Jump back to footnote 10 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:sklearnUG">
+<p>Scikit Learn. <a href="https://scikit-learn.org/stable/modules/manifold.html#multi-dimensional-scaling-mds">MDS User Guide</a>&#160;<a class="footnote-backref" href="#fnref:sklearnUG" title="Jump back to footnote 11 in the text">&#8617&#xFE0E</a><a class="footnote-backref" href="#fnref2:sklearnUG" title="Jump back to footnote 11 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:completeGraph">
+<p><em>Every pair of vertices is connected with an edge.</em> See Wikipedia <a href="https://en.wikipedia.org/wiki/Complete_graph">Complete graph</a>&#160;<a class="footnote-backref" href="#fnref:completeGraph" title="Jump back to footnote 12 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:raman">
+<p>Rajeev Raman. Recent results on the single-source shortest paths problem. 1997. <a href="https://dl.acm.org/doi/10.1145/261342.261352">doi</a>. <a href="https://dl.acm.org/doi/pdf/10.1145/261342.261352">pdf</a>&#160;<a class="footnote-backref" href="#fnref:raman" title="Jump back to footnote 13 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:thorup">
+<p>Mikkel Thorup. On RAM Priority Queues. 2000. <a href="https://epubs.siam.org/doi/10.1137/S0097539795288246">doi</a>&#160;<a class="footnote-backref" href="#fnref:thorup" title="Jump back to footnote 14 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:fruehwald">
+<p>Joesf Fruehwald. How Long Does it Take You to Knit a Sweater. 13 Jan, 2020. <a href="https://medium.com/@JoFrhwld/how-long-does-it-take-you-to-knit-a-sweater-74e35cf5c3c1#:~:text=It%27s%20important%20to%20keep%20the,number%20of%20stitches%20is%2020k">Article</a>&#160;<a class="footnote-backref" href="#fnref:fruehwald" title="Jump back to footnote 15 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:delicado">
+<p>Pedro Delicado, Cristian Pachón-García. Multidimensional Scaling for Big Data. 2024. <a href="https://arxiv.org/abs/2007.11919">arXiv:2007.11919</a>. <a href="https://doi.org/10.48550/arXiv.2007.11919">doi</a>&#160;<a class="footnote-backref" href="#fnref:delicado" title="Jump back to footnote 16 in the text">&#8617&#xFE0E</a><a class="footnote-backref" href="#fnref2:delicado" title="Jump back to footnote 16 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:gowler">
+<p>Gowler, J.C. Adding a point to vector diagrams in multivariate analysis. 1968. Biometrika 55(3): 582-585. <a href="https://www.jstor.org/stable/2334268">jsotr</a>. <em>(I haven&rsquo;t actually read this one, but it seemed helpful to link for further work)</em>&#160;<a class="footnote-backref" href="#fnref:gowler" title="Jump back to footnote 17 in the text">&#8617&#xFE0E</a></p>
+</li>
+</ol>
+</div>
+        </article>
+        <footer>
+<!-- If you spam this email I will be sad -->
+    <script>
+        function decodeEmail(encoded) {
+            var address = atob(encoded);
+            window.location.href = "mailto:" + address;
+        }
+    </script>
+    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2024
+    <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
+</footer>
+    </body>
+</html>

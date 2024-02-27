@@ -1,0 +1,9 @@
+.figure img {
+    display: inline;
+    max-height: 350;
+    width: auto;
+    max-width:100%;
+}
+.figure {
+    text-align: center;
+}
