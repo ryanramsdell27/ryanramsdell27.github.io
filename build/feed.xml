@@ -3,7 +3,29 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>26-02-2024T22:19:02Z</updated>
+  <updated>25-03-2024T22:01:03Z</updated>
+  <entry>
+    <title>Sketches</title>
+    <id>paintings/sketches/index.html</id>
+    <updated>2024-03-25T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;A series of small sketches &lt;code&gt;4" x 4.5"&lt;/code&gt;, oil on canvas paper.&lt;/p&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+
+&lt;img alt="Sketch 0" src="sketch0.jpeg" /&gt;
+&lt;img alt="Sketch 1" src="sketch1.jpeg" /&gt;
+&lt;img alt="Sketch 2" src="sketch2.jpeg" /&gt;
+&lt;img alt="Home" src="sketch3.jpeg" title="Home" /&gt;
+&lt;img alt="Sketch 4" src="sketch4.jpeg" /&gt;
+&lt;img alt="Ghost of a plant killed by the winter storm" src="sketch5.jpeg" title="Ghost of a plant killed by the winter storm" /&gt;
+&lt;img alt="Hell on earth" src="sketch6.jpeg" title="Hell on Earth" /&gt;
+&lt;img alt="Abandoned farm ruins" src="sketch7.jpeg" title="Abandoned farm ruins" /&gt;
+&lt;img alt="Chicago" src="sketch8.jpeg" title="Chicago" /&gt;
+
+&lt;/div&gt;
+&lt;/section&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/sketches/index.html" />
+  </entry>
   <entry>
     <title>Knitting Tools</title>
     <id>programming/knitting/index.html</id>
@@ -1732,14 +1754,5 @@ I also wanted some doors for the smaller cabinet. I ran to Blue Moon Glassworks 
 &lt;p&gt;&lt;code&gt;8"x10"&lt;/code&gt; oil on canvas board&lt;/p&gt;
 &lt;p&gt;Unframed.&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/spider_lake/index.html" />
-  </entry>
-  <entry>
-    <title>Mums</title>
-    <id>paintings/mums/index.html</id>
-    <updated>2023-03-21T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Mums" src="mums.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;8"x10"&lt;/code&gt; oil on canvas board&lt;/p&gt;
-&lt;p&gt;Unframed.&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/mums/index.html" />
   </entry>
 </feed>
