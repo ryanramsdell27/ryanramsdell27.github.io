@@ -11,6 +11,7 @@ from pymdownx.arithmatex import ArithmatexExtension
 from generateRss import RssGen, Post
 
 SOURCE_DIR = 'src/pages/'
+STATIC_DIR = 'src/static'
 TEMPLATE_DIR = 'src/template'
 COMPONENT_DIR = 'src/component'
 OUTPUT_DIR = 'build/'
@@ -185,6 +186,10 @@ def process_files():
     for file in Path(TEMPLATE_DIR).glob('**/*'):
         if file.suffix in ['.css', '.ico', '.png']:
             copy_to_build_dir(file, TEMPLATE_DIR, OUTPUT_DIR + '/template')
+    for file in Path(STATIC_DIR).glob('**/*'):
+        if not file.is_file():
+            continue
+        copy_to_build_dir(file, STATIC_DIR, OUTPUT_DIR + '/static')
 
 
 POST_TEMPLATE = load_file('src/template/post.html')

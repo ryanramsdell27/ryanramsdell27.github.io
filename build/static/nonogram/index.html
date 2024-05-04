@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <title>Nonogram</title>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+
+    <div id="settingsNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+            <h2>Settings</h2>
+            <div class="overlay-settings">
+                <label>Number of rows</label>
+                <select id="setting-num-rows">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option selected value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <label>Number of columns</label>
+                <select id="setting-num-cols">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option selected value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+
+                <label>Show solution</label>
+                <input id="setting-show-solution" type="checkbox"/>
+            </div>
+            <div class="footer">
+                <!-- If you spam this email I will be sad -->
+                <script>
+                    function decodeEmail(encoded) {
+                        var address = atob(encoded);
+                        window.location.href = "mailto:" + address;
+                    }
+                </script>
+                &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2024
+                <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
+                <a href="/">Blog</a>
+            </div>
+        </div>
+    </div>
+    <article id="content">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()" class="open">&#9776;</span>
+        <div id="game" class="game">
+
+        </div>
+    </article>
+
+    <script src="./main.js"></script>
+
+</body>
+</html>
