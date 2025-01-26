@@ -58,6 +58,7 @@ body {
     border: 1px;
     border-style: solid;
     position: relative;
+    border-radius: 5px;
 }
 
 .cell-unselected {

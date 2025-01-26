@@ -1,0 +1,44 @@
+.figure img {
+    display: inline;
+    max-height: 350;
+    width: auto;
+    max-width:100%;
+}
+.figure {
+    text-align: center;
+}
+
+#combined_puzzle_1 tr:nth-child(2) td:nth-child(3),
+#combined_puzzle_1 tr:nth-child(2) td:nth-child(4),
+#combined_puzzle_1 tr:nth-child(3) td:nth-child(3),
+#combined_puzzle_1 tr:nth-child(3) td:nth-child(4),
+#combined_puzzle_1 tr:nth-child(3) td:nth-child(6),
+#combined_puzzle_1 tr:nth-child(3) td:nth-child(7),
+#combined_puzzle_1 tr:nth-child(4) td:nth-child(6),
+#combined_puzzle_1 tr:nth-child(4) td:nth-child(7) {
+    background-color: #00bcff;
+
+}
+
+#combined_puzzle_2 tr:nth-child(4) td:nth-child(5),
+#combined_puzzle_2 tr:nth-child(4) td:nth-child(6),
+#combined_puzzle_2 tr:nth-child(4) td:nth-child(7),
+#combined_puzzle_2 tr:nth-child(5) td:nth-child(5),
+#combined_puzzle_2 tr:nth-child(5) td:nth-child(6),
+#combined_puzzle_2 tr:nth-child(5) td:nth-child(7) {
+    background-color: #00bcff;
+
+}
+
+#combined_puzzle_3 tr:nth-child(3) td:nth-child(5),
+#combined_puzzle_3 tr:nth-child(3) td:nth-child(6),
+#combined_puzzle_3 tr:nth-child(3) td:nth-child(7),
+#combined_puzzle_3 tr:nth-child(4) td:nth-child(5),
+#combined_puzzle_3 tr:nth-child(4) td:nth-child(6),
+#combined_puzzle_3 tr:nth-child(4) td:nth-child(7),
+#combined_puzzle_3 tr:nth-child(5) td:nth-child(5),
+#combined_puzzle_3 tr:nth-child(5) td:nth-child(6),
+#combined_puzzle_3 tr:nth-child(5) td:nth-child(7) {
+    background-color: #00bcff;
+
+}

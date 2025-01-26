@@ -227,7 +227,11 @@ function closeNav() {
     document.querySelector("#settingsNav").style.width = "0%";
 }
 
-const arrayColumn = (arr, n) => arr.map(x => x[n]);
 
 newGame();
 
+////const board = Board.FromImage([[1,0,0,0,0,0],[0,0,0,1,1,1],[0,1,0,0,1,1],[1,0,0,0,1,1],[0,0,0,0,0,1],[0,0,0,1,0,1]]);
+//const board = Board.FromImage([[1,0,0,0,0,0],[0,1,0,0,0,0]])
+//const board2 = Board.FromImage([[0,1,0,0,0,0],[1,0,0,0,0,0]])
+//board.drawBoard("game");
+//board2.drawBoard("game2");

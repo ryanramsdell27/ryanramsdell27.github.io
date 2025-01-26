@@ -1,0 +1,698 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="/template/main.css">
+    <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*",
+            processHtmlClass: "arithmatex"
+          }
+        };
+</script>
+    <link rel="stylesheet" href="/template/codehilite.css">
+
+    <title>Nonograms</title>
+</head>
+    <body>
+        <header>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tagged/furniture">Furniture</a></li>
+        <li><a href="/tagged/programming">Programming</a></li>
+        <li><a href="/tagged/art">Art</a></li>
+        <li><a href="/tagged/recipe">Recipes</a></li>
+    </ul>
+</header>
+        <article>
+            <h1>Nonograms</h1>
+            <h5>Sunday 26, January 2025</h5>
+            
+            <div class="chip">
+    <a href="/tagged/programming">programming</a>
+</div><div class="chip">
+    <a href="/tagged/games">games</a>
+</div><div class="chip">
+    <a href="/tagged/math">math</a>
+</div>
+            <hr/>
+            <p><link rel="stylesheet" href="./nonogram.css"></p>
+<p>I started writing this months ago, with an ambition to generate uniquely solvable nonogram puzzles. Although I have yet to do this, I&rsquo;ve found in practice that randomly generated ones at the board size I like to play with are generally easy enough to determine if I&rsquo;ll be able to solve it or not. </p>
+<p>This post documents some of the things I&rsquo;ve explored and may be expanded on in the future. But for now it is something that has been sitting un-published for too long.</p>
+<p><a href="../../static/nonogram">Play the game here</a></p>
+<div class="toc">
+<ul>
+<li><a href="#fun-and-games">Fun and Games</a><ul>
+<li><a href="#the-game">The Game</a></li>
+<li><a href="#the-question-of-uniqueness">The Question of Uniqueness</a><ul>
+<li><a href="#patterns-that-lead-to-multiple-solutions">Patterns that lead to multiple solutions</a></li>
+<li><a href="#combinations">Combinations</a></li>
+<li><a href="#how-to-avoid-non-unique-puzzles">How to avoid non-unique puzzles</a></li>
+</ul>
+</li>
+<li><a href="#solvability-with-lacking-information">Solvability with lacking information</a></li>
+</ul>
+</li>
+<li><a href="#implementing">Implementing</a><ul>
+<li><a href="#the-game_1">The Game</a><ul>
+<li><a href="#board-generation">Board Generation</a></li>
+<li><a href="#clue-calculation">Clue Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#future-topics">Future Topics</a></li>
+<li><a href="#references-and-notes">References and Notes</a></li>
+</ul>
+</div>
+<h1 id="fun-and-games">Fun and Games<a class="headerlink" href="#fun-and-games" title="Permanent link">&para;</a></h1>
+<p>Nonograms are a type of logic puzzle wherein the player is presented with a grid and a series of clues for each column and row. Using these clues, the player marks certain cells in the grid in one of three states: filled, empty, and unknown.</p>
+<h2 id="the-game">The Game<a class="headerlink" href="#the-game" title="Permanent link">&para;</a></h2>
+<p>Each column and row has a clue, which is an ordered list of integers. These integers indicate consecutive groups of filled cells, each group separated by one or more empty cells. </p>
+<p>For example, consider a 6-cell wide row with hint <code>1,3</code>. There are 3 possible solutions</p>
+<blockquote>
+<p>1, 3  &#9726; &#9725; &#9726; &#9726; &#9726; &#9725;</p>
+<p>1, 3  &#9726; &#9725; &#9725; &#9726; &#9726; &#9726;</p>
+<p>1, 3  &#9725; &#9726; &#9725; &#9726; &#9726; &#9726;</p>
+<p>Key:
+unknown &#9974;
+filled &#9726;
+empty &#9725;</p>
+</blockquote>
+<p>Players can deduce that the following filled squares will always be filled with hint <code>1,3</code> in a 6-cell row (or column)</p>
+<blockquote>
+<p>1, 3  &#9974; &#9974; &#9974; &#9726; &#9726; &#9974;</p>
+</blockquote>
+<p>(If you think of each row as a 6-bit number with filled as 1 and empty as 0, this is the bitwise <code>AND</code> of all possible solutions)</p>
+<p>The player can then look at the other rows and columns, determine which cells need to be filled, and work their way iteratively through the board, revisiting columns and rows after more information has been gained from an intersecting row or column. </p>
+<p>Following these rules, the player fills in a game board until complete.</p>
+<figure class="figure">
+
+<img alt="Solved example" src="ex1.png" />
+
+<figcaption>A solved nonogram with clues</figcaption>
+</figure>
+<p>This method of solving doesn&rsquo;t always work, however. Occasionally there is not enough information to consider single rows and columns, but instead you need to consider a combination of them.</p>
+<p>The simplest example of one such technique is what Battenburg calls <span class="arithmatex">\((2,2)\)</span> solvable, a specific instance of <span class="arithmatex">\((p,q)\)</span>-solvability <sup id="fnref:Batenburg2012"><a class="footnote-ref" href="#fn:Batenburg2012">1</a></sup>. For a #m\times n$ nonogram and for <span class="arithmatex">\(1\leq p \leq m\)</span>, <span class="arithmatex">\(1\leq q \leq n\)</span>, the puzzle is <span class="arithmatex">\((p,q)\)</span> solvable if it can be solved by using alternating row and column inferences, and then consider all <span class="arithmatex">\(p\)</span> rows and <span class="arithmatex">\(q\)</span> columns and finding where the intersection of such have cells that guaranteed to be filled in any configuration. <span class="arithmatex">\((2,2)\)</span> solving, then, involves looking at the intersection of 2 rows and 2 columns and finding any fixed cells in those instances. </p>
+<h2 id="the-question-of-uniqueness">The Question of Uniqueness<a class="headerlink" href="#the-question-of-uniqueness" title="Permanent link">&para;</a></h2>
+<p>As it turns out, the game can be a bit more complicated than that. For starters, a set of hints is not guaranteed to be uniquely solvable! This becomes a problem when trying to generate puzzles, as having multiple solutions can make it significantly more difficult to solve. </p>
+<h3 id="patterns-that-lead-to-multiple-solutions">Patterns that lead to multiple solutions<a class="headerlink" href="#patterns-that-lead-to-multiple-solutions" title="Permanent link">&para;</a></h3>
+<p>Classifying the types of patterns that result in multiple solutions isn&rsquo;t immediately obvious (to me at least).</p>
+<p>Some key properties that may help give some better understanding on the problem could be: proximity, cardinality, or parity.</p>
+<figure class="figure">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Solution A</figcaption>
+</figure>
+<figure class="figure">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>&#9726;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Solution B</figcaption>
+</figure>
+<p>For example, in the figure above, two solutions arise just by flipping the bits of a <code>2x2</code> square. Should this be classified as a &ldquo;close&rdquo; pattern? Cardinal 2 because it produces two solutions? &ldquo;Even&rdquo; parity because it involves two cells? This type of pattern is explored by Valve<sup id="fnref:Valve"><a class="footnote-ref" href="#fn:Valve">5</a></sup>, where he named it a &ldquo;switching component&rdquo;.</p>
+<p>Another example</p>
+<figure class="figure">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th></th>
+<th>1</th>
+<th></th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Solution A</figcaption>
+</figure>
+<figure class="figure">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th></th>
+<th>1</th>
+<th></th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Solution B</figcaption>
+</figure>
+<figure class="figure">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th></th>
+<th>1</th>
+<th></th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Solution C</figcaption>
+</figure>
+<p>Three solutions. The filled cells are all separated by some number of empty cells, should this be classified as &ldquo;far&rdquo;? Cardinal 3? &ldquo;Odd&rdquo; parity? Is this pattern a combination of three of the first type?</p>
+<p>Ultimately classifying these types of patterns is really only useful if we can get additional information out of them. And for that matter, what really is useful? From personal experience, the first example is incredibly easy to solve in practice. The implications are clear and often when it arises in a larger problem it is has little effect on the rest of the solution &ndash; you just pick one option and continue solving everything else.</p>
+<h3 id="combinations">Combinations<a class="headerlink" href="#combinations" title="Permanent link">&para;</a></h3>
+<p>In addition to a single clue configuration resulting in multiple solutions, these ambiguous patterns can be combined in a single board to create a game with many solutions.</p>
+<figure class="figure">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>&hellip;</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>(&#9974;)</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>&hellip;</td>
+<td>(&#9974;)</td>
+<td>&hellip;</td>
+<td>(&#9974;)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9726;</td>
+<td>(&#9974;)</td>
+<td>&#9725;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Solution A</figcaption>
+</figure>
+<figure class="figure">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>&hellip;</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>&#9726;</td>
+<td>(&#9974;)</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>&hellip;</td>
+<td>(&#9974;)</td>
+<td>&hellip;</td>
+<td>(&#9974;)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>(&#9974;)</td>
+<td>&#9726;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Solution B</figcaption>
+</figure>
+<p>The &ldquo;&hellip;&rdquo; can be any other puzzle, and the configuration on the outer-edge will necessarily double the number of possible solutions from the puzzle defined just by &ldquo;&hellip;&rdquo;</p>
+<p>These &ldquo;embeddings&rdquo; of patterns aren&rsquo;t limited to edges, however. Consider the following:</p>
+<figure class="figure" id="combined_puzzle_1">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1<br/>1</th>
+<th>1<br/>1</th>
+<th>1</th>
+<th>1<br/>1</th>
+<th>1</th>
+<th>1<br/>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,1,1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1,1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>2,1</td>
+<td>&#9726;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Figure A</figcaption>
+</figure>
+<p>Each blue marked box is itself of the <code>2x2</code> pattern. There are 4 solutions possible just by virtue of these yellow boxes alone.</p>
+<p>But there is compounding ambiguity, as several of these highlighted cells are actually part of other ambiguous patterns.</p>
+<figure class="figure" id="combined_puzzle_2">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1<br/>1</th>
+<th>1<br/>1</th>
+<th>1</th>
+<th>1<br/>1</th>
+<th>1</th>
+<th>1<br/>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,1,1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1,1</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>2,1</td>
+<td>&#9726;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Figure B</figcaption>
+</figure>
+<figure class="figure" id="combined_puzzle_3">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1<br/>1</th>
+<th>1<br/>1</th>
+<th>1</th>
+<th>1<br/>1</th>
+<th>1</th>
+<th>1<br/>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,1,1</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1,1</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+</tr>
+<tr>
+<td>2,1</td>
+<td>&#9726;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9726;</td>
+<td>&#9725;</td>
+<td>&#9725;</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Figure C</figcaption>
+</figure>
+<p>These ambiguities make some of these puzzles particularly hard to solve, somtimes impossibly so through inference alone, requiring the solver to make guesses and verify later if it was a correct decision.</p>
+<h3 id="how-to-avoid-non-unique-puzzles">How to avoid non-unique puzzles<a class="headerlink" href="#how-to-avoid-non-unique-puzzles" title="Permanent link">&para;</a></h3>
+<p>Generating puzzles is easy, just make an <code>nxm</code> bit map and calculate the clues. Both have time complexity <span class="arithmatex">\(\mathcal{O}(nm)\)</span> see <a href="#board-generation">board generation</a> and <a href="#clue-calculation">clue calculation</a>.</p>
+<p>The much harder problem is determining if that set of clues has a unique solution. Turns out this is NP-Complete<sup id="fnref:Ueda"><a class="footnote-ref" href="#fn:Ueda">2</a></sup>. Ueda shows that  <em>Another Solution Problem (ASP)</em> for nonograms is reducible to the <em>3D Matching</em> problem. <em>ASP-Nonogram</em> is formulated as: <em>given a set of clues and a solution <span class="arithmatex">\(P\)</span>, does there exist another solution <span class="arithmatex">\(P'\neq P\)</span> satisfying the same clues?</em> This is exactly the situation we have after generating a board.</p>
+<p>For small enough boards you can just enumerate the entire space of nonograms (the bitmaps) and calculate their associated clues. If you group all of these nonograms by matching sets of clues, then each group is the solution space for those clues. Groups of cardinality 1 have a single solution to a set of clues and can be classified as &ldquo;solvable&rdquo;. Groups with more than a single solution then must have some ambiguity in the clues.</p>
+<table>
+<thead>
+<tr>
+<th>Nonogram</th>
+<th># Boards</th>
+<th># Unique clues</th>
+<th># Non-unique clues</th>
+<th>% Non-unique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2x2</td>
+<td>16</td>
+<td>15</td>
+<td>1</td>
+<td>6.3</td>
+</tr>
+<tr>
+<td>2x3</td>
+<td>64</td>
+<td>58</td>
+<td>6</td>
+<td>9.4</td>
+</tr>
+<tr>
+<td>3x3</td>
+<td>512</td>
+<td>445</td>
+<td>67</td>
+<td>13.1</td>
+</tr>
+<tr>
+<td>3x4</td>
+<td>4096</td>
+<td>3588</td>
+<td>508</td>
+<td>12.4</td>
+</tr>
+<tr>
+<td>4x4</td>
+<td>65536</td>
+<td>58196</td>
+<td>7340</td>
+<td>11.2</td>
+</tr>
+</tbody>
+</table>
+<p>This quickly becomes intractable, the number of boards increases exponentially with the size of the puzzle, specifically there are <span class="arithmatex">\(2^{nm}\)</span> boards for an <span class="arithmatex">\(n\times m\)</span> puzzle. </p>
+<h2 id="solvability-with-lacking-information">Solvability with lacking information<a class="headerlink" href="#solvability-with-lacking-information" title="Permanent link">&para;</a></h2>
+<p>Solving some puzzles is easy. Each clue might have some set of cells that are guaranteed to be filled in the solved state. Filling in a cell for one clue might give more information for another clue (ie the intersecting, perpendicular clue)&mdash;if the solver iterates over the clues repeatedly they may gain enough information in each pass to eventually solve the puzzle in its entirety.</p>
+<p>Sometimes this inferential solving technique is not enough to deterministically solve the puzzle. What can they do from this point?</p>
+<p><strong><em>I&rsquo;ll leave these questions for another post</em></strong></p>
+<ul>
+<li>(How) can you confirm guesses by filling in the board after making an assumption?</li>
+<li>Is a puzzle acceptable if it has only one instance where you need to guess</li>
+<li>Are there single-solution problems that cannot be solved inferentially (ie need to guess at some point)</li>
+</ul>
+<h1 id="implementing">Implementing<a class="headerlink" href="#implementing" title="Permanent link">&para;</a></h1>
+<h2 id="the-game_1">The Game<a class="headerlink" href="#the-game_1" title="Permanent link">&para;</a></h2>
+<h3 id="board-generation">Board Generation<a class="headerlink" href="#board-generation" title="Permanent link">&para;</a></h3>
+<p>Given an <code>nxm</code> puzzle, generate a board. In this case, the code simply creates a <code>nxm</code> bitmap, with <code>0</code> for an empty cell and <code>1</code> for filled.</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">let</span><span class="w"> </span><span class="n">board</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array2d</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">board</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randomBit</span><span class="p">()</span>
+<span class="k">return</span><span class="w"> </span><span class="n">board</span>
+</code></pre></div></td></tr></table></div>
+
+<h3 id="clue-calculation">Clue Calculation<a class="headerlink" href="#clue-calculation" title="Permanent link">&para;</a></h3>
+<p>Given an <code>nxm</code> board (bitmap), calculate the set of clues</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="nx">calcRowHints</span><span class="p">(</span><span class="nx">image</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">max_hints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">image</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">row</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">r_h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">row</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="nx">row</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">count</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">r_h</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">count</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">r_h</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">out</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">r_h</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">max_hints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">max_hints</span><span class="p">,</span><span class="w"> </span><span class="nx">r_h</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">out</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">hint</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="nx">max_hints</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">hint</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="p">...</span><span class="nx">hint</span><span class="p">];</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">row_clues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">calcRowHints</span><span class="p">(</span><span class="nx">image</span><span class="p">)</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">column_clues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">calcRowHints</span><span class="p">(</span><span class="nx">matrixTranspose</span><span class="p">(</span><span class="nx">image</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+
+<p>To find the clue for a given row of digits you iterate over it until you reach the first filled one. Count how many appear contiguously until you reach an empty digit or the end. Add this count to a running array of counts, reset the count to zero and repeat until you reach the end of the row.</p>
+<p>A set of clues for the rows is then just running over the entire image, and for columns it is doing the same but on the transpose of the image.</p>
+<h1 id="future-topics">Future Topics<a class="headerlink" href="#future-topics" title="Permanent link">&para;</a></h1>
+<p>There is a lot to explore in this space. </p>
+<p>There still might be some heuristic for generating uniquely solvable puzzles that isn&rsquo;t np-complete, some ideas are explored by Henrick Valve<sup id="fnref2:Valve"><a class="footnote-ref" href="#fn:Valve">5</a></sup>.</p>
+<p>I&rsquo;ve completely avoided the topic of actually <em>solving</em> these puzzles in any kind of algorithmic way&mdash;there is already pretty extensive literature on this.<sup id="fnref:Batenburg2008"><a class="footnote-ref" href="#fn:Batenburg2008">3</a></sup>,<sup id="fnref:Oosterman"><a class="footnote-ref" href="#fn:Oosterman">4</a></sup></p>
+<p>Finding a better representation for these problems may aid in analysis. Particularly finding a group representation for both the boards and the clues where the map of boards -&gt; clues can be studied more rigorously.</p>
+<h1 id="references-and-notes">References and Notes<a class="headerlink" href="#references-and-notes" title="Permanent link">&para;</a></h1>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:Batenburg2012">
+<p>K. Joost Batenburg and Walter A. Kosters. December 2012. On the Difficulty of Nonograms. <a href="https://liacs.leidenuniv.nl/~kosterswa/nonodec2012.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:Batenburg2012" title="Jump back to footnote 1 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:Ueda">
+<p>Nobuhisa Ueda and Tadaaki Nagao. May 1996. NP-Completeness Results for NONOGRAM via Parsimonious Reductions. <a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=1bb23460c7f0462d95832bb876ec2ee0e5bc46cf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:Ueda" title="Jump back to footnote 2 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:Batenburg2008">
+<p>K. Joost Batenburg and Walter A. Kosters. November 2008. Solving Nonograms by combining relaxations. <a href="https://homepages.cwi.nl/~kbatenbu/papers/bako_pr_2009.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:Batenburg2008" title="Jump back to footnote 3 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:Oosterman">
+<p>R.A. Oosterman. April 2017. Complexity and solvability of Nonogram puzzles. <a href="https://fse.studenttheses.ub.rug.nl/15287/1/Master_Educatie_2017_RAOosterman.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:Oosterman" title="Jump back to footnote 4 in the text">&#8617&#xFE0E</a></p>
+</li>
+<li id="fn:Valve">
+<p>Henrik Valve. 2022. On the estimation of the number of solutions for nonograms. <a href="https://lutpub.lut.fi/bitstream/handle/10024/166259/diplomityo_henrik_valve.pdf?sequence=3&amp;isAllowed=y">PDF</a>&#160;<a class="footnote-backref" href="#fnref:Valve" title="Jump back to footnote 5 in the text">&#8617&#xFE0E</a><a class="footnote-backref" href="#fnref2:Valve" title="Jump back to footnote 5 in the text">&#8617&#xFE0E</a></p>
+</li>
+</ol>
+</div>
+        </article>
+        <footer>
+<!-- If you spam this email I will be sad -->
+    <script>
+        function decodeEmail(encoded) {
+            var address = atob(encoded);
+            window.location.href = "mailto:" + address;
+        }
+    </script>
+    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2024
+    <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
+</footer>
+    </body>
+</html>
