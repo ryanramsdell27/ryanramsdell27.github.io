@@ -3,7 +3,69 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>26-01-2025T17:07:33Z</updated>
+  <updated>22-06-2025T20:27:25Z</updated>
+  <entry>
+    <title>Fish Bag</title>
+    <id>sewing/fish-bag/index.html</id>
+    <updated>2025-06-14T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Fish bag" src="3.jpeg" /&gt;
+&lt;img alt="Fish bag with guts" src="4.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Cross body fish bag" src="1.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve been a runner on-and-off since middle school, but I only just started running with a club this year. I&amp;rsquo;m loving the social aspect, but the club meets downtown, so I bike down before the run. &lt;/p&gt;
+&lt;p&gt;Ever since my handlebars came loose on a ride back in 2020, I try not to go without a set of tools on me. And since I live in Texas, I sweat &lt;em&gt;a lot&lt;/em&gt; when I run: enter the need for a bag large enough to hold my tool set, a travel pump, and a spare shirt but small enough to stash away safely.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Cross body fish bag" src="2.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;The design I copied from a bag I saw floating on the &lt;a href="https://www.etsy.com/listing/1818293323/rainbow-trout-fish-crossbody-bag-sewing?gpla=1&amp;amp;gao=1&amp;amp;"&gt;internet&lt;/a&gt;. I&amp;rsquo;ve been learning to sew and figured this would be an easy enough project to do without a pattern and practice my own drafting abilities.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Striped pattern" src="9.jpeg" /&gt;
+First step was to put together the striped pattern of the fish. I made two of these sections and backed them with some plain canvas to form a liner. Looking closely at the picture, you can see the first iteration chilling in the back. If I were to make this a third time I&amp;rsquo;d probably wait to attach the liner until I could hide the fins as well.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Sewing on the head" src="10.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Joining two halves" src="11.jpeg" /&gt;
+I&amp;rsquo;m terrible at taking step-by-step pictures, so by this point I had made all the fins, attached them, added the zipper, added the straps, and sewn on the button eyes.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The old" src="13.jpeg" /&gt;
+My first attempt at this fish turned out pretty well, except I did not properly wash the red fabric after dyeing it. I got caught in a sudden downpour biking back home one day and the colors bled which really ruined the effect I was going for.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="First attempt" src="5.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;But I had enough fabric on hand to do it again, this time with some fixes. The head seams on the old bag were not great and showed the raw edge of the fabric. I added in a liner, adjusted the zipper size and position, and found a better way to attach the straps that didn&amp;rsquo;t dig into my skin; I guess it was a happy accident?&lt;/p&gt;
+&lt;p&gt;Just look at the difference:&lt;/p&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+        &lt;img alt="Old head" src="8.jpeg" /&gt;
+        &lt;img alt="New head" src="7.jpeg" /&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+&lt;p&gt;Another upside, I now have two of these bags! Meaning I had a test subject for waxing the bag to make it waterproof. Eventually I would like to make a frame bag for my bike with what I&amp;rsquo;ve learned from this project.&lt;/p&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+        &lt;img alt="Side by side of old and new" src="6.jpeg" /&gt;
+        &lt;img alt="Waxing the old" src="12.jpeg" /&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/sewing/fish-bag/index.html" />
+  </entry>
+  <entry>
+    <title>Stained Glass Lamp</title>
+    <id>furniture/lighting/stained-glass/index.html</id>
+    <updated>2025-05-09T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;img alt="Lamp" src="1.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;I was a bit ambitious on this project, turns out stained-glass is incredibly hard to do. In my naivety I thought it would be as simple as &amp;ldquo;cut the shapes and piece them together&amp;rdquo;. Cutting accurately: hard. Soldering cleanly: harder. Soldering in 3D: impossibly difficult. But I finished it (or close enough at any rate). &lt;/p&gt;
+&lt;p&gt;This lamp was greatly inspired by the work of &lt;a href="http://www.shawnmlucas.com"&gt;Shawn Michael Lucas&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="the-process"&gt;The Process&lt;a class="headerlink" href="#the-process" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+        &lt;img alt="Alt view 1" src="2.jpeg" /&gt;
+        &lt;img alt="Alt view 2" src="3.jpeg" /&gt;
+        &lt;img alt="Alt view 3" src="4.jpeg" /&gt;
+        &lt;img alt="Alt view 4" src="5.jpeg" /&gt;
+        &lt;img alt="Alt view 5" src="6.jpeg" /&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+&lt;h2 id="complete"&gt;Complete&lt;a class="headerlink" href="#complete" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+        &lt;img alt="Completed view 1" src="7.jpeg" /&gt;
+        &lt;img alt="Completed view 2" src="8.jpeg" /&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/stained-glass/index.html" />
+  </entry>
   <entry>
     <title>Shoreland Lane</title>
     <id>paintings/shoreland/index.html</id>
@@ -1446,32 +1508,5 @@ The weight of the shade ended up being too much for kerf bend at the base to han
 &lt;p&gt;&lt;img alt="Barn" src="barn_big.jpeg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;16"x20"&lt;/code&gt; oil on canvas&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/barn/index.html" />
-  </entry>
-  <entry>
-    <title>Lilies</title>
-    <id>paintings/lilies/index.html</id>
-    <updated>2023-08-10T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Lilies" src="lilies.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;8"x10"&lt;/code&gt; oil on canvas board&lt;/p&gt;
-&lt;p&gt;Lilies and mums painted from real life&lt;/p&gt;
-&lt;p&gt;Frame from local thrift shop&lt;/p&gt;
-&lt;h1 id="process-photos"&gt;Process Photos&lt;a class="headerlink" href="#process-photos" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Under painting" src="p1.jpeg" /&gt;
-&lt;img alt="More filled in" src="p2.jpeg" /&gt;&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/lilies/index.html" />
-  </entry>
-  <entry>
-    <title>Snow House</title>
-    <id>paintings/snow_house/index.html</id>
-    <updated>2023-08-04T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Snow House" src="snow_house.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;11"x14"&lt;/code&gt; oil on canvas board&lt;/p&gt;
-&lt;p&gt;Copy of a painting by contemporary artist Jeremy Miranda.&lt;/p&gt;
-&lt;p&gt;Waiting to glaze in 6 months to make everything more purple.&lt;/p&gt;
-&lt;p&gt;Not framed.&lt;/p&gt;
-&lt;h1 id="process-photos"&gt;Process Photos&lt;a class="headerlink" href="#process-photos" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Blocking" src="p1.jpeg" /&gt;
-&lt;img alt="More filled in" src="p2.jpeg" /&gt;&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/snow_house/index.html" />
   </entry>
 </feed>
