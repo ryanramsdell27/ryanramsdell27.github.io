@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="/template/main.css">
+    <link rel="icon" type="image/x-icon" href="/template/favicon.ico">
+    
+    
+
+    <title>Wooden PC Case</title>
+</head>
+    <body>
+        <header>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tagged/furniture">Furniture</a></li>
+        <li><a href="/tagged/programming">Programming</a></li>
+        <li><a href="/tagged/art">Art</a></li>
+        <li><a href="/tagged/recipe">Recipes</a></li>
+    </ul>
+</header>
+        <article>
+            <h1>Wooden PC Case</h1>
+            <h5>Sunday 31, August 2025</h5>
+            
+            <div class="chip">
+    <a href="/tagged/furniture">furniture</a>
+</div><div class="chip">
+    <a href="/tagged/woodworking">woodworking</a>
+</div><div class="chip">
+    <a href="/tagged/design">design</a>
+</div>
+            <hr/>
+            <p>My old PC was starting to show its age, I had first built it in college around 2017. As I had very little money, I sourced parts from used machines from ebay, and it was nearing end of life. The CPU was for the lga1150 socket, the motherboard was a monstrous one for servers that I could find cheap, the PSU was inefficient, the GPU was severely underpowered, and the ram was a mix of random sticks I could get cheap. The Oblivion remaster came out and my machine died as soon as I exited the sewers, so it was time to rebuild.</p>
+<p><img alt="completed case" src="complete.jpeg" /></p>
+<h2 id="first-iteration">First iteration<a class="headerlink" href="#first-iteration" title="Permanent link">&para;</a></h2>
+<p><img alt="raw components" src="raw0.jpeg" /></p>
+<p>The midsize ATX case I had was fine, but nothing fancy and took up way more space than I should like. After shopping around, there weren&rsquo;t any cases that really spoke to me design wise. Unfortunately the consumer PC market is incredibly gaudy, and cases that aren&rsquo;t RGB vomit or big ugly boxes end up being insanely expensive. So I built my own.</p>
+<p><img alt="cube 0" src="cube0.jpeg" /></p>
+<p><img alt="cube 1" src="cube1.jpeg" /></p>
+<p>The computer itself is built on a mini-itx mobo. That, the power supply, and the GPU became the geometry constraints, and the rest was just designing around airflow and finding a shape that I liked. The first iteration was too cube-like, a clunky box with an incredibly dangerous temporary mounting bracket for the PSU made from aluminum flashing. I nearly cut myself too many times handling this monstrosity.</p>
+<p><img alt="cube 2" src="cube2.jpeg" /></p>
+<h2 id="refining-the-shape">Refining the shape<a class="headerlink" href="#refining-the-shape" title="Permanent link">&para;</a></h2>
+<p>After some thought, I was able to reconfigure a more vertical setup. The original plan was built to fit my existing graphics card, as the new one was still coming in. This proved to be a small problem down the line, the card did not fit when inserted into the PCIe slot, but was eventually solved with a riser cable.</p>
+<p><img alt="frame beginning" src="frame0.jpeg" /></p>
+<p>Most of the woodworking was simple joinery, some dados for the front and back frames, and nails and glue for the side rails and interior mounting brackets. The brackets for the mobo have brass standoffs glued into shallow holes.</p>
+<p><img alt="frame" src="frame2.jpeg" />
+<img alt="frame" src="frame1.jpeg" /></p>
+<h2 id="more-natural-materials">More natural materials<a class="headerlink" href="#more-natural-materials" title="Permanent link">&para;</a></h2>
+<p>The side is encased  in canvas, which is secured underneath with twine lacing. The goal was to have something that allowed some airflow to avoid heating issues. So far temps have been fine and there have been no major issues, but I have considered opening up a few holes in the fabric for more venting. Another concern is how this will affect static buildup and accidental discharge. I have not noticed any problems in that regard, but don&rsquo;t touch the machine very much to definitively say it is no longer a concern.</p>
+<p><img alt="fabric" src="fabric0.jpeg" />
+<img alt="fabric lacing" src="fabric1.jpeg" /></p>
+<h2 id="building-the-front-panel">Building the front panel<a class="headerlink" href="#building-the-front-panel" title="Permanent link">&para;</a></h2>
+<p>When building the front panel, the goal was to create vents that were both functional but aesthetic. I constructed a simple lattice from some square doweling. The chisel-work was a bit messy, but I was able to hide imperfections well enough. It is friction-fitted into the frame.</p>
+<p><img alt="front start" src="front0.jpeg" />
+<img alt="front glue up" src="front1.jpeg" /></p>
+<h2 id="things-to-improve">Things to improve<a class="headerlink" href="#things-to-improve" title="Permanent link">&para;</a></h2>
+<p>The newer, larger GPU meant I had to mount it with fans pointing out rather than down. The two major drawbacks of this being that, firstly, the GPU is interfacing with the PC over a PCIe riser cable. This has the potential to bottleneck performance and cause instability. Secondly, rather than the GPU exhausting heat down through the bottom, which I could lace to be open, it is sent out through the fabric. There is a gap where the front-to-back airflow can carry some heat out, but I have considered cutting buttonholes in the side panel if temps become an issue.</p>
+<p><img alt="gpu mounted in a way that hurts airflow" src="newComponents.jpeg" /></p>
+<p>Visually the front could be improved by re-building it with a kumiko panel. I&rsquo;m unsure if I have the skills for such precise work at this time. At any rate, I&rsquo;m quite pleased with how the final panel turned out. </p>
+<p>The power switch is currently just a long cable that hangs out the back. In future iterations I would like to move it to the front with a push button, but I haven&rsquo;t come up with any viable mechanism that matches the visual style I&rsquo;m aiming for. </p>
+<p>Additionally, the case could benefit from some enhancements that make the computer more useful. I have a slim disk drive that can fit in the dead space, but mounting and blending it in into the front panel will require some significant rebuilding. I&rsquo;d also like to add front usb ports for easier interfacing with some peripherals I use on occasion but have yet to find a component that would be easy to modify.</p>
+        </article>
+        <footer>
+<!-- If you spam this email I will be sad -->
+    <script>
+        function decodeEmail(encoded) {
+            var address = atob(encoded);
+            window.location.href = "mailto:" + address;
+        }
+    </script>
+    &copy <a href="javascript:decodeEmail('Y29udGFjdEByeWFucmFtc2RlbGwuZGV2');">Ryan Ramsdell</a> 2026
+    <a href="/feed.xml"><img class="feed-icon" src="/template/feed-icon.png">Feed</a>
+</footer>
+    </body>
+</html>

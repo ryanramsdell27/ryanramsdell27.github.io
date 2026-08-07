@@ -14,4 +14,7 @@ The weight of the shade ended up being too much for kerf bend at the base to han
 The original freestanding lamp was not salvageable (glue did not work). Instead, I opted to lop off the original base and mount the remainder to the wall. 
 ![Big Bent Lamp](bigBentUpdate3.jpeg)
 
+---
+And with a [new shade](/furniture/lighting/edge-banding-lampshade/index.html)
+
 

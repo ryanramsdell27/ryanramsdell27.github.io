@@ -13,3 +13,4 @@ The construction was essentially the same as the previous post. The biggest diff
 
 ---
 Follow-up [update](/furniture/lighting/bigBentLampUpdate.html) following design changes and catastrophic failure.
+And with a [new shade](/furniture/lighting/edge-banding-lampshade/index.html)

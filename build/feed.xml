@@ -3,7 +3,65 @@
   <link rel="alternate" href="https://blog.ryanramsdell.dev" />
   <description>RSS feed for my blog</description>
   <id>https://blog.ryanramsdell.dev</id>
-  <updated>22-06-2025T20:27:25Z</updated>
+  <updated>06-08-2026T23:13:03Z</updated>
+  <entry>
+    <title>Wooden PC Case</title>
+    <id>furniture/pc-case/index.html</id>
+    <updated>2025-08-31T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;My old PC was starting to show its age, I had first built it in college around 2017. As I had very little money, I sourced parts from used machines from ebay, and it was nearing end of life. The CPU was for the lga1150 socket, the motherboard was a monstrous one for servers that I could find cheap, the PSU was inefficient, the GPU was severely underpowered, and the ram was a mix of random sticks I could get cheap. The Oblivion remaster came out and my machine died as soon as I exited the sewers, so it was time to rebuild.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="completed case" src="complete.jpeg" /&gt;&lt;/p&gt;
+&lt;h2 id="first-iteration"&gt;First iteration&lt;a class="headerlink" href="#first-iteration" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="raw components" src="raw0.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;The midsize ATX case I had was fine, but nothing fancy and took up way more space than I should like. After shopping around, there weren&amp;rsquo;t any cases that really spoke to me design wise. Unfortunately the consumer PC market is incredibly gaudy, and cases that aren&amp;rsquo;t RGB vomit or big ugly boxes end up being insanely expensive. So I built my own.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="cube 0" src="cube0.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="cube 1" src="cube1.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;The computer itself is built on a mini-itx mobo. That, the power supply, and the GPU became the geometry constraints, and the rest was just designing around airflow and finding a shape that I liked. The first iteration was too cube-like, a clunky box with an incredibly dangerous temporary mounting bracket for the PSU made from aluminum flashing. I nearly cut myself too many times handling this monstrosity.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="cube 2" src="cube2.jpeg" /&gt;&lt;/p&gt;
+&lt;h2 id="refining-the-shape"&gt;Refining the shape&lt;a class="headerlink" href="#refining-the-shape" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;After some thought, I was able to reconfigure a more vertical setup. The original plan was built to fit my existing graphics card, as the new one was still coming in. This proved to be a small problem down the line, the card did not fit when inserted into the PCIe slot, but was eventually solved with a riser cable.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="frame beginning" src="frame0.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;Most of the woodworking was simple joinery, some dados for the front and back frames, and nails and glue for the side rails and interior mounting brackets. The brackets for the mobo have brass standoffs glued into shallow holes.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="frame" src="frame2.jpeg" /&gt;
+&lt;img alt="frame" src="frame1.jpeg" /&gt;&lt;/p&gt;
+&lt;h2 id="more-natural-materials"&gt;More natural materials&lt;a class="headerlink" href="#more-natural-materials" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The side is encased  in canvas, which is secured underneath with twine lacing. The goal was to have something that allowed some airflow to avoid heating issues. So far temps have been fine and there have been no major issues, but I have considered opening up a few holes in the fabric for more venting. Another concern is how this will affect static buildup and accidental discharge. I have not noticed any problems in that regard, but don&amp;rsquo;t touch the machine very much to definitively say it is no longer a concern.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="fabric" src="fabric0.jpeg" /&gt;
+&lt;img alt="fabric lacing" src="fabric1.jpeg" /&gt;&lt;/p&gt;
+&lt;h2 id="building-the-front-panel"&gt;Building the front panel&lt;a class="headerlink" href="#building-the-front-panel" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When building the front panel, the goal was to create vents that were both functional but aesthetic. I constructed a simple lattice from some square doweling. The chisel-work was a bit messy, but I was able to hide imperfections well enough. It is friction-fitted into the frame.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="front start" src="front0.jpeg" /&gt;
+&lt;img alt="front glue up" src="front1.jpeg" /&gt;&lt;/p&gt;
+&lt;h2 id="things-to-improve"&gt;Things to improve&lt;a class="headerlink" href="#things-to-improve" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The newer, larger GPU meant I had to mount it with fans pointing out rather than down. The two major drawbacks of this being that, firstly, the GPU is interfacing with the PC over a PCIe riser cable. This has the potential to bottleneck performance and cause instability. Secondly, rather than the GPU exhausting heat down through the bottom, which I could lace to be open, it is sent out through the fabric. There is a gap where the front-to-back airflow can carry some heat out, but I have considered cutting buttonholes in the side panel if temps become an issue.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="gpu mounted in a way that hurts airflow" src="newComponents.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;Visually the front could be improved by re-building it with a kumiko panel. I&amp;rsquo;m unsure if I have the skills for such precise work at this time. At any rate, I&amp;rsquo;m quite pleased with how the final panel turned out. &lt;/p&gt;
+&lt;p&gt;The power switch is currently just a long cable that hangs out the back. In future iterations I would like to move it to the front with a push button, but I haven&amp;rsquo;t come up with any viable mechanism that matches the visual style I&amp;rsquo;m aiming for. &lt;/p&gt;
+&lt;p&gt;Additionally, the case could benefit from some enhancements that make the computer more useful. I have a slim disk drive that can fit in the dead space, but mounting and blending it in into the front panel will require some significant rebuilding. I&amp;rsquo;d also like to add front usb ports for easier interfacing with some peripherals I use on occasion but have yet to find a component that would be easy to modify.&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/pc-case/index.html" />
+  </entry>
+  <entry>
+    <title>Edge Banding Lampshade</title>
+    <id>furniture/lighting/edge-banding-lampshade/index.html</id>
+    <updated>2025-08-11T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;Another update on my &lt;a href="/furniture/lighting/bigBentLamp.html"&gt;big bent lamp&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Also see the &lt;a href="/furniture/lighting/bigBentLampUpdate.html"&gt;update&lt;/a&gt;
+&lt;img alt="Shade" src="1.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;The previous lampshade on this lamp had serious balancing issues. Using poster putty I could eventually get the shade to sit level on the pendant, but the location of the switch at the base of the bulb receptacle meant that any time I turned on the lamp, the shade would be knocked askew.&lt;/p&gt;
+&lt;p&gt;I was able to live with the faults for much longer than I initially thought, but eventually capitulated that it wasn&amp;rsquo;t an ideal situation to spend an extra minute rebalancing a shade each time I turn the light on or off. So it was time for a new shade, and an excuse to justify my growing hoard of craft supplies by using things I already own.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="getting started" src="2.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;Construction is simple, the central column of the shade I had built for another lamp before starting this blog. Although it never got a full post, the shade lived a short life in my bedroom over my nightstand. It consists of two embroidery hoops with a sheet of craft paper suspended between. Within it an annulus of wood, designed to sit around the base of the light socket, is suspended from the hoops using skewers and glue.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="old column" src="3.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;I cut strips of edge banding I had from my &lt;a href="/furniture/shelves/shelves.html"&gt;shelves&lt;/a&gt;. These inserted into the hoops after a bit of struggle to get tension right to hold them all in place while till leaving space for the new ones.&lt;/p&gt;
+&lt;section class="gallery"&gt;
+    &lt;div markdown&gt;
+        &lt;img alt="spring" src="4.jpeg" /&gt;
+        &lt;img alt="spring 2" src="5.jpeg" /&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+&lt;p&gt;After a huge amount of struggle to hold the paper in the hoops without unseating any of the strips, I sealed off the top with cardboard to reduce the amount of uplightin from the lamp, and mounted it on the lamp. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt view" src="6.jpeg" /&gt;&lt;/p&gt;</content>
+    <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/edge-banding-lampshade/index.html" />
+  </entry>
   <entry>
     <title>Fish Bag</title>
     <id>sewing/fish-bag/index.html</id>
@@ -1453,7 +1511,9 @@ I wasn&amp;rsquo;t a big fan of the pink shade so I swapped it out for a pleated
 &lt;p&gt;&lt;img alt="Big Bent Lamp" src="bigBentUpdate1.jpeg" /&gt;
 The weight of the shade ended up being too much for kerf bend at the base to handle, and the lamp ended up snapping when a slight breeze from the patio door caused the shade to swing.&lt;/p&gt;
 &lt;p&gt;The original freestanding lamp was not salvageable (glue did not work). Instead, I opted to lop off the original base and mount the remainder to the wall. 
-&lt;img alt="Big Bent Lamp" src="bigBentUpdate3.jpeg" /&gt;&lt;/p&gt;</content>
+&lt;img alt="Big Bent Lamp" src="bigBentUpdate3.jpeg" /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;And with a &lt;a href="/furniture/lighting/edge-banding-lampshade/index.html"&gt;new shade&lt;/a&gt;&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/furniture/lighting/bigBentLampUpdate.html" />
   </entry>
   <entry>
@@ -1487,26 +1547,5 @@ The weight of the shade ended up being too much for kerf bend at the base to han
 &lt;p&gt;&lt;img alt="Snow golem" src="snow_golem.jpeg" /&gt;
 &lt;code&gt;6"x7.5"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
     <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/studies/index.html" />
-  </entry>
-  <entry>
-    <title>Moonlight</title>
-    <id>paintings/moonlight/index.html</id>
-    <updated>2023-09-10T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img alt="Moonlight" src="moon.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;7"x4"&lt;/code&gt; oil on canvas paper&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/moonlight/index.html" />
-  </entry>
-  <entry>
-    <title>Passing View on County Road G</title>
-    <id>paintings/barn/index.html</id>
-    <updated>2023-09-10T00:00:00Z</updated>
-    <content type="html">&lt;p&gt;Germantown WI&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Barn, study" src="barn.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;5.25"x6.5"&lt;/code&gt; oil on canvas paper&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Study and reproduction" src="mother_and_child.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;I tried my hand at painting it larger, but am not too fond of the outcome.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Barn" src="barn_big.jpeg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;16"x20"&lt;/code&gt; oil on canvas&lt;/p&gt;</content>
-    <link rel="alternate" href="https://blog.ryanramsdell.dev/paintings/barn/index.html" />
   </entry>
 </feed>

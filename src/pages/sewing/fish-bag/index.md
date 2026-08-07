@@ -1,6 +1,6 @@
 title: Fish Bag
 date: 2025-06-14
-tags: furniture,woodworking,design,lighting
+tags: art,sewing
 backdated:true
 ---
 ![Fish bag](3.jpeg)
